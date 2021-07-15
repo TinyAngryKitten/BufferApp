@@ -20,11 +20,15 @@ kotlin {
         this.useCommonJs()
         binaries.executable()
         moduleName = "index"
-        nodejs {
-            distribution {
-                directory = File("functions")
-            }
-        }
+        nodejs {}
 
     }
 }
+
+tasks.register<Copy>("copyIndexToFunctionsFolder") {
+    dependsOn(":build")
+    from(layout.buildDirectory.file("js/packages/index/kotlin/index.js"))
+    into(layout.buildDirectory.dir("../functions"))
+}
+
+tasks.findByPath(":build")?.finalizedBy(":copyIndexToFunctionsFolder")
