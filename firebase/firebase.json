@@ -8,7 +8,8 @@
       "port": 9099
     },
     "functions": {
-      "port": 5001
+      "port": 5001,
+      "runtime": "nodejs14"
     },
     "firestore": {
       "port": 8080
