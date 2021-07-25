@@ -5,14 +5,10 @@
   "main": "index.js",
   "devDependencies": {},
   "dependencies": {
+    "firebase": "^8.8.0",
     "firebase-admin": "^9.2.0",
     "firebase-functions": "^3.11.0",
-    "@js-joda/core": "^3.2.0",
-    "kotlin": "file:C:\\Users\\Sander\\AndroidStudioProjects\\mqtt_dashboard\\BufferApp\\firebase\\build\\js\\packages_imported\\kotlin\\1.5.20",
-    "ktor-ktor-client-core-jsIr": "file:C:\\Users\\Sander\\AndroidStudioProjects\\mqtt_dashboard\\BufferApp\\firebase\\build\\js\\packages_imported\\ktor-ktor-client-core-jsIr\\1.5.4",
-    "Kotlin-DateTime-library-kotlinx-datetime-js-ir": "file:C:\\Users\\Sander\\AndroidStudioProjects\\mqtt_dashboard\\BufferApp\\firebase\\build\\js\\packages_imported\\Kotlin-DateTime-library-kotlinx-datetime-js-ir\\0.2.1",
-    "kotlin-test-js-runner": "file:C:\\Users\\Sander\\AndroidStudioProjects\\mqtt_dashboard\\BufferApp\\firebase\\build\\js\\packages_imported\\kotlin-test-js-runner\\1.5.20",
-    "kotlin-test": "file:C:\\Users\\Sander\\AndroidStudioProjects\\mqtt_dashboard\\BufferApp\\firebase\\build\\js\\packages_imported\\kotlin-test\\1.5.20"
+    "@js-joda/core": "^3.2.0"
   },
   "peerDependencies": {},
   "optionalDependencies": {},

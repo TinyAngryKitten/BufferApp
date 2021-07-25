@@ -3,13 +3,15 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
+  "functions": {
+    "runtime": "nodejs14"
+  },
   "emulators": {
     "auth": {
       "port": 9099
     },
     "functions": {
-      "port": 5001,
-      "runtime": "nodejs14"
+      "port": 5001
     },
     "firestore": {
       "port": 8080

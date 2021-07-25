@@ -1,5 +1,6 @@
 plugins {
     kotlin("js") version "1.5.20"
+    kotlin("plugin.serialization") version "1.5.20"
 }
 
 group = "tiny.angry.kitten"
@@ -14,8 +15,9 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlinx:kotlinx-nodejs:0.0.7")
-    implementation("tiny.angry.kitten:SimpleBankClient:1.0.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.5.1")
+    implementation("tiny.angry.kitten:SimpleBankClient:1.0.10")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.4.0")
+    implementation(npm("firebase", "^8.8.0"))
     implementation(npm("firebase-admin", "^9.2.0"))
     implementation(npm("firebase-functions", "^3.11.0"))
     implementation(npm("@js-joda/core", "^3.2.0"))
@@ -55,14 +57,14 @@ kotlin {
 
 tasks.register<Copy>("copyIndexToFunctionsFolder") {
     dependsOn(":build")
-    //delete("../functions/index.js")
+    delete("../functions/index.js")
     from(layout.buildDirectory.file("js/packages/index/kotlin/index.js"))
     into(layout.buildDirectory.dir("../functions"))
 }
 
 tasks.register<Copy>("copyPackageJsonToFunctionsFolder") {
     dependsOn(":copyIndexToFunctionsFolder")
-    //delete("../functions/package.json")
+    delete("../functions/package.json")
     from(layout.buildDirectory.file("js/packages/index/package.json"))
     into(layout.buildDirectory.dir("../functions"))
 }
