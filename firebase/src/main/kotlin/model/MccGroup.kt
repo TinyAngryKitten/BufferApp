@@ -4,7 +4,7 @@ import accounts
 
 fun parseMCC(str : String?) : MCC? =
     try {
-        MCC.valueOf(str!!)
+        MCC.values().find { it.value == str?.toInt() }
     } catch(e : Exception) {
         null
     }
