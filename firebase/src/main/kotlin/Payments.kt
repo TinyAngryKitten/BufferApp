@@ -31,19 +31,26 @@ class Payments(
     private suspend fun handleTransactionIfNew(transaction : Transaction, since : Instant) {
         when {
             hasBeenHandled(transaction, since) -> { }
-            isNoopTransaction(transaction) -> firestoreHelper.addData(
-                TransactionAction(transaction, "",0,"None"),
-                transactionActionCollection
-            )
-            else -> firestoreHelper.addData(
-                moveMoneytoCoverTransaction(transaction),
-                transactionActionCollection
-            )
+            isNoopTransaction(transaction) -> {
+                firestoreHelper.addData(
+                    TransactionAction(transaction, "",0,"None"),
+                    transactionActionCollection
+                )
+
+                log("Registered noop transaction: $transaction")
+            }
+            else -> {
+                firestoreHelper.addData(
+                    moveMoneytoCoverTransaction(transaction),
+                    transactionActionCollection
+                )
+
+                log("Transaction was paid: $transaction")
+            }
         }
     }
 
     private suspend fun moveMoneytoCoverTransaction(transaction: Transaction) : TransactionAction {
-        log("move money")
         val paymentAccount = determinePaymentAccount(transaction)
         var transferCompleted = false
         try {
@@ -51,7 +58,7 @@ class Payments(
                 Transfer(
                     accounts.creditCardPayments,
                     paymentAccount,
-                    -transaction.amount.roundToInt(),
+                    -transaction.amount,
                     "payment: ${transaction.cardDetails?.merchantName?.take(20)}"
                 ),
                 tokenStorage.getToken().access_token
@@ -64,7 +71,7 @@ class Payments(
                     Transfer(
                         accounts.creditCardPayments,
                         accounts.paymentsBuffer,
-                        -transaction.amount.roundToInt(),
+                        -transaction.amount,
                         "payment: ${transaction.cardDetails?.merchantName?.take(20)}"
                     ),
                     tokenStorage.getToken().access_token
@@ -79,7 +86,8 @@ class Payments(
             transaction,
             paymentAccount,
             transaction.amount.toInt(),
-            "PayFromAccount"
+            "PayFromAccount",
+            accounts.findAccountName(paymentAccount)
         )
         else throw Exception("Could not transfer payment to creditcard accound from $paymentAccount")
     }

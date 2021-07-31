@@ -54732,7 +54732,7 @@
     return this._descriptor_44;
   };
   $serializer_4.prototype.childSerializers_0_k$ = function () {
-    var tmp0_arrayOf_0 = [StringSerializer_getInstance(), StringSerializer_getInstance(), IntSerializer_getInstance(), StringSerializer_getInstance()];
+    var tmp0_arrayOf_0 = [StringSerializer_getInstance(), StringSerializer_getInstance(), DoubleSerializer_getInstance(), StringSerializer_getInstance()];
     return tmp0_arrayOf_0;
   };
   $serializer_4.prototype.deserialize_u9oizh_k$ = function (decoder) {
@@ -54742,7 +54742,7 @@
     var tmp3_bitMask0 = 0;
     var tmp4_local0 = null;
     var tmp5_local1 = null;
-    var tmp6_local2 = 0;
+    var tmp6_local2 = 0.0;
     var tmp7_local3 = null;
     var tmp8_input = decoder.beginStructure_6qhf5t_k$(tmp0_desc);
     if (tmp8_input.decodeSequentially_0_k$()) {
@@ -54750,7 +54750,7 @@
       tmp3_bitMask0 = tmp3_bitMask0 | 1;
       tmp5_local1 = tmp8_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 1);
       tmp3_bitMask0 = tmp3_bitMask0 | 2;
-      tmp6_local2 = tmp8_input.decodeIntElement_5vyt7k_k$(tmp0_desc, 2);
+      tmp6_local2 = tmp8_input.decodeDoubleElement_5vyt7k_k$(tmp0_desc, 2);
       tmp3_bitMask0 = tmp3_bitMask0 | 4;
       tmp7_local3 = tmp8_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 3);
       tmp3_bitMask0 = tmp3_bitMask0 | 8;
@@ -54770,7 +54770,7 @@
             tmp3_bitMask0 = tmp3_bitMask0 | 2;
             break;
           case 2:
-            tmp6_local2 = tmp8_input.decodeIntElement_5vyt7k_k$(tmp0_desc, 2);
+            tmp6_local2 = tmp8_input.decodeDoubleElement_5vyt7k_k$(tmp0_desc, 2);
             tmp3_bitMask0 = tmp3_bitMask0 | 4;
             break;
           case 3:
@@ -54788,7 +54788,7 @@
     var tmp1_output = encoder.beginStructure_6qhf5t_k$(tmp0_desc);
     tmp1_output.encodeStringElement_mom8tu_k$(tmp0_desc, 0, value._to_0);
     tmp1_output.encodeStringElement_mom8tu_k$(tmp0_desc, 1, value._from_0);
-    tmp1_output.encodeIntElement_wh7n80_k$(tmp0_desc, 2, value._amount_0);
+    tmp1_output.encodeDoubleElement_xwk426_k$(tmp0_desc, 2, value._amount_0);
     tmp1_output.encodeStringElement_mom8tu_k$(tmp0_desc, 3, value._message_5);
     tmp1_output.endStructure_g940c0_k$(tmp0_desc);
   };
@@ -54831,7 +54831,7 @@
   Transfer.prototype.hashCode = function () {
     var result = getStringHashCode(this._to_0);
     result = imul(result, 31) + getStringHashCode(this._from_0) | 0;
-    result = imul(result, 31) + this._amount_0 | 0;
+    result = imul(result, 31) + getNumberHashCode(this._amount_0) | 0;
     result = imul(result, 31) + getStringHashCode(this._message_5) | 0;
     return result;
   };
@@ -54847,7 +54847,7 @@
       return false;
     if (!(this._from_0 === tmp0_other_with_cast._from_0))
       return false;
-    if (!(this._amount_0 === tmp0_other_with_cast._amount_0))
+    if (!equals_1(this._amount_0, tmp0_other_with_cast._amount_0))
       return false;
     if (!(this._message_5 === tmp0_other_with_cast._message_5))
       return false;
@@ -54866,7 +54866,6 @@
     this._$list_3_5 = $list_3_5;
   }
   _no_name_provided__220.prototype.invoke_h9nkbz_k$ = function (doc) {
-    println('query snapshot');
     try {
       var stringData_5_7 = JSON.stringify(doc.data());
       var tmp;
@@ -55092,7 +55091,7 @@
           case 0:
             this._exceptionState = 6;
             this._paymentAmount0 = this._debt._amount_3 / this._debt._nrOfPayments;
-            this._transfer1 = new Transfer(accounts_getInstance()._buffer_9, accounts_getInstance()._paymentsBuffer, numberToInt(this._paymentAmount0), '' + 'debt: ' + this._debt._name_8);
+            this._transfer1 = new Transfer(accounts_getInstance()._buffer_9, accounts_getInstance()._paymentsBuffer, this._paymentAmount0, '' + 'debt: ' + this._debt._name_8);
             this._ARGUMENT2_0 = this.__this__39._bankClient;
             this._state_0 = 1;
             suspendResult = this.__this__39._tokenStorage.getToken_0_k$(this);
@@ -55227,7 +55226,6 @@
             var tmp_3 = this;
             tmp_3._tmp0__anonymous__1_13 = this;
             this._safe_2_24 = SafeContinuation_init_$Create$(intercepted(this._tmp0__anonymous__1_13));
-            println('find daata with query');
             firestore.collection(this._tmp1_find_01).where(this._tmp2_find_02._field, this._tmp2_find_02._operator, this._tmp2_find_02._value_27).get().then(_no_name_provided_$factory_184(this._safe_2_24));
             suspendResult = this._safe_2_24.getOrThrow_0_k$();
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
@@ -55269,7 +55267,7 @@
           case 0:
             this._exceptionState = 3;
             this._ARGUMENT0_0 = this.__this__42._bankClient;
-            this._ARGUMENT1 = new Transfer(this._accountId_1, accounts_getInstance()._buffer_9, numberToInt(this._amount_2), 'Uttak fra buffer');
+            this._ARGUMENT1 = new Transfer(this._accountId_1, accounts_getInstance()._buffer_9, this._amount_2, 'Uttak fra buffer');
             this._state_0 = 1;
             suspendResult = this.__this__42._tokenStorage.getToken_0_k$(this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
@@ -55326,7 +55324,6 @@
             var tmp_2 = this;
             tmp_2._tmp0__anonymous__1_12 = this;
             this._safe_2_23 = SafeContinuation_init_$Create$(intercepted(this._tmp0__anonymous__1_12));
-            println('find all');
             firestore.collection(this._tmp1_findAll_01).get().then(_no_name_provided_$factory_185(this._safe_2_23));
             suspendResult = this._safe_2_23.getOrThrow_0_k$();
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
@@ -55502,7 +55499,6 @@
             var tmp_0 = this;
             tmp_0._tmp0__anonymous__1_10 = this;
             this._safe_2_21 = SafeContinuation_init_$Create$(intercepted(this._tmp0__anonymous__1_10));
-            println('' + 'add data ' + this._obj);
             this._doc_42 = firestore.collection(this._collection).doc();
             firestore.collection(this._collection).doc(this._doc_42.id).set(this._obj.addId_6wfw3l_k$(this._doc_42.id)._get_jsonObject__0_k$(), json([to('merge', false)])).then(_no_name_provided_$factory_186(this._safe_2_21));
             suspendResult = this._safe_2_21.getOrThrow_0_k$();
@@ -55803,7 +55799,6 @@
     this._$list_5_4 = $list_5_4;
   }
   _no_name_provided__226.prototype.invoke_h9nkbz_k$ = function (doc) {
-    println('query snapshot');
     try {
       var stringData_7_6 = JSON.stringify(doc.data());
       var tmp;
@@ -55989,7 +55984,7 @@
               if (isNoopTransaction(this.__this__46, this._transaction)) {
                 this._state_0 = 4;
                 var tmp_0 = firestoreHelper_getInstance();
-                suspendResult = tmp_0.addData_oyvw3h_k$(TransactionAction_init_$Create$(this._transaction, '', 0, 'None', null, 0.0, 48, null), this.__this__46._transactionActionCollection, this);
+                suspendResult = tmp_0.addData_oyvw3h_k$(TransactionAction_init_$Create$(this._transaction, '', 0, 'None', null, null, 0.0, 112, null), this.__this__46._transactionActionCollection, this);
                 if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
                   return suspendResult;
                 }continue $sm;
@@ -56013,9 +56008,11 @@
             }
             continue $sm;
           case 3:
+            log('' + 'Transaction was paid: ' + this._transaction);
             this._state_0 = 5;
             continue $sm;
           case 4:
+            log('' + 'Registered noop transaction: ' + this._transaction);
             this._state_0 = 5;
             continue $sm;
           case 5:
@@ -56051,14 +56048,13 @@
         switch (tmp) {
           case 0:
             this._exceptionState = 11;
-            log('move money');
             this._paymentAccount0 = determinePaymentAccount(this.__this__47, this._transaction_0);
             this._transferCompleted1 = false;
             this._exceptionState = 3;
             this._ARGUMENT2_3 = this.__this__47._bankClient_0;
             var tmp_0 = this;
             var tmp_1 = accounts_getInstance()._creditCardPayments;
-            var tmp_2 = -roundToInt(this._transaction_0._amount) | 0;
+            var tmp_2 = -this._transaction_0._amount;
             var tmp0_safe_receiver = this._transaction_0._cardDetails;
             var tmp1_safe_receiver = tmp0_safe_receiver == null ? null : tmp0_safe_receiver._merchantName;
             tmp_0._ARGUMENT3_3 = new Transfer(tmp_1, this._paymentAccount0, tmp_2, '' + 'payment: ' + (tmp1_safe_receiver == null ? null : take(tmp1_safe_receiver, 20)));
@@ -56116,7 +56112,7 @@
             var tmp_4 = this;
             var tmp_5 = accounts_getInstance()._creditCardPayments;
             var tmp_6 = accounts_getInstance()._paymentsBuffer;
-            var tmp_7 = -roundToInt(this._transaction_0._amount) | 0;
+            var tmp_7 = -this._transaction_0._amount;
             var tmp4_safe_receiver = this._transaction_0._cardDetails;
             var tmp5_safe_receiver = tmp4_safe_receiver == null ? null : tmp4_safe_receiver._merchantName;
             tmp_4._ARGUMENT8 = new Transfer(tmp_5, tmp_6, tmp_7, '' + 'payment: ' + (tmp5_safe_receiver == null ? null : take(tmp5_safe_receiver, 20)));
@@ -56163,7 +56159,8 @@
             this._exceptionState = 11;
             if (this._transferCompleted1) {
               var tmp_8 = numberToInt(this._transaction_0._amount);
-              return TransactionAction_init_$Create$(this._transaction_0, this._paymentAccount0, tmp_8, 'PayFromAccount', null, 0.0, 48, null);
+              var tmp_9 = accounts_getInstance().findAccountName_6wfw3l_k$(this._paymentAccount0);
+              return TransactionAction_init_$Create$(this._transaction_0, this._paymentAccount0, tmp_8, 'PayFromAccount', tmp_9, null, 0.0, 96, null);
             } else
               throw Exception_init_$Create$('' + 'Could not transfer payment to creditcard accound from ' + this._paymentAccount0);
             return Unit_getInstance();
@@ -56209,7 +56206,6 @@
             var tmp_3 = this;
             tmp_3._tmp0__anonymous__1_1_13 = this;
             this._safe_2_2_24 = SafeContinuation_init_$Create$(intercepted(this._tmp0__anonymous__1_1_13));
-            println('find daata with query');
             firestore.collection(this._tmp1_find_01_0).where(this._tmp2_find_02_0._field, this._tmp2_find_02_0._operator, this._tmp2_find_02_0._value_27).get().then(_no_name_provided_$factory_189(this._safe_2_2_24));
             suspendResult = this._safe_2_2_24.getOrThrow_0_k$();
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
@@ -57745,16 +57741,18 @@
     interfaces: []
   };
   var norwegianTimeZone;
-  function TransactionAction_init_$Init$(transaction, account, amount, action, id, timestamp, $mask0, $marker, $this) {
+  function TransactionAction_init_$Init$(transaction, account, amount, action, accountName, id, timestamp, $mask0, $marker, $this) {
     if (!(($mask0 & 16) === 0))
-      id = '';
+      accountName = '';
     if (!(($mask0 & 32) === 0))
+      id = '';
+    if (!(($mask0 & 64) === 0))
       timestamp = System_getInstance().now_0_k$().toEpochMilliseconds_0_k$().toFloat_0_k$();
-    TransactionAction.call($this, transaction, account, amount, action, id, timestamp);
+    TransactionAction.call($this, transaction, account, amount, action, accountName, id, timestamp);
     return $this;
   }
-  function TransactionAction_init_$Create$(transaction, account, amount, action, id, timestamp, $mask0, $marker) {
-    return TransactionAction_init_$Init$(transaction, account, amount, action, id, timestamp, $mask0, $marker, Object.create(TransactionAction.prototype));
+  function TransactionAction_init_$Create$(transaction, account, amount, action, accountName, id, timestamp, $mask0, $marker) {
+    return TransactionAction_init_$Init$(transaction, account, amount, action, accountName, id, timestamp, $mask0, $marker, Object.create(TransactionAction.prototype));
   }
   function Companion_72() {
     Companion_instance_71 = this;
@@ -57772,11 +57770,12 @@
   }
   function $serializer_7() {
     $serializer_instance_7 = this;
-    var tmp0_serialDesc = new PluginGeneratedSerialDescriptor('model.TransactionAction', this, 6);
+    var tmp0_serialDesc = new PluginGeneratedSerialDescriptor('model.TransactionAction', this, 7);
     tmp0_serialDesc.addElement_5xhc52_k$('transaction', false);
     tmp0_serialDesc.addElement_5xhc52_k$('account', false);
     tmp0_serialDesc.addElement_5xhc52_k$('amount', false);
     tmp0_serialDesc.addElement_5xhc52_k$('action', false);
+    tmp0_serialDesc.addElement_5xhc52_k$('accountName', true);
     tmp0_serialDesc.addElement_5xhc52_k$('id', true);
     tmp0_serialDesc.addElement_5xhc52_k$('timestamp', true);
     this._descriptor_47 = tmp0_serialDesc;
@@ -57785,7 +57784,7 @@
     return this._descriptor_47;
   };
   $serializer_7.prototype.childSerializers_0_k$ = function () {
-    var tmp0_arrayOf_0 = [$serializer_getInstance_0(), StringSerializer_getInstance(), IntSerializer_getInstance(), StringSerializer_getInstance(), StringSerializer_getInstance(), FloatSerializer_getInstance()];
+    var tmp0_arrayOf_0 = [$serializer_getInstance_0(), StringSerializer_getInstance(), IntSerializer_getInstance(), StringSerializer_getInstance(), StringSerializer_getInstance(), StringSerializer_getInstance(), FloatSerializer_getInstance()];
     return tmp0_arrayOf_0;
   };
   $serializer_7.prototype.deserialize_u9oizh_k$ = function (decoder) {
@@ -57798,57 +57797,64 @@
     var tmp6_local2 = 0;
     var tmp7_local3 = null;
     var tmp8_local4 = null;
-    var tmp9_local5 = 0.0;
-    var tmp10_input = decoder.beginStructure_6qhf5t_k$(tmp0_desc);
-    if (tmp10_input.decodeSequentially_0_k$()) {
-      tmp4_local0 = tmp10_input.decodeSerializableElement_fgxyly_k$(tmp0_desc, 0, $serializer_getInstance_0(), tmp4_local0);
+    var tmp9_local5 = null;
+    var tmp10_local6 = 0.0;
+    var tmp11_input = decoder.beginStructure_6qhf5t_k$(tmp0_desc);
+    if (tmp11_input.decodeSequentially_0_k$()) {
+      tmp4_local0 = tmp11_input.decodeSerializableElement_fgxyly_k$(tmp0_desc, 0, $serializer_getInstance_0(), tmp4_local0);
       tmp3_bitMask0 = tmp3_bitMask0 | 1;
-      tmp5_local1 = tmp10_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 1);
+      tmp5_local1 = tmp11_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 1);
       tmp3_bitMask0 = tmp3_bitMask0 | 2;
-      tmp6_local2 = tmp10_input.decodeIntElement_5vyt7k_k$(tmp0_desc, 2);
+      tmp6_local2 = tmp11_input.decodeIntElement_5vyt7k_k$(tmp0_desc, 2);
       tmp3_bitMask0 = tmp3_bitMask0 | 4;
-      tmp7_local3 = tmp10_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 3);
+      tmp7_local3 = tmp11_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 3);
       tmp3_bitMask0 = tmp3_bitMask0 | 8;
-      tmp8_local4 = tmp10_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 4);
+      tmp8_local4 = tmp11_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 4);
       tmp3_bitMask0 = tmp3_bitMask0 | 16;
-      tmp9_local5 = tmp10_input.decodeFloatElement_5vyt7k_k$(tmp0_desc, 5);
+      tmp9_local5 = tmp11_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 5);
       tmp3_bitMask0 = tmp3_bitMask0 | 32;
+      tmp10_local6 = tmp11_input.decodeFloatElement_5vyt7k_k$(tmp0_desc, 6);
+      tmp3_bitMask0 = tmp3_bitMask0 | 64;
     } else
       while (tmp1_flag) {
-        tmp2_index = tmp10_input.decodeElementIndex_6qhf5t_k$(tmp0_desc);
+        tmp2_index = tmp11_input.decodeElementIndex_6qhf5t_k$(tmp0_desc);
         switch (tmp2_index) {
           case -1:
             tmp1_flag = false;
             break;
           case 0:
-            tmp4_local0 = tmp10_input.decodeSerializableElement_fgxyly_k$(tmp0_desc, 0, $serializer_getInstance_0(), tmp4_local0);
+            tmp4_local0 = tmp11_input.decodeSerializableElement_fgxyly_k$(tmp0_desc, 0, $serializer_getInstance_0(), tmp4_local0);
             tmp3_bitMask0 = tmp3_bitMask0 | 1;
             break;
           case 1:
-            tmp5_local1 = tmp10_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 1);
+            tmp5_local1 = tmp11_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 1);
             tmp3_bitMask0 = tmp3_bitMask0 | 2;
             break;
           case 2:
-            tmp6_local2 = tmp10_input.decodeIntElement_5vyt7k_k$(tmp0_desc, 2);
+            tmp6_local2 = tmp11_input.decodeIntElement_5vyt7k_k$(tmp0_desc, 2);
             tmp3_bitMask0 = tmp3_bitMask0 | 4;
             break;
           case 3:
-            tmp7_local3 = tmp10_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 3);
+            tmp7_local3 = tmp11_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 3);
             tmp3_bitMask0 = tmp3_bitMask0 | 8;
             break;
           case 4:
-            tmp8_local4 = tmp10_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 4);
+            tmp8_local4 = tmp11_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 4);
             tmp3_bitMask0 = tmp3_bitMask0 | 16;
             break;
           case 5:
-            tmp9_local5 = tmp10_input.decodeFloatElement_5vyt7k_k$(tmp0_desc, 5);
+            tmp9_local5 = tmp11_input.decodeStringElement_5vyt7k_k$(tmp0_desc, 5);
             tmp3_bitMask0 = tmp3_bitMask0 | 32;
+            break;
+          case 6:
+            tmp10_local6 = tmp11_input.decodeFloatElement_5vyt7k_k$(tmp0_desc, 6);
+            tmp3_bitMask0 = tmp3_bitMask0 | 64;
             break;
           default:throw UnknownFieldException_init_$Create$(tmp2_index);
         }
       }
-    tmp10_input.endStructure_g940c0_k$(tmp0_desc);
-    return TransactionAction_init_$Create$_0(tmp3_bitMask0, tmp4_local0, tmp5_local1, tmp6_local2, tmp7_local3, tmp8_local4, tmp9_local5, null);
+    tmp11_input.endStructure_g940c0_k$(tmp0_desc);
+    return TransactionAction_init_$Create$_0(tmp3_bitMask0, tmp4_local0, tmp5_local1, tmp6_local2, tmp7_local3, tmp8_local4, tmp9_local5, tmp10_local6, null);
   };
   $serializer_7.prototype.serialize_dr5aq4_k$ = function (encoder, value) {
     var tmp0_desc = this._descriptor_47;
@@ -57857,10 +57863,12 @@
     tmp1_output.encodeStringElement_mom8tu_k$(tmp0_desc, 1, value._account);
     tmp1_output.encodeIntElement_wh7n80_k$(tmp0_desc, 2, value._amount_5);
     tmp1_output.encodeStringElement_mom8tu_k$(tmp0_desc, 3, value._action);
-    if (tmp1_output.shouldEncodeElementDefault_5vyt7k_k$(tmp0_desc, 4) ? true : !(value._id_1 === ''))
-      tmp1_output.encodeStringElement_mom8tu_k$(tmp0_desc, 4, value._id_1);
-    if (tmp1_output.shouldEncodeElementDefault_5vyt7k_k$(tmp0_desc, 5) ? true : !equals_1(value._timestamp_2, System_getInstance().now_0_k$().toEpochMilliseconds_0_k$().toFloat_0_k$()))
-      tmp1_output.encodeFloatElement_qv7flv_k$(tmp0_desc, 5, value._timestamp_2);
+    if (tmp1_output.shouldEncodeElementDefault_5vyt7k_k$(tmp0_desc, 4) ? true : !(value._accountName === ''))
+      tmp1_output.encodeStringElement_mom8tu_k$(tmp0_desc, 4, value._accountName);
+    if (tmp1_output.shouldEncodeElementDefault_5vyt7k_k$(tmp0_desc, 5) ? true : !(value._id_1 === ''))
+      tmp1_output.encodeStringElement_mom8tu_k$(tmp0_desc, 5, value._id_1);
+    if (tmp1_output.shouldEncodeElementDefault_5vyt7k_k$(tmp0_desc, 6) ? true : !equals_1(value._timestamp_2, System_getInstance().now_0_k$().toEpochMilliseconds_0_k$().toFloat_0_k$()))
+      tmp1_output.encodeFloatElement_qv7flv_k$(tmp0_desc, 6, value._timestamp_2);
     tmp1_output.endStructure_g940c0_k$(tmp0_desc);
   };
   $serializer_7.prototype.serialize_whawnb_k$ = function (encoder, value) {
@@ -57877,7 +57885,7 @@
       new $serializer_7();
     return $serializer_instance_7;
   }
-  function TransactionAction_init_$Init$_0(seen1, transaction, account, amount, action, id, timestamp, serializationConstructorMarker, $this) {
+  function TransactionAction_init_$Init$_0(seen1, transaction, account, amount, action, accountName, id, timestamp, serializationConstructorMarker, $this) {
     if (!(15 === (15 & seen1)))
       throwMissingFieldException(seen1, 15, $serializer_getInstance_7()._descriptor_47);
     $this._transaction_2 = transaction;
@@ -57885,24 +57893,29 @@
     $this._amount_5 = amount;
     $this._action = action;
     if (0 === (seen1 & 16))
+      $this._accountName = '';
+    else
+      $this._accountName = accountName;
+    if (0 === (seen1 & 32))
       $this._id_1 = '';
     else
       $this._id_1 = id;
-    if (0 === (seen1 & 32))
+    if (0 === (seen1 & 64))
       $this._timestamp_2 = System_getInstance().now_0_k$().toEpochMilliseconds_0_k$().toFloat_0_k$();
     else
       $this._timestamp_2 = timestamp;
     return $this;
   }
-  function TransactionAction_init_$Create$_0(seen1, transaction, account, amount, action, id, timestamp, serializationConstructorMarker) {
-    return TransactionAction_init_$Init$_0(seen1, transaction, account, amount, action, id, timestamp, serializationConstructorMarker, Object.create(TransactionAction.prototype));
+  function TransactionAction_init_$Create$_0(seen1, transaction, account, amount, action, accountName, id, timestamp, serializationConstructorMarker) {
+    return TransactionAction_init_$Init$_0(seen1, transaction, account, amount, action, accountName, id, timestamp, serializationConstructorMarker, Object.create(TransactionAction.prototype));
   }
-  function TransactionAction(transaction, account, amount, action, id, timestamp) {
+  function TransactionAction(transaction, account, amount, action, accountName, id, timestamp) {
     Companion_getInstance_71();
     this._transaction_2 = transaction;
     this._account = account;
     this._amount_5 = amount;
     this._action = action;
+    this._accountName = accountName;
     this._id_1 = id;
     this._timestamp_2 = timestamp;
   }
@@ -57910,12 +57923,12 @@
     return json([to(action$factory(this).callableName, this._action), to(account$factory(this).callableName, this._account), to(amount$factory_6(this).callableName, this._amount_5), to(transaction$factory(this).callableName, _get_jsonObject_(this._transaction_2)), to(timestamp$factory_5(this).callableName, this._timestamp_2)]);
   };
   TransactionAction.prototype.addId_6wfw3l_k$ = function (id) {
-    return this.copy$default_mag5ru_k$(null, null, 0, null, id, 0.0, 47, null);
+    return this.copy$default_ofaccu_k$(null, null, 0, null, null, id, 0.0, 95, null);
   };
-  TransactionAction.prototype.copy_eakdhk_k$ = function (transaction, account, amount, action, id, timestamp) {
-    return new TransactionAction(transaction, account, amount, action, id, timestamp);
+  TransactionAction.prototype.copy_iszwq1_k$ = function (transaction, account, amount, action, accountName, id, timestamp) {
+    return new TransactionAction(transaction, account, amount, action, accountName, id, timestamp);
   };
-  TransactionAction.prototype.copy$default_mag5ru_k$ = function (transaction, account, amount, action, id, timestamp, $mask0, $handler) {
+  TransactionAction.prototype.copy$default_ofaccu_k$ = function (transaction, account, amount, action, accountName, id, timestamp, $mask0, $handler) {
     if (!(($mask0 & 1) === 0))
       transaction = this._transaction_2;
     if (!(($mask0 & 2) === 0))
@@ -57925,19 +57938,22 @@
     if (!(($mask0 & 8) === 0))
       action = this._action;
     if (!(($mask0 & 16) === 0))
-      id = this._id_1;
+      accountName = this._accountName;
     if (!(($mask0 & 32) === 0))
+      id = this._id_1;
+    if (!(($mask0 & 64) === 0))
       timestamp = this._timestamp_2;
-    return this.copy_eakdhk_k$(transaction, account, amount, action, id, timestamp);
+    return this.copy_iszwq1_k$(transaction, account, amount, action, accountName, id, timestamp);
   };
   TransactionAction.prototype.toString = function () {
-    return '' + 'TransactionAction(transaction=' + this._transaction_2 + ', account=' + this._account + ', amount=' + this._amount_5 + ', action=' + this._action + ', id=' + this._id_1 + ', timestamp=' + this._timestamp_2 + ')';
+    return '' + 'TransactionAction(transaction=' + this._transaction_2 + ', account=' + this._account + ', amount=' + this._amount_5 + ', action=' + this._action + ', accountName=' + this._accountName + ', id=' + this._id_1 + ', timestamp=' + this._timestamp_2 + ')';
   };
   TransactionAction.prototype.hashCode = function () {
     var result = this._transaction_2.hashCode();
     result = imul(result, 31) + getStringHashCode(this._account) | 0;
     result = imul(result, 31) + this._amount_5 | 0;
     result = imul(result, 31) + getStringHashCode(this._action) | 0;
+    result = imul(result, 31) + getStringHashCode(this._accountName) | 0;
     result = imul(result, 31) + getStringHashCode(this._id_1) | 0;
     result = imul(result, 31) + getNumberHashCode(this._timestamp_2) | 0;
     return result;
@@ -57957,6 +57973,8 @@
     if (!(this._amount_5 === tmp0_other_with_cast._amount_5))
       return false;
     if (!(this._action === tmp0_other_with_cast._action))
+      return false;
+    if (!(this._accountName === tmp0_other_with_cast._accountName))
       return false;
     if (!(this._id_1 === tmp0_other_with_cast._id_1))
       return false;

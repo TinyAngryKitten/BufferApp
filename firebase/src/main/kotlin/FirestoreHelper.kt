@@ -9,7 +9,6 @@ import kotlin.js.json
 object firestoreHelper {
     suspend fun addData(obj : JsJSON, collection : String) =
         suspendCoroutine<Unit> {
-            println("add data $obj")
             val doc = firestore.collection(collection).doc()
             firestore.collection(collection)
                 .doc(doc.id)
@@ -20,12 +19,10 @@ object firestoreHelper {
 
     suspend inline fun <reified T : JsJSON> find(collection: String, where : WhereClause) =
         suspendCoroutine<List<T>> {
-            println("find daata with query")
             firestore.collection(collection).where(where.field,where.operator,where.value)
                 .get().then { querySnapshot ->
                     val list = mutableListOf<T>()
                     querySnapshot.forEach { doc ->
-                        println("query snapshot")
                         try {
                             val stringData = JSON.stringify(doc.data())
                             if(stringData != null && !stringData.isEmpty() && stringData != "undefined") {
@@ -40,7 +37,6 @@ object firestoreHelper {
         }
     suspend inline fun <reified T : JsJSON> findAll(collection: String) =
         suspendCoroutine<List<T>> {
-            println("find all")
         firestore.collection(collection)
             .get().then { querySnapshot ->
                 val list = mutableListOf<T>()

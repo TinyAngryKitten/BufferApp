@@ -29,7 +29,7 @@ class BufferAccount(
 
     suspend fun payDebt(debt: Debt, payments: List<DebtPayment>) {
         val paymentAmount = debt.amount / debt.nrOfPayments
-        val transfer = Transfer(accounts.buffer, accounts.paymentsBuffer, paymentAmount.toInt(), "debt: ${debt.name}")
+        val transfer = Transfer(accounts.buffer, accounts.paymentsBuffer, paymentAmount, "debt: ${debt.name}")
         if(bankClient.transferMoney(transfer,tokenStorage.getToken().access_token)) {
             addDebtPayment(
                 DebtPayment(
@@ -79,7 +79,7 @@ class BufferAccount(
         bankClient.transferMoney(Transfer(
             accountId,
             accounts.buffer,
-            amount.toInt(),
+            amount,
             "Uttak fra buffer"
         ), tokenStorage.getToken().access_token)
     }

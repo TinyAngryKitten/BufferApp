@@ -14,9 +14,10 @@ data class TransactionAction(
     val account : String,
     val amount : Int,
     val action : String,
+    val accountName : String = "",
     override val id: String = "",
-    override val timestamp: Float = Clock.System.now().toEpochMilliseconds().toFloat()
-) : JsJSON {
+    override val timestamp: Float = Clock.System.now().toEpochMilliseconds().toFloat(),
+    ) : JsJSON {
     override val jsonObject: Json
         get() = json(
             ::action.name to action,
