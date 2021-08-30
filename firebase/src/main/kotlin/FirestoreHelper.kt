@@ -11,10 +11,10 @@ object firestoreHelper {
         suspendCoroutine<Unit> {
             val doc = firestore.collection(collection).doc()
             firestore.collection(collection)
-                .doc(doc.id)
-                .set(obj.addId(doc.id).jsonObject, json("merge" to false)).then { ref ->
-                    it.resume(Unit)
-                }
+                    .doc(doc.id)
+                    .set(obj.addId(doc.id).jsonObject, json("merge" to false)).then { ref ->
+                        it.resume(Unit)
+                    }
         }
 
     suspend inline fun <reified T : JsJSON> find(collection: String, where : WhereClause) =

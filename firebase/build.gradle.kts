@@ -21,6 +21,7 @@ dependencies {
     implementation(npm("firebase-admin", "^9.2.0"))
     implementation(npm("firebase-functions", "^3.11.0"))
     implementation(npm("@js-joda/core", "^3.2.0"))
+    implementation(kotlin("stdlib-js"))
 }
 
 kotlin {

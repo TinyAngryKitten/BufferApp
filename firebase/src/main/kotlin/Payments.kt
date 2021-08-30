@@ -2,6 +2,7 @@ import api_client.BankClient
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.toLocalDateTime
+import main.kotlin.settings
 import model.*
 import kotlin.math.roundToInt
 import kotlin.time.ExperimentalTime
@@ -15,8 +16,8 @@ class Payments(
 
     @OptIn(ExperimentalTime::class)
     suspend fun checkForNewTransactions(
-        since : Instant = Clock.System.now().minus(9.days),
-        until : Instant = Clock.System.now().minus(5.days)
+            since : Instant = Clock.System.now().minus((5 + settings.nrOfDaysToCheckForTransactions).days),
+            until : Instant = Clock.System.now().minus(5.days)
     ) {
         bankClient.fetchTransactions(
             tokenStorage.getToken().access_token,
@@ -93,10 +94,9 @@ class Payments(
     }
 
     private fun determinePaymentAccount(transaction: Transaction) : String  =
-        when(parseMCC(transaction.cardDetails?.merchantCategoryCode)) {
-            in MccGroup.HouseholdGroup.mccValues -> MccGroup.HouseholdGroup.withdrawalAccount
-            else -> MccGroup.Unknown.withdrawalAccount
-        }
+        parseMCC(transaction.cardDetails?.merchantCategoryCode)
+            .group
+            .withdrawalAccount
 
     private suspend fun hasBeenHandled(transaction : Transaction, since : Instant) : Boolean {
         return firestoreHelper

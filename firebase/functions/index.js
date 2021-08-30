@@ -2210,11 +2210,11 @@
       new EmptyList();
     return EmptyList_instance;
   }
-  function throwIndexOverflow() {
-    throw ArithmeticException_init_$Create$('Index overflow has happened.');
-  }
   function arrayListOf(elements) {
     return elements.length === 0 ? ArrayList_init_$Create$() : ArrayList_init_$Create$_1(new ArrayAsCollection(elements, true));
+  }
+  function throwIndexOverflow() {
+    throw ArithmeticException_init_$Create$('Index overflow has happened.');
   }
   function asCollection(_this_) {
     return new ArrayAsCollection(_this_, false);
@@ -5947,6 +5947,9 @@
   function setOf_0(element) {
     return hashSetOf([element]);
   }
+  function listOf_0(element) {
+    return arrayListOf([element]);
+  }
   function mapCapacity(expectedSize) {
     return expectedSize;
   }
@@ -5957,9 +5960,6 @@
   }
   function sortWith(_this_, comparator) {
     collectionsSort(_this_, comparator);
-  }
-  function listOf_0(element) {
-    return arrayListOf([element]);
   }
   function arrayCopy_0(source, destination, destinationOffset, startIndex, endIndex) {
     Companion_getInstance().checkRangeIndexes_zd700_k$(startIndex, endIndex, source.length);
@@ -55855,8 +55855,7 @@
   }
   function determinePaymentAccount($this, transaction) {
     var tmp0_safe_receiver = transaction._cardDetails;
-    var tmp1_subject = parseMCC(tmp0_safe_receiver == null ? null : tmp0_safe_receiver._merchantCategoryCode);
-    return contains_0(HouseholdGroup_getInstance()._mccValues_0, tmp1_subject) ? HouseholdGroup_getInstance()._withdrawalAccount_0 : Unknown_getInstance()._withdrawalAccount;
+    return _get_group_(parseMCC(tmp0_safe_receiver == null ? null : tmp0_safe_receiver._merchantCategoryCode))._get_withdrawalAccount__0_k$();
   }
   function hasBeenHandled($this, transaction, since, $cont) {
     var tmp = new $hasBeenHandledCOROUTINE$11($this, transaction, since, $cont);
@@ -56263,7 +56262,7 @@
   };
   Payments.prototype.checkForNewTransactions$default_1l835x_k$ = function (since, until_1, $mask0, $handler, $cont) {
     if (!(($mask0 & 1) === 0))
-      since = System_getInstance().now_0_k$().minus_mqzjix_k$(_get_days_(9));
+      since = System_getInstance().now_0_k$().minus_mqzjix_k$(_get_days_(5 + settings_getInstance()._nrOfDaysToCheckForTransactions | 0));
     if (!(($mask0 & 2) === 0))
       until_1 = System_getInstance().now_0_k$().minus_mqzjix_k$(_get_days_(5));
     return this.checkForNewTransactions_c9w0cx_k$(since, until_1, $cont);
@@ -56435,7 +56434,7 @@
     var tokenStorage = new TokenStorage(client);
     var buffer = new BufferAccount(client, tokenStorage, firestore, functions);
     var payments = new Payments(client, tokenStorage);
-    exports.checkTransactions = functions.pubsub.schedule('every 24 hours').onRun(_no_name_provided_$factory_190(payments));
+    exports.checkTransactions = functions.pubsub.schedule('every 1 hours').onRun(_no_name_provided_$factory_190(payments));
     exports.payDebtForCurrentMonth = functions.pubsub.schedule('every 24 hours').onRun(_no_name_provided_$factory_191(buffer));
     exports.listDebt = functions.https.onRequest(_no_name_provided_$factory_192(buffer));
     exports.addDebt = functions.https.onRequest(_no_name_provided_$factory_193(buffer));
@@ -57698,6 +57697,40 @@
     }
     return tmp;
   }
+  function _get_group_(_this_) {
+    var tmp0_find_0 = Companion_getInstance_71()._subclasses;
+    var tmp$ret$0;
+    l$ret$1: do {
+      var tmp0_iterator_1_1 = tmp0_find_0.iterator_0_k$();
+      while (tmp0_iterator_1_1.hasNext_0_k$()) {
+        var element_2_2 = tmp0_iterator_1_1.next_0_k$();
+        if (contains_0(element_2_2._get_mccValues__0_k$(), _this_)) {
+          tmp$ret$0 = element_2_2;
+          break l$ret$1;
+        } else {
+        }
+      }
+      tmp$ret$0 = null;
+    }
+     while (false);
+    var tmp0_elvis_lhs = tmp$ret$0;
+    return tmp0_elvis_lhs == null ? Unknown_getInstance() : tmp0_elvis_lhs;
+  }
+  function Companion_72() {
+    Companion_instance_71 = this;
+    this._subclasses = listOf_0(HouseholdGroup_getInstance());
+  }
+  Companion_72.$metadata$ = {
+    simpleName: 'Companion',
+    kind: 'object',
+    interfaces: []
+  };
+  var Companion_instance_71;
+  function Companion_getInstance_71() {
+    if (Companion_instance_71 == null)
+      new Companion_72();
+    return Companion_instance_71;
+  }
   function Unknown() {
     Unknown_instance = this;
     MccGroup.call(this);
@@ -57705,6 +57738,12 @@
     tmp._mccValues = emptyList();
     this._withdrawalAccount = accounts_getInstance()._generalUse;
   }
+  Unknown.prototype._get_mccValues__0_k$ = function () {
+    return this._mccValues;
+  };
+  Unknown.prototype._get_withdrawalAccount__0_k$ = function () {
+    return this._withdrawalAccount;
+  };
   Unknown.$metadata$ = {
     simpleName: 'Unknown',
     kind: 'object',
@@ -57722,6 +57761,12 @@
     this._withdrawalAccount_0 = accounts_getInstance()._houseHoldExpenses;
     this._mccValues_0 = listOf([MCC_MiscellaneousFoodStores_getInstance(), MCC_PetShopsPetFoodAndSupplies_getInstance(), MCC_GroceryStoresSupermarkets_getInstance()]);
   }
+  HouseholdGroup.prototype._get_withdrawalAccount__0_k$ = function () {
+    return this._withdrawalAccount_0;
+  };
+  HouseholdGroup.prototype._get_mccValues__0_k$ = function () {
+    return this._mccValues_0;
+  };
   HouseholdGroup.$metadata$ = {
     simpleName: 'HouseholdGroup',
     kind: 'object',
@@ -57734,6 +57779,7 @@
     return HouseholdGroup_instance;
   }
   function MccGroup() {
+    Companion_getInstance_71();
   }
   MccGroup.$metadata$ = {
     simpleName: 'MccGroup',
@@ -57754,19 +57800,19 @@
   function TransactionAction_init_$Create$(transaction, account, amount, action, accountName, id, timestamp, $mask0, $marker) {
     return TransactionAction_init_$Init$(transaction, account, amount, action, accountName, id, timestamp, $mask0, $marker, Object.create(TransactionAction.prototype));
   }
-  function Companion_72() {
-    Companion_instance_71 = this;
+  function Companion_73() {
+    Companion_instance_72 = this;
   }
-  Companion_72.$metadata$ = {
+  Companion_73.$metadata$ = {
     simpleName: 'Companion',
     kind: 'object',
     interfaces: []
   };
-  var Companion_instance_71;
-  function Companion_getInstance_71() {
-    if (Companion_instance_71 == null)
-      new Companion_72();
-    return Companion_instance_71;
+  var Companion_instance_72;
+  function Companion_getInstance_72() {
+    if (Companion_instance_72 == null)
+      new Companion_73();
+    return Companion_instance_72;
   }
   function $serializer_7() {
     $serializer_instance_7 = this;
@@ -57910,7 +57956,7 @@
     return TransactionAction_init_$Init$_0(seen1, transaction, account, amount, action, accountName, id, timestamp, serializationConstructorMarker, Object.create(TransactionAction.prototype));
   }
   function TransactionAction(transaction, account, amount, action, accountName, id, timestamp) {
-    Companion_getInstance_71();
+    Companion_getInstance_72();
     this._transaction_2 = transaction;
     this._account = account;
     this._amount_5 = amount;
@@ -58012,6 +58058,24 @@
     return getPropertyCallableRef('timestamp', 0, KProperty0, function () {
       return $b0._timestamp_2;
     }, null);
+  }
+  function settings() {
+    settings_instance = this;
+    var tmp = this;
+    var tmp0_safe_receiver = functions.config().settings.nr_of_days_to_check_for_transactions;
+    var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : toString_1(tmp0_safe_receiver);
+    tmp._nrOfDaysToCheckForTransactions = toInt(tmp1_elvis_lhs == null ? '5' : tmp1_elvis_lhs);
+  }
+  settings.$metadata$ = {
+    simpleName: 'settings',
+    kind: 'object',
+    interfaces: []
+  };
+  var settings_instance;
+  function settings_getInstance() {
+    if (settings_instance == null)
+      new settings();
+    return settings_instance;
   }
   AbstractMap.prototype._get_entries__0_k$ = Map_0.prototype._get_entries__0_k$;
   CombinedContext.prototype.plus_d7pszg_k$ = CoroutineContext.prototype.plus_d7pszg_k$;
