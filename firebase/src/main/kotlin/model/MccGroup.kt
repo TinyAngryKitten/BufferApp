@@ -20,7 +20,9 @@ sealed class MccGroup {
 
     companion object {
         val subclasses: List<MccGroup> = listOf(
-            HouseholdGroup,
+                HouseholdGroup,
+                SmallPersonalCosts,
+                Clothes,
         )
     }
 
@@ -39,11 +41,25 @@ sealed class MccGroup {
         )
     }
 
+    object Clothes : MccGroup() {
+        override val mccValues: List<MCC> = listOf(
+                MCC.FamilyClothingStores,
+                MCC.MensAndBoysClothingAndAccessoriesStores,
+                MCC.MensWomensClothingStores,
+                MCC.SportingGoodsStores,
+                MCC.SportsAndRidingApparelStores,
+                MCC.ShoeStores
+        )
+
+        override val withdrawalAccount: String = accounts.clothes
+
+    }
+
     object SmallPersonalCosts : MccGroup() {
         override val withdrawalAccount: String = accounts.generalUse
 
         override val mccValues: List<MCC> = listOf(
-            MCC.CosmeticStores//parfyme / deo
+            MCC.CosmeticStores,//parfyme / deo
         )
     }
 }

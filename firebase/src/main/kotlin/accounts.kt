@@ -5,6 +5,7 @@ object accounts {
     val houseHoldExpenses = functions.config().accounts.household_expenses as String
     val creditCard = functions.config().accounts.creditcard as String
     val generalUse = functions.config().accounts.general_use as String
+    val clothes = functions.config().accounts.clothes as String
 
     //orker ikke gjøre dette finere...
     fun findAccountName(accountNr : String) = when(accountNr) {
@@ -14,6 +15,7 @@ object accounts {
         houseHoldExpenses -> "Household expsenses"
         creditCardPayments -> "Credit card payments"
         generalUse -> "General use"
+        clothes -> "Clothing"
         else -> "Unknown accountnr: $accountNr"
     }
 }

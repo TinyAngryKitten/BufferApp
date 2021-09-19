@@ -79,7 +79,7 @@ class Payments(
                 )
                 if(!transferCompleted) discordAlert("Insufficient funds on payments buffer", "Attempted to move ${transaction.amount} because of $transaction")
             } else {
-                log("Unknown error occured when handling a transaction $transaction")
+                log("Unknown error occured: ${e.message} when handling a transaction $transaction")
             }
         }
 

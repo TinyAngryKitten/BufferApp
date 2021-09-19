@@ -869,6 +869,10 @@
   Unknown.prototype.constructor = Unknown;
   HouseholdGroup.prototype = Object.create(MccGroup.prototype);
   HouseholdGroup.prototype.constructor = HouseholdGroup;
+  Clothes.prototype = Object.create(MccGroup.prototype);
+  Clothes.prototype.constructor = Clothes;
+  SmallPersonalCosts.prototype = Object.create(MccGroup.prototype);
+  SmallPersonalCosts.prototype.constructor = SmallPersonalCosts;
   function toList(_this_) {
     var tmp0_subject = _this_.length;
     switch (tmp0_subject) {
@@ -56093,7 +56097,7 @@
                 }continue $sm;
               } else {
                 {
-                  log('' + 'Unknown error occured when handling a transaction ' + this._transaction_0);
+                  log('' + 'Unknown error occured: ' + this._e6.message + ' when handling a transaction ' + this._transaction_0);
                   this._state_0 = 9;
                   continue $sm;
                 }
@@ -56372,10 +56376,13 @@
     var tmp_9 = this;
     var tmp_10 = functions.config().accounts.general_use;
     tmp_9._generalUse = (!(tmp_10 == null) ? typeof tmp_10 === 'string' : false) ? tmp_10 : THROW_CCE();
+    var tmp_11 = this;
+    var tmp_12 = functions.config().accounts.clothes;
+    tmp_11._clothes = (!(tmp_12 == null) ? typeof tmp_12 === 'string' : false) ? tmp_12 : THROW_CCE();
   }
   accounts.prototype.findAccountName_6wfw3l_k$ = function (accountNr) {
     var tmp0_subject = accountNr;
-    return tmp0_subject === this._buffer_9 ? 'Buffer' : tmp0_subject === this._creditCard ? 'Credit card' : tmp0_subject === this._paymentsBuffer ? 'Payments buffer' : tmp0_subject === this._houseHoldExpenses ? 'Household expsenses' : tmp0_subject === this._creditCardPayments ? 'Credit card payments' : tmp0_subject === this._generalUse ? 'General use' : '' + 'Unknown accountnr: ' + accountNr;
+    return tmp0_subject === this._buffer_9 ? 'Buffer' : tmp0_subject === this._creditCard ? 'Credit card' : tmp0_subject === this._paymentsBuffer ? 'Payments buffer' : tmp0_subject === this._houseHoldExpenses ? 'Household expsenses' : tmp0_subject === this._creditCardPayments ? 'Credit card payments' : tmp0_subject === this._generalUse ? 'General use' : tmp0_subject === this._clothes ? 'Clothing' : '' + 'Unknown accountnr: ' + accountNr;
   };
   accounts.$metadata$ = {
     simpleName: 'accounts',
@@ -57718,7 +57725,7 @@
   }
   function Companion_72() {
     Companion_instance_71 = this;
-    this._subclasses = listOf_0(HouseholdGroup_getInstance());
+    this._subclasses = listOf([HouseholdGroup_getInstance(), SmallPersonalCosts_getInstance(), Clothes_getInstance()]);
   }
   Companion_72.$metadata$ = {
     simpleName: 'Companion',
@@ -57777,6 +57784,52 @@
     if (HouseholdGroup_instance == null)
       new HouseholdGroup();
     return HouseholdGroup_instance;
+  }
+  function Clothes() {
+    Clothes_instance = this;
+    MccGroup.call(this);
+    this._mccValues_1 = listOf([MCC_FamilyClothingStores_getInstance(), MCC_MensAndBoysClothingAndAccessoriesStores_getInstance(), MCC_MensWomensClothingStores_getInstance(), MCC_SportingGoodsStores_getInstance(), MCC_SportsAndRidingApparelStores_getInstance(), MCC_ShoeStores_getInstance()]);
+    this._withdrawalAccount_1 = accounts_getInstance()._clothes;
+  }
+  Clothes.prototype._get_mccValues__0_k$ = function () {
+    return this._mccValues_1;
+  };
+  Clothes.prototype._get_withdrawalAccount__0_k$ = function () {
+    return this._withdrawalAccount_1;
+  };
+  Clothes.$metadata$ = {
+    simpleName: 'Clothes',
+    kind: 'object',
+    interfaces: []
+  };
+  var Clothes_instance;
+  function Clothes_getInstance() {
+    if (Clothes_instance == null)
+      new Clothes();
+    return Clothes_instance;
+  }
+  function SmallPersonalCosts() {
+    SmallPersonalCosts_instance = this;
+    MccGroup.call(this);
+    this._withdrawalAccount_2 = accounts_getInstance()._generalUse;
+    this._mccValues_2 = listOf_0(MCC_CosmeticStores_getInstance());
+  }
+  SmallPersonalCosts.prototype._get_withdrawalAccount__0_k$ = function () {
+    return this._withdrawalAccount_2;
+  };
+  SmallPersonalCosts.prototype._get_mccValues__0_k$ = function () {
+    return this._mccValues_2;
+  };
+  SmallPersonalCosts.$metadata$ = {
+    simpleName: 'SmallPersonalCosts',
+    kind: 'object',
+    interfaces: []
+  };
+  var SmallPersonalCosts_instance;
+  function SmallPersonalCosts_getInstance() {
+    if (SmallPersonalCosts_instance == null)
+      new SmallPersonalCosts();
+    return SmallPersonalCosts_instance;
   }
   function MccGroup() {
     Companion_getInstance_71();
