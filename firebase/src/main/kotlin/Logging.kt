@@ -27,5 +27,8 @@ suspend fun discordAlert(title : String, msg : String) : Boolean =
                 }
             """
             header("Content-Type", "application/json")
+        }.also {
+            if(it.status.isSuccess()) log("message with title: $title and content: \"$msg\" was sent to discord")
+            else log("Could not send message with title: $title and content: \"$msg\" to discord. Status: ${it.status.value}, message: ${it.readText()}")
         }.status == HttpStatusCode.NoContent
     }
