@@ -65,9 +65,9 @@ class Payments(
                 tokenStorage.getToken().access_token
             )
         }catch (e : Exception) {
-            if(e.message?.contains("insufficient funds", true) ?: false) {
+            if(e.message?.contains("Insufficient money", true) ?: false) {
                 log("insufficient funds on $paymentAccount, attempting to withdraw from paymentsBuffer")
-                discordAlert("Insufficient funds", "Attempted to move ${transaction.amount} from ${accounts.findAccountName(paymentAccount)} because of $transaction")
+                discordAlert("Insufficient funds", "Attempted to move ${transaction.amount} from ${accounts.findAccountName(paymentAccount)} because of the transaction: $transaction")
                 transferCompleted = bankClient.transferMoney(
                     Transfer(
                         accounts.creditCardPayments,

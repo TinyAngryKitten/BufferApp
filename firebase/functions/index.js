@@ -30995,6 +30995,10 @@
     kind: 'class',
     interfaces: []
   };
+  function isSuccess(_this_) {
+    var containsArg = _this_._value_15;
+    return 200 <= containsArg ? containsArg < 300 : false;
+  }
   function allStatusCodes() {
     return listOf([Companion_getInstance_36()._Continue, Companion_getInstance_36()._SwitchingProtocols, Companion_getInstance_36()._Processing, Companion_getInstance_36()._OK, Companion_getInstance_36()._Created, Companion_getInstance_36()._Accepted, Companion_getInstance_36()._NonAuthoritativeInformation, Companion_getInstance_36()._NoContent, Companion_getInstance_36()._ResetContent, Companion_getInstance_36()._PartialContent, Companion_getInstance_36()._MultiStatus, Companion_getInstance_36()._MultipleChoices, Companion_getInstance_36()._MovedPermanently, Companion_getInstance_36()._Found, Companion_getInstance_36()._SeeOther, Companion_getInstance_36()._NotModified, Companion_getInstance_36()._UseProxy, Companion_getInstance_36()._SwitchProxy, Companion_getInstance_36()._TemporaryRedirect, Companion_getInstance_36()._PermanentRedirect, Companion_getInstance_36()._BadRequest, Companion_getInstance_36()._Unauthorized, Companion_getInstance_36()._PaymentRequired, Companion_getInstance_36()._Forbidden, Companion_getInstance_36()._NotFound, Companion_getInstance_36()._MethodNotAllowed, Companion_getInstance_36()._NotAcceptable, Companion_getInstance_36()._ProxyAuthenticationRequired, Companion_getInstance_36()._RequestTimeout, Companion_getInstance_36()._Conflict, Companion_getInstance_36()._Gone, Companion_getInstance_36()._LengthRequired, Companion_getInstance_36()._PreconditionFailed, Companion_getInstance_36()._PayloadTooLarge, Companion_getInstance_36()._RequestURITooLong, Companion_getInstance_36()._UnsupportedMediaType, Companion_getInstance_36()._RequestedRangeNotSatisfiable, Companion_getInstance_36()._ExpectationFailed, Companion_getInstance_36()._UnprocessableEntity, Companion_getInstance_36()._Locked, Companion_getInstance_36()._FailedDependency, Companion_getInstance_36()._UpgradeRequired, Companion_getInstance_36()._TooManyRequests, Companion_getInstance_36()._RequestHeaderFieldTooLarge, Companion_getInstance_36()._InternalServerError, Companion_getInstance_36()._NotImplemented, Companion_getInstance_36()._BadGateway, Companion_getInstance_36()._ServiceUnavailable, Companion_getInstance_36()._GatewayTimeout, Companion_getInstance_36()._VersionNotSupported, Companion_getInstance_36()._VariantAlsoNegotiates, Companion_getInstance_36()._InsufficientStorage]);
   }
@@ -55632,43 +55636,43 @@
         var tmp = this._state_0;
         switch (tmp) {
           case 0:
-            this._exceptionState = 11;
+            this._exceptionState = 13;
             var tmp_0 = this;
             tmp_0._tmp0_use_00_1 = _get_client_();
             this._closed_11_1 = false;
             this._state_0 = 1;
             continue $sm;
           case 1:
-            this._exceptionState = 10;
-            this._exceptionState = 9;
+            this._exceptionState = 12;
+            this._exceptionState = 11;
             var tmp_1 = this;
-            tmp_1._tmp0_request_0_53 = _get_webhookUrl_();
+            tmp_1._tmp0_request_0_63 = _get_webhookUrl_();
             var tmp_2 = this;
-            var tmp0_apply_0_3_7 = new HttpRequestBuilder();
-            url(tmp0_apply_0_3_7, this._tmp0_request_0_53);
-            tmp0_apply_0_3_7._method_0 = Companion_getInstance_34()._Post;
-            tmp0_apply_0_3_7._body_0 = '' + '{\n                "content" : "' + this._msg + '",\n                "title" : "' + this._title + '",\n                "username" : "Firebase functions"\n                }\n            ';
-            header(tmp0_apply_0_3_7, 'Content-Type', 'application/json');
-            tmp_2._tmp2_request_0_2_64 = tmp0_apply_0_3_7;
+            var tmp0_apply_0_3_8 = new HttpRequestBuilder();
+            url(tmp0_apply_0_3_8, this._tmp0_request_0_63);
+            tmp0_apply_0_3_8._method_0 = Companion_getInstance_34()._Post;
+            tmp0_apply_0_3_8._body_0 = '' + '{\n                "content" : "' + this._msg + '",\n                "title" : "' + this._title + '",\n                "username" : "Firebase functions"\n                }\n            ';
+            header(tmp0_apply_0_3_8, 'Content-Type', 'application/json');
+            tmp_2._tmp2_request_0_2_74 = tmp0_apply_0_3_8;
             var tmp_3 = this;
-            tmp_3._tmp1_receive_0_4_85 = new HttpStatement(this._tmp2_request_0_2_64, this._tmp0_use_00_1);
-            this._tmp0_subject_1_5_96 = getKClass_0(HttpResponse);
-            if (this._tmp0_subject_1_5_96.equals(getKClass_0(HttpStatement))) {
+            tmp_3._tmp1_receive_0_4_95 = new HttpStatement(this._tmp2_request_0_2_74, this._tmp0_use_00_1);
+            this._tmp0_subject_1_5_106 = getKClass_0(HttpResponse);
+            if (this._tmp0_subject_1_5_106.equals(getKClass_0(HttpStatement))) {
               var tmp_4 = this;
-              var tmp_5 = this._tmp1_receive_0_4_85;
+              var tmp_5 = this._tmp1_receive_0_4_95;
               tmp_4._WHEN_RESULT7_0 = tmp_5 instanceof HttpResponse ? tmp_5 : THROW_CCE();
               this._state_0 = 8;
               continue $sm;
             } else {
-              if (this._tmp0_subject_1_5_96.equals(getKClass_0(HttpResponse))) {
+              if (this._tmp0_subject_1_5_106.equals(getKClass_0(HttpResponse))) {
                 this._state_0 = 7;
-                suspendResult = this._tmp1_receive_0_4_85.execute_0_k$(this);
+                suspendResult = this._tmp1_receive_0_4_95.execute_0_k$(this);
                 if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
                   return suspendResult;
                 }continue $sm;
               } else {
                 this._state_0 = 2;
-                suspendResult = this._tmp1_receive_0_4_85.executeUnsafe_0_k$(this);
+                suspendResult = this._tmp1_receive_0_4_95.executeUnsafe_0_k$(this);
                 if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
                   return suspendResult;
                 }continue $sm;
@@ -55678,13 +55682,13 @@
 
             break;
           case 2:
-            this._response_2_6_108 = suspendResult;
+            this._response_2_6_118 = suspendResult;
             this._state_0 = 3;
             continue $sm;
           case 3:
             this._exceptionState = 6;
             this._state_0 = 4;
-            var tmp_6 = this._response_2_6_108._get_call__0_k$();
+            var tmp_6 = this._response_2_6_118._get_call__0_k$();
             var tmp_7;
             try {
               tmp_7 = new TypeInfo(getKClass_0(HttpResponse), JsType_getInstance(), createKType_0(getKClass_0(HttpResponse), [], false));
@@ -55709,34 +55713,57 @@
             this._state_0 = 5;
             continue $sm;
           case 5:
-            var tmp_12 = this._tmp$ret$09;
-            complete(this._response_2_6_108);
-            this._WHEN_RESULT7_0 = tmp_12;
+            this._tmp10 = this._tmp$ret$09;
+            complete(this._response_2_6_118);
+            this._WHEN_RESULT7_0 = this._tmp10;
             this._state_0 = 8;
             continue $sm;
           case 6:
-            this._exceptionState = 9;
-            var t = this._exception_0;
-            complete(this._response_2_6_108);
-            throw t;
+            this._exceptionState = 11;
+            this._t11 = this._exception_0;
+            complete(this._response_2_6_118);
+            throw this._t11;
           case 7:
-            var tmp_13 = this;
-            tmp_13._WHEN_RESULT7_0 = suspendResult instanceof HttpResponse ? suspendResult : THROW_CCE();
+            var tmp_12 = this;
+            tmp_12._WHEN_RESULT7_0 = suspendResult instanceof HttpResponse ? suspendResult : THROW_CCE();
             this._state_0 = 8;
             continue $sm;
           case 8:
-            var ARGUMENT = this._WHEN_RESULT7_0;
-            var ARGUMENT_0 = ARGUMENT._get_status__0_k$();
-            this._tmp$ret$22 = ARGUMENT_0.equals(Companion_getInstance_36()._NoContent);
-            this._exceptionState = 11;
-            this._state_0 = 12;
-            continue $sm;
+            this._tmp1_also_0_512 = this._WHEN_RESULT7_0;
+            if (isSuccess(this._tmp1_also_0_512._get_status__0_k$())) {
+              log('' + 'message with title: ' + this._title + ' and content: "' + this._msg + '" was sent to discord');
+              this._state_0 = 10;
+              continue $sm;
+            } else {
+              this._ARGUMENT13_0 = this._tmp1_also_0_512._get_status__0_k$()._value_15;
+              this._state_0 = 9;
+              suspendResult = readText$default_0(this._tmp1_also_0_512, null, 1, null, this);
+              if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
+                return suspendResult;
+              }continue $sm;
+            }
+
+            Unit_getInstance();
+            break;
           case 9:
-            this._exceptionState = 10;
-            var tmp_14 = this._exception_0;
-            if (tmp_14 instanceof Error) {
+            var ARGUMENT = suspendResult;
+            var ARGUMENT_0 = '' + 'Could not send message with title: ' + this._title + ' and content: "' + this._msg + '" to discord. Status: ' + this._ARGUMENT13_0 + ', message: ' + ARGUMENT;
+            log(ARGUMENT_0);
+            this._state_0 = 10;
+            continue $sm;
+          case 10:
+            var ARGUMENT_1 = this._tmp1_also_0_512;
+            var ARGUMENT_2 = ARGUMENT_1._get_status__0_k$();
+            this._tmp$ret$22 = ARGUMENT_2.equals(Companion_getInstance_36()._NoContent);
+            this._exceptionState = 13;
+            this._state_0 = 14;
+            continue $sm;
+          case 11:
+            this._exceptionState = 12;
+            var tmp_13 = this._exception_0;
+            if (tmp_13 instanceof Error) {
               var first_2 = this._exception_0;
-              var tmp_15 = this;
+              var tmp_14 = this;
               try {
                 this._closed_11_1 = true;
                 this._tmp0_use_00_1.close_sv8swh_k$();
@@ -55757,24 +55784,24 @@
             }
 
             break;
-          case 10:
-            this._exceptionState = 11;
-            var t_0 = this._exception_0;
-            if (!this._closed_11_1) {
-              this._tmp0_use_00_1.close_sv8swh_k$();
-            }
-            throw t_0;
-          case 11:
-            throw this._exception_0;
           case 12:
-            var tmp_16 = this._tmp$ret$22;
+            this._exceptionState = 13;
+            var t = this._exception_0;
             if (!this._closed_11_1) {
               this._tmp0_use_00_1.close_sv8swh_k$();
             }
-            return tmp_16;
+            throw t;
+          case 13:
+            throw this._exception_0;
+          case 14:
+            var tmp_15 = this._tmp$ret$22;
+            if (!this._closed_11_1) {
+              this._tmp0_use_00_1.close_sv8swh_k$();
+            }
+            return tmp_15;
         }
       } catch ($p_1) {
-        if (this._exceptionState === 11) {
+        if (this._exceptionState === 13) {
           throw $p_1;
         } else {
           this._state_0 = this._exceptionState;
@@ -56087,7 +56114,7 @@
             if (tmp_3 instanceof Exception) {
               this._e6 = this._exception_0;
               var tmp2_safe_receiver = this._e6.message;
-              var tmp3_elvis_lhs = tmp2_safe_receiver == null ? null : contains_3(tmp2_safe_receiver, 'insufficient funds', true);
+              var tmp3_elvis_lhs = tmp2_safe_receiver == null ? null : contains_3(tmp2_safe_receiver, 'Insufficient money', true);
               if (tmp3_elvis_lhs == null ? false : tmp3_elvis_lhs) {
                 log('' + 'insufficient funds on ' + this._paymentAccount0 + ', attempting to withdraw from paymentsBuffer');
                 this._state_0 = 4;
