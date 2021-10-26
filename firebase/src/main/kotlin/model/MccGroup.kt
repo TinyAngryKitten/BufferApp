@@ -59,7 +59,8 @@ sealed class MccGroup {
         override val withdrawalAccount: String = accounts.generalUse
 
         override val mccValues: List<MCC> = listOf(
-            MCC.CosmeticStores,//parfyme / deo
+                MCC.CosmeticStores,//parfyme / deo
+                MCC.TransportationServices
         )
     }
 }
