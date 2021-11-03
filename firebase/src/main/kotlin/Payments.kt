@@ -4,13 +4,14 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.toLocalDateTime
 import main.kotlin.settings
 import model.*
-import kotlin.math.roundToInt
 import kotlin.time.ExperimentalTime
 import kotlin.time.days
 
 class Payments(
     val bankClient: BankClient,
     val tokenStorage: TokenStorage,
+    private val accounts: Accounts = Accounts(),
+    private val firestoreHelper : FirestoreHelper = FirestoreHelper()
     ) {
     val transactionActionCollection = "transaction-actions"
 
@@ -25,11 +26,15 @@ class Payments(
             startDate = since,
             endDate = until,
         ).items.forEach {
-            handleTransactionIfNew(it, since)
+            try {
+                handleTransactionIfNew(it, since)
+            } catch (e : Exception) {
+                discordAlert("Error handling transaction", "Unknown error occured: ${e.message} while handling a transaction $it. \n${e.stackTraceToString()}")
+            }
         }
     }
 
-    private suspend fun handleTransactionIfNew(transaction : Transaction, since : Instant) {
+    suspend fun handleTransactionIfNew(transaction : Transaction, since : Instant) {
         when {
             hasBeenHandled(transaction, since) -> { }
             isNoopTransaction(transaction) -> {
@@ -51,7 +56,7 @@ class Payments(
         }
     }
 
-    private suspend fun moveMoneytoCoverTransaction(transaction: Transaction) : TransactionAction {
+    suspend fun moveMoneytoCoverTransaction(transaction: Transaction) : TransactionAction {
         val paymentAccount = determinePaymentAccount(transaction)
         var transferCompleted = false
         try {
@@ -60,7 +65,7 @@ class Payments(
                     accounts.creditCardPayments,
                     paymentAccount,
                     -transaction.amount,
-                    "payment: ${transaction.cardDetails?.merchantName?.take(20)}"
+                    createTransactionMessage(transaction.cardDetails)
                 ),
                 tokenStorage.getToken().access_token
             )
@@ -73,12 +78,13 @@ class Payments(
                         accounts.creditCardPayments,
                         accounts.paymentsBuffer,
                         -transaction.amount,
-                        "payment: ${transaction.cardDetails?.merchantName?.take(20)}"
+                        createTransactionMessage(transaction.cardDetails)
                     ),
                     tokenStorage.getToken().access_token
                 )
-                if(!transferCompleted) discordAlert("Insufficient funds on payments buffer", "Attempted to move ${transaction.amount} because of $transaction")
+                if(!transferCompleted) discordAlert("Insufficient funds on payments buffer", "Attempted to move ${transaction.amount} kr because of $transaction")
             } else {
+                discordAlert("Error","Unknown error occured: ${e.message} when handling a transaction $transaction")
                 log("Unknown error occured: ${e.message} when handling a transaction $transaction")
             }
         }
@@ -93,12 +99,22 @@ class Payments(
         else throw Exception("Could not transfer payment to creditcard accound from $paymentAccount")
     }
 
-    private fun determinePaymentAccount(transaction: Transaction) : String  =
+    fun createTransactionMessage(cardDetails: CardDetails?) =
+            "payment: ${cardDetails
+                    ?.merchantName
+                    ?.filter(::isValidBankStatementCharacter)
+                    ?.take(20)}"
+
+    private fun isValidBankStatementCharacter(c : Char) =
+            c.toString()
+            .matches("[a-zA-Z0-9-. ]")
+
+    fun determinePaymentAccount(transaction: Transaction) : String  =
         parseMCC(transaction.cardDetails?.merchantCategoryCode)
             .group
             .withdrawalAccount
 
-    private suspend fun hasBeenHandled(transaction : Transaction, since : Instant) : Boolean {
+    suspend fun hasBeenHandled(transaction : Transaction, since : Instant) : Boolean {
         return firestoreHelper
             .find<TransactionAction>(
                 transactionActionCollection,

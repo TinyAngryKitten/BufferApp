@@ -6,19 +6,27 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlin.js.json
 
-object firestoreHelper {
+class FirestoreHelper(
+        val useStubs : Boolean = false,//workaround for swapping inline methods for stubs
+        val addDataStub : suspend (JsJSON, String) -> Unit = {_,_ ->},
+        val findStub : suspend (String, WhereClause) -> String = {_,_ -> ""},
+        val findAllStub : suspend (String) -> String = {_ -> ""},
+        val removeStub : (String, String) -> Unit = {_,_ -> }
+){
     suspend fun addData(obj : JsJSON, collection : String) =
-        suspendCoroutine<Unit> {
-            val doc = firestore.collection(collection).doc()
-            firestore.collection(collection)
-                    .doc(doc.id)
-                    .set(obj.addId(doc.id).jsonObject, json("merge" to false)).then { ref ->
-                        it.resume(Unit)
-                    }
-        }
+            if(useStubs) addDataStub(obj,collection)
+            else suspendCoroutine {
+                val doc = firestore.collection(collection).doc()
+                firestore.collection(collection)
+                        .doc(doc.id)
+                        .set(obj.addId(doc.id).jsonObject, json("merge" to false)).then { ref ->
+                            it.resume(Unit)
+                        }
+            }
 
     suspend inline fun <reified T : JsJSON> find(collection: String, where : WhereClause) =
-        suspendCoroutine<List<T>> {
+            if(useStubs) Json.decodeFromString(findStub(collection, where))
+            else suspendCoroutine<List<T>> {
             firestore.collection(collection).where(where.field,where.operator,where.value)
                 .get().then { querySnapshot ->
                     val list = mutableListOf<T>()
@@ -36,27 +44,29 @@ object firestoreHelper {
                 }
         }
     suspend inline fun <reified T : JsJSON> findAll(collection: String) =
-        suspendCoroutine<List<T>> {
-        firestore.collection(collection)
-            .get().then { querySnapshot ->
-                val list = mutableListOf<T>()
-                querySnapshot.forEach { doc ->
-                    try {
-                        val stringData = JSON.stringify(doc.data())
-                        list.add(Json.decodeFromString(stringData))
-                    } catch (e : Exception) {
-                        e.printStackTrace()
-                        println(e.message)
-                    }
-                }
-                it.resume(list)
+            if (useStubs) Json.decodeFromString(findAllStub(collection))
+            else suspendCoroutine<List<T>> {
+                firestore.collection(collection)
+                        .get().then { querySnapshot ->
+                        val list = mutableListOf<T>()
+                        querySnapshot.forEach { doc ->
+                            try {
+                                val stringData = JSON.stringify(doc.data())
+                                list.add(Json.decodeFromString(stringData))
+                            } catch (e : Exception) {
+                                e.printStackTrace()
+                                println(e.message)
+                            }
+                        }
+                            it.resume(list)
+                        }
             }
-        }
 
     fun remove(collection: String, id : String) {
-        firestore.collection(collection)
-            .doc(id)
-            .delete()
+        if(useStubs) removeStub(collection, id)
+        else firestore.collection(collection)
+                .doc(id)
+                .delete()
     }
 }
 

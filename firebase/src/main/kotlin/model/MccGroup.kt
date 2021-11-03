@@ -1,6 +1,6 @@
 package model
 
-import accounts
+import Accounts
 
 fun parseMCC(str : String?) : MCC? =
     try {
@@ -19,6 +19,7 @@ sealed class MccGroup {
     abstract val withdrawalAccount : String
 
     companion object {
+        var accounts : Accounts = Accounts()
         val subclasses: List<MccGroup> = listOf(
                 HouseholdGroup,
                 SmallPersonalCosts,
@@ -28,11 +29,13 @@ sealed class MccGroup {
 
     object Unknown : MccGroup() {
         override val mccValues: List<MCC> = listOf()
-        override val withdrawalAccount: String = accounts.generalUse
+        override val withdrawalAccount: String
+            get() = accounts.generalUse
     }
 
     object HouseholdGroup : MccGroup() {
-        override val withdrawalAccount: String = accounts.houseHoldExpenses
+        override val withdrawalAccount: String
+            get() = accounts.houseHoldExpenses
 
         override val mccValues: List<MCC> = listOf(
             MCC.MiscellaneousFoodStores,
@@ -51,12 +54,13 @@ sealed class MccGroup {
                 MCC.ShoeStores
         )
 
-        override val withdrawalAccount: String = accounts.clothes
-
+        override val withdrawalAccount: String
+            get() = accounts.clothes
     }
 
     object SmallPersonalCosts : MccGroup() {
-        override val withdrawalAccount: String = accounts.regularPersonalCosts
+        override val withdrawalAccount: String
+            get() = accounts.regularPersonalCosts
 
         override val mccValues: List<MCC> = listOf(
                 MCC.CosmeticStores,//parfyme / deo

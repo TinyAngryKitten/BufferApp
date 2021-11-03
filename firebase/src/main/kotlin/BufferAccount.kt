@@ -2,18 +2,15 @@ import api_client.BankClient
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.toLocalDateTime
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
 import model.*
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
-import kotlin.js.json
 
 class BufferAccount(
     val bankClient: BankClient,
     val tokenStorage : TokenStorage,
     val firestore : dynamic,
     val functions : dynamic,
+    val accounts: Accounts = Accounts(),
+    val firestoreHelper: FirestoreHelper = FirestoreHelper()
     ) {
     private val debtCollectionName = "debt"
     private val debtPaymentCollectionName = "debtPayments"
@@ -60,9 +57,9 @@ class BufferAccount(
     }
 
     suspend fun withdrawWithDownpayment(
-        amount: Double,
-        accountId : String = accounts.paymentsBuffer,
-        debt : Debt
+            amount: Double,
+            accountId : String = accounts.paymentsBuffer,
+            debt : Debt
     ) {
         addDebt(debt)
         withdraw(amount,accountId)

@@ -34,7 +34,7 @@ fun main(args: Array<String>) {
     val buffer = BufferAccount(client, tokenStorage, firestore,functions)
     val payments = Payments(client, tokenStorage)
 
-    exports.checkTransactions = functions.pubsub.schedule("every 1 hours").onRun { context ->
+    exports.checkTransactions = functions.pubsub.schedule("every 24 hours").onRun { context ->
         CoroutineScope(Dispatchers.Default).launch {
             payments.checkForNewTransactions()
         }

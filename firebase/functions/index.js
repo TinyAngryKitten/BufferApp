@@ -841,6 +841,12 @@
   $withdrawCOROUTINE$4.prototype.constructor = $withdrawCOROUTINE$4;
   $getDebtCOROUTINE$5.prototype = Object.create(CoroutineImpl_0.prototype);
   $getDebtCOROUTINE$5.prototype.constructor = $getDebtCOROUTINE$5;
+  _no_name_provided__224.prototype = Object.create(CoroutineImpl_0.prototype);
+  _no_name_provided__224.prototype.constructor = _no_name_provided__224;
+  _no_name_provided__225.prototype = Object.create(CoroutineImpl_0.prototype);
+  _no_name_provided__225.prototype.constructor = _no_name_provided__225;
+  _no_name_provided__226.prototype = Object.create(CoroutineImpl_0.prototype);
+  _no_name_provided__226.prototype.constructor = _no_name_provided__226;
   $addDataCOROUTINE$6.prototype = Object.create(CoroutineImpl_0.prototype);
   $addDataCOROUTINE$6.prototype.constructor = $addDataCOROUTINE$6;
   $discordAlertCOROUTINE$7.prototype = Object.create(CoroutineImpl_0.prototype);
@@ -855,16 +861,16 @@
   $hasBeenHandledCOROUTINE$11.prototype.constructor = $hasBeenHandledCOROUTINE$11;
   $getTokenCOROUTINE$12.prototype = Object.create(CoroutineImpl_0.prototype);
   $getTokenCOROUTINE$12.prototype.constructor = $getTokenCOROUTINE$12;
-  _no_name_provided__237.prototype = Object.create(CoroutineImpl_0.prototype);
-  _no_name_provided__237.prototype.constructor = _no_name_provided__237;
-  _no_name_provided__239.prototype = Object.create(CoroutineImpl_0.prototype);
-  _no_name_provided__239.prototype.constructor = _no_name_provided__239;
   _no_name_provided__241.prototype = Object.create(CoroutineImpl_0.prototype);
   _no_name_provided__241.prototype.constructor = _no_name_provided__241;
   _no_name_provided__243.prototype = Object.create(CoroutineImpl_0.prototype);
   _no_name_provided__243.prototype.constructor = _no_name_provided__243;
   _no_name_provided__245.prototype = Object.create(CoroutineImpl_0.prototype);
   _no_name_provided__245.prototype.constructor = _no_name_provided__245;
+  _no_name_provided__247.prototype = Object.create(CoroutineImpl_0.prototype);
+  _no_name_provided__247.prototype.constructor = _no_name_provided__247;
+  _no_name_provided__249.prototype = Object.create(CoroutineImpl_0.prototype);
+  _no_name_provided__249.prototype.constructor = _no_name_provided__249;
   Unknown.prototype = Object.create(MccGroup.prototype);
   Unknown.prototype.constructor = Unknown;
   HouseholdGroup.prototype = Object.create(MccGroup.prototype);
@@ -54949,6 +54955,17 @@
     kind: 'class',
     interfaces: []
   };
+  function BufferAccount_init_$Init$(bankClient, tokenStorage, firestore_0, functions_0, accounts, firestoreHelper, $mask0, $marker, $this) {
+    if (!(($mask0 & 16) === 0))
+      accounts = new Accounts();
+    if (!(($mask0 & 32) === 0)) {
+      firestoreHelper = FirestoreHelper_init_$Create$(false, null, null, null, null, 31, null);
+    }BufferAccount.call($this, bankClient, tokenStorage, firestore_0, functions_0, accounts, firestoreHelper);
+    return $this;
+  }
+  function BufferAccount_init_$Create$(bankClient, tokenStorage, firestore_0, functions_0, accounts, firestoreHelper, $mask0, $marker) {
+    return BufferAccount_init_$Init$(bankClient, tokenStorage, firestore_0, functions_0, accounts, firestoreHelper, $mask0, $marker, Object.create(BufferAccount.prototype));
+  }
   function _no_name_provided__222($safe_2_2) {
     this._$safe_2_2 = $safe_2_2;
   }
@@ -55099,7 +55116,7 @@
           case 0:
             this._exceptionState = 6;
             this._paymentAmount0 = this._debt._amount_3 / this._debt._nrOfPayments;
-            this._transfer1 = new Transfer(accounts_getInstance()._get_buffer__0_k$(), accounts_getInstance()._get_paymentsBuffer__0_k$(), this._paymentAmount0, '' + 'debt: ' + this._debt._name_8);
+            this._transfer1 = new Transfer(this.__this__39._accounts._get_buffer__0_k$(), this.__this__39._accounts._get_paymentsBuffer__0_k$(), this._paymentAmount0, '' + 'debt: ' + this._debt._name_8);
             this._ARGUMENT2_0 = this.__this__39._bankClient;
             this._state_0 = 1;
             suspendResult = this.__this__39._tokenStorage.getToken_0_k$(this);
@@ -55223,30 +55240,53 @@
         var tmp = this._state_0;
         switch (tmp) {
           case 0:
-            this._exceptionState = 2;
+            this._exceptionState = 4;
             var tmp_0 = this;
-            tmp_0._tmp0_find_00 = firestoreHelper_getInstance();
+            tmp_0._tmp2_find_00 = this.__this__41._firestoreHelper;
             var tmp_1 = this;
-            tmp_1._tmp1_find_01 = this.__this__41._debtPaymentCollectionName;
+            tmp_1._tmp3_find_01 = this.__this__41._debtPaymentCollectionName;
             var tmp_2 = this;
-            tmp_2._tmp2_find_02 = new WhereClause('debt.id', '==', this._debt_1._id);
-            this._state_0 = 1;
-            var tmp_3 = this;
-            tmp_3._tmp0__anonymous__1_13 = this;
-            this._safe_2_24 = SafeContinuation_init_$Create$(intercepted(this._tmp0__anonymous__1_13));
-            firestore.collection(this._tmp1_find_01).where(this._tmp2_find_02._field, this._tmp2_find_02._operator, this._tmp2_find_02._value_27).get().then(_no_name_provided_$factory_184(this._safe_2_24));
-            suspendResult = this._safe_2_24.getOrThrow_0_k$();
-            if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
-              return suspendResult;
+            tmp_2._tmp4_find_02 = new WhereClause('debt.id', '==', this._debt_1._id);
+            if (this._tmp2_find_00._useStubs) {
+              var tmp_3 = this;
+              tmp_3._tmp0_decodeFromString_04 = Default_getInstance();
+              this._state_0 = 2;
+              suspendResult = this._tmp2_find_00._findStub(this._tmp3_find_01, this._tmp4_find_02, this);
+              if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
+                return suspendResult;
+              }continue $sm;
+            } else {
+              this._state_0 = 1;
+              var tmp_4 = this;
+              tmp_4._tmp0__anonymous__1_15 = this;
+              this._safe_2_26 = SafeContinuation_init_$Create$(intercepted(this._tmp0__anonymous__1_15));
+              firestore.collection(this._tmp3_find_01).where(this._tmp4_find_02._field, this._tmp4_find_02._operator, this._tmp4_find_02._value_27).get().then(_no_name_provided_$factory_184(this._safe_2_26));
+              suspendResult = this._safe_2_26.getOrThrow_0_k$();
+              if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
+                return suspendResult;
+              }continue $sm;
             }
-            continue $sm;
+
+            break;
           case 1:
-            return suspendResult;
+            this._WHEN_RESULT3_0 = suspendResult;
+            this._state_0 = 3;
+            continue $sm;
           case 2:
+            var tmp1_decodeFromString_0 = suspendResult;
+            var tmp_5 = this;
+            var tmp1_serializer_0_1 = this._tmp0_decodeFromString_04._get_serializersModule__0_k$();
+            var tmp0_cast_0_2 = serializer_1(tmp1_serializer_0_1, createKType_0(getKClass_0(List), [createInvariantKTypeProjection_0(createKType_0(getKClass_0(DebtPayment), [], false))], false));
+            tmp_5._WHEN_RESULT3_0 = this._tmp0_decodeFromString_04.decodeFromString_ed5pl9_k$(isInterface(tmp0_cast_0_2, KSerializer) ? tmp0_cast_0_2 : THROW_CCE(), tmp1_decodeFromString_0);
+            this._state_0 = 3;
+            continue $sm;
+          case 3:
+            return this._WHEN_RESULT3_0;
+          case 4:
             throw this._exception_0;
         }
       } catch ($p) {
-        if (this._exceptionState === 2) {
+        if (this._exceptionState === 4) {
           throw $p;
         } else {
           this._state_0 = this._exceptionState;
@@ -55275,7 +55315,7 @@
           case 0:
             this._exceptionState = 3;
             this._ARGUMENT0_0 = this.__this__42._bankClient;
-            this._ARGUMENT1 = new Transfer(this._accountId_1, accounts_getInstance()._get_buffer__0_k$(), this._amount_2, 'Uttak fra buffer');
+            this._ARGUMENT1 = new Transfer(this._accountId_1, this.__this__42._accounts._get_buffer__0_k$(), this._amount_2, 'Uttak fra buffer');
             this._state_0 = 1;
             suspendResult = this.__this__42._tokenStorage.getToken_0_k$(this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
@@ -55323,28 +55363,51 @@
         var tmp = this._state_0;
         switch (tmp) {
           case 0:
-            this._exceptionState = 2;
+            this._exceptionState = 4;
             var tmp_0 = this;
-            tmp_0._tmp0_findAll_00 = firestoreHelper_getInstance();
+            tmp_0._tmp2_findAll_00 = this.__this__43._firestoreHelper;
             var tmp_1 = this;
-            tmp_1._tmp1_findAll_01 = this.__this__43._debtCollectionName;
-            this._state_0 = 1;
-            var tmp_2 = this;
-            tmp_2._tmp0__anonymous__1_12 = this;
-            this._safe_2_23 = SafeContinuation_init_$Create$(intercepted(this._tmp0__anonymous__1_12));
-            firestore.collection(this._tmp1_findAll_01).get().then(_no_name_provided_$factory_185(this._safe_2_23));
-            suspendResult = this._safe_2_23.getOrThrow_0_k$();
-            if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
-              return suspendResult;
+            tmp_1._tmp3_findAll_01 = this.__this__43._debtCollectionName;
+            if (this._tmp2_findAll_00._useStubs) {
+              var tmp_2 = this;
+              tmp_2._tmp0_decodeFromString_03 = Default_getInstance();
+              this._state_0 = 2;
+              suspendResult = this._tmp2_findAll_00._findAllStub(this._tmp3_findAll_01, this);
+              if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
+                return suspendResult;
+              }continue $sm;
+            } else {
+              this._state_0 = 1;
+              var tmp_3 = this;
+              tmp_3._tmp0__anonymous__1_14 = this;
+              this._safe_2_25 = SafeContinuation_init_$Create$(intercepted(this._tmp0__anonymous__1_14));
+              firestore.collection(this._tmp3_findAll_01).get().then(_no_name_provided_$factory_185(this._safe_2_25));
+              suspendResult = this._safe_2_25.getOrThrow_0_k$();
+              if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
+                return suspendResult;
+              }continue $sm;
             }
-            continue $sm;
+
+            break;
           case 1:
-            return suspendResult;
+            this._WHEN_RESULT2_1 = suspendResult;
+            this._state_0 = 3;
+            continue $sm;
           case 2:
+            var tmp1_decodeFromString_0 = suspendResult;
+            var tmp_4 = this;
+            var tmp1_serializer_0_1 = this._tmp0_decodeFromString_03._get_serializersModule__0_k$();
+            var tmp0_cast_0_2 = serializer_1(tmp1_serializer_0_1, createKType_0(getKClass_0(List), [createInvariantKTypeProjection_0(createKType_0(getKClass_0(Debt), [], false))], false));
+            tmp_4._WHEN_RESULT2_1 = this._tmp0_decodeFromString_03.decodeFromString_ed5pl9_k$(isInterface(tmp0_cast_0_2, KSerializer) ? tmp0_cast_0_2 : THROW_CCE(), tmp1_decodeFromString_0);
+            this._state_0 = 3;
+            continue $sm;
+          case 3:
+            return this._WHEN_RESULT2_1;
+          case 4:
             throw this._exception_0;
         }
       } catch ($p) {
-        if (this._exceptionState === 2) {
+        if (this._exceptionState === 4) {
           throw $p;
         } else {
           this._state_0 = this._exceptionState;
@@ -55358,11 +55421,13 @@
     kind: 'class',
     interfaces: []
   };
-  function BufferAccount(bankClient, tokenStorage, firestore_0, functions_0) {
+  function BufferAccount(bankClient, tokenStorage, firestore_0, functions_0, accounts, firestoreHelper) {
     this._bankClient = bankClient;
     this._tokenStorage = tokenStorage;
     this._firestore = firestore_0;
     this._functions = functions_0;
+    this._accounts = accounts;
+    this._firestoreHelper = firestoreHelper;
     this._debtCollectionName = 'debt';
     this._debtPaymentCollectionName = 'debtPayments';
   }
@@ -55434,10 +55499,10 @@
     return tmp.doResume_0_k$();
   };
   BufferAccount.prototype.addDebt_bjqt2e_k$ = function (debt, $cont) {
-    return firestoreHelper_getInstance().addData_oyvw3h_k$(debt, this._debtCollectionName, $cont);
+    return this._firestoreHelper.addData_oyvw3h_k$(debt, this._debtCollectionName, $cont);
   };
   BufferAccount.prototype.addDebtPayment_mlg6de_k$ = function (debtPayment, $cont) {
-    return firestoreHelper_getInstance().addData_oyvw3h_k$(debtPayment, this._debtPaymentCollectionName, $cont);
+    return this._firestoreHelper.addData_oyvw3h_k$(debtPayment, this._debtPaymentCollectionName, $cont);
   };
   BufferAccount.prototype.removeDebt_bjqt2e_k$ = function (debt) {
     this._firestore.collection(this._debtCollectionName).doc(debt._id).delete();
@@ -55474,18 +55539,165 @@
       return Unit_getInstance();
     };
   }
-  function _no_name_provided__224($safe_2_2) {
+  function FirestoreHelper_init_$Init$(useStubs, addDataStub, findStub, findAllStub, removeStub, $mask0, $marker, $this) {
+    if (!(($mask0 & 1) === 0))
+      useStubs = false;
+    if (!(($mask0 & 2) === 0)) {
+      addDataStub = _no_name_provided_$factory_186(null);
+    }if (!(($mask0 & 4) === 0)) {
+      findStub = _no_name_provided_$factory_187(null);
+    }if (!(($mask0 & 8) === 0)) {
+      findAllStub = _no_name_provided_$factory_188(null);
+    }if (!(($mask0 & 16) === 0)) {
+      removeStub = _no_name_provided_$factory_189();
+    }FirestoreHelper.call($this, useStubs, addDataStub, findStub, findAllStub, removeStub);
+    return $this;
+  }
+  function FirestoreHelper_init_$Create$(useStubs, addDataStub, findStub, findAllStub, removeStub, $mask0, $marker) {
+    return FirestoreHelper_init_$Init$(useStubs, addDataStub, findStub, findAllStub, removeStub, $mask0, $marker, Object.create(FirestoreHelper.prototype));
+  }
+  function _no_name_provided__224(resultContinuation) {
+    CoroutineImpl_0.call(this, resultContinuation);
+  }
+  _no_name_provided__224.prototype.invoke_oyvw3h_k$ = function (_anonymous_parameter_0_, _anonymous_parameter_1_, $cont) {
+    var tmp = this.create_tmx49k_k$(_anonymous_parameter_0_, _anonymous_parameter_1_, $cont);
+    tmp._result_0 = Unit_getInstance();
+    tmp._exception_0 = null;
+    return tmp.doResume_0_k$();
+  };
+  _no_name_provided__224.prototype.invoke_osx4an_k$ = function (p1, p2, $cont) {
+    var tmp = (!(p1 == null) ? isInterface(p1, JsJSON) : false) ? p1 : THROW_CCE();
+    this.invoke_oyvw3h_k$(tmp, (!(p2 == null) ? typeof p2 === 'string' : false) ? p2 : THROW_CCE(), $cont);
+    return Unit_getInstance();
+  };
+  _no_name_provided__224.prototype.doResume_0_k$ = function () {
+    var suspendResult = this._result_0;
+    $sm: do
+      try {
+        var tmp = this._state_0;
+        if (tmp === 0) {
+          this._exceptionState = 1;
+          return Unit_getInstance();
+        } else if (tmp === 1) {
+          throw this._exception_0;
+        }} catch ($p) {
+        throw $p;
+      }
+     while (true);
+  };
+  _no_name_provided__224.prototype.create_tmx49k_k$ = function (_anonymous_parameter_0_, _anonymous_parameter_1_, completion) {
+    var i = new _no_name_provided__224(completion);
+    i.__anonymous_parameter_0_ = _anonymous_parameter_0_;
+    i.__anonymous_parameter_1__0 = _anonymous_parameter_1_;
+    return i;
+  };
+  _no_name_provided__224.$metadata$ = {
+    kind: 'class',
+    interfaces: [],
+    suspendArity: 2
+  };
+  function _no_name_provided__225(resultContinuation) {
+    CoroutineImpl_0.call(this, resultContinuation);
+  }
+  _no_name_provided__225.prototype.invoke_qr6gdm_k$ = function (_anonymous_parameter_0_, _anonymous_parameter_1_, $cont) {
+    var tmp = this.create_bgvg0m_k$(_anonymous_parameter_0_, _anonymous_parameter_1_, $cont);
+    tmp._result_0 = Unit_getInstance();
+    tmp._exception_0 = null;
+    return tmp.doResume_0_k$();
+  };
+  _no_name_provided__225.prototype.invoke_osx4an_k$ = function (p1, p2, $cont) {
+    var tmp = (!(p1 == null) ? typeof p1 === 'string' : false) ? p1 : THROW_CCE();
+    return this.invoke_qr6gdm_k$(tmp, p2 instanceof WhereClause ? p2 : THROW_CCE(), $cont);
+  };
+  _no_name_provided__225.prototype.doResume_0_k$ = function () {
+    var suspendResult = this._result_0;
+    $sm: do
+      try {
+        var tmp = this._state_0;
+        if (tmp === 0) {
+          this._exceptionState = 1;
+          return '';
+        } else if (tmp === 1) {
+          throw this._exception_0;
+        }} catch ($p) {
+        throw $p;
+      }
+     while (true);
+  };
+  _no_name_provided__225.prototype.create_bgvg0m_k$ = function (_anonymous_parameter_0_, _anonymous_parameter_1_, completion) {
+    var i = new _no_name_provided__225(completion);
+    i.__anonymous_parameter_0__0 = _anonymous_parameter_0_;
+    i.__anonymous_parameter_1__1 = _anonymous_parameter_1_;
+    return i;
+  };
+  _no_name_provided__225.$metadata$ = {
+    kind: 'class',
+    interfaces: [],
+    suspendArity: 2
+  };
+  function _no_name_provided__226(resultContinuation) {
+    CoroutineImpl_0.call(this, resultContinuation);
+  }
+  _no_name_provided__226.prototype.invoke_6wfw3l_k$ = function (_anonymous_parameter_0_, $cont) {
+    var tmp = this.create_dsepsj_k$(_anonymous_parameter_0_, $cont);
+    tmp._result_0 = Unit_getInstance();
+    tmp._exception_0 = null;
+    return tmp.doResume_0_k$();
+  };
+  _no_name_provided__226.prototype.invoke_20e8_k$ = function (p1, $cont) {
+    return this.invoke_6wfw3l_k$((!(p1 == null) ? typeof p1 === 'string' : false) ? p1 : THROW_CCE(), $cont);
+  };
+  _no_name_provided__226.prototype.doResume_0_k$ = function () {
+    var suspendResult = this._result_0;
+    $sm: do
+      try {
+        var tmp = this._state_0;
+        if (tmp === 0) {
+          this._exceptionState = 1;
+          return '';
+        } else if (tmp === 1) {
+          throw this._exception_0;
+        }} catch ($p) {
+        throw $p;
+      }
+     while (true);
+  };
+  _no_name_provided__226.prototype.create_dsepsj_k$ = function (_anonymous_parameter_0_, completion) {
+    var i = new _no_name_provided__226(completion);
+    i.__anonymous_parameter_0__1 = _anonymous_parameter_0_;
+    return i;
+  };
+  _no_name_provided__226.$metadata$ = {
+    kind: 'class',
+    interfaces: [],
+    suspendArity: 1
+  };
+  function _no_name_provided__227() {
+  }
+  _no_name_provided__227.prototype.invoke_wbz76b_k$ = function (_anonymous_parameter_0_, _anonymous_parameter_1_) {
+    return Unit_getInstance();
+  };
+  _no_name_provided__227.prototype.invoke_osx4an_k$ = function (p1, p2) {
+    var tmp = (!(p1 == null) ? typeof p1 === 'string' : false) ? p1 : THROW_CCE();
+    this.invoke_wbz76b_k$(tmp, (!(p2 == null) ? typeof p2 === 'string' : false) ? p2 : THROW_CCE());
+    return Unit_getInstance();
+  };
+  _no_name_provided__227.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__228($safe_2_2) {
     this._$safe_2_2_1 = $safe_2_2;
   }
-  _no_name_provided__224.prototype.invoke_h9nkbz_k$ = function (ref) {
+  _no_name_provided__228.prototype.invoke_h9nkbz_k$ = function (ref) {
     var tmp0_success_0_1_6 = Companion_getInstance_4();
     this._$safe_2_2_1.resumeWith_bnunh2_k$(_Result___init__impl_(Unit_getInstance()));
   };
-  _no_name_provided__224.prototype.invoke_20e8_k$ = function (p1) {
+  _no_name_provided__228.prototype.invoke_20e8_k$ = function (p1) {
     this.invoke_h9nkbz_k$((p1 == null ? true : p1) ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__224.$metadata$ = {
+  _no_name_provided__228.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
@@ -55502,25 +55714,40 @@
         var tmp = this._state_0;
         switch (tmp) {
           case 0:
-            this._exceptionState = 2;
-            this._state_0 = 1;
-            var tmp_0 = this;
-            tmp_0._tmp0__anonymous__1_10 = this;
-            this._safe_2_21 = SafeContinuation_init_$Create$(intercepted(this._tmp0__anonymous__1_10));
-            this._doc_42 = firestore.collection(this._collection).doc();
-            firestore.collection(this._collection).doc(this._doc_42.id).set(this._obj.addId_6wfw3l_k$(this._doc_42.id)._get_jsonObject__0_k$(), json([to('merge', false)])).then(_no_name_provided_$factory_186(this._safe_2_21));
-            suspendResult = this._safe_2_21.getOrThrow_0_k$();
-            if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
-              return suspendResult;
+            this._exceptionState = 4;
+            if (this.__this__44._useStubs) {
+              this._state_0 = 2;
+              suspendResult = this.__this__44._addDataStub(this._obj, this._collection, this);
+              if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
+                return suspendResult;
+              }continue $sm;
+            } else {
+              this._state_0 = 1;
+              var tmp_0 = this;
+              tmp_0._tmp0__anonymous__1_10 = this;
+              this._safe_2_21 = SafeContinuation_init_$Create$(intercepted(this._tmp0__anonymous__1_10));
+              this._doc_42 = firestore.collection(this._collection).doc();
+              firestore.collection(this._collection).doc(this._doc_42.id).set(this._obj.addId_6wfw3l_k$(this._doc_42.id)._get_jsonObject__0_k$(), json([to('merge', false)])).then(_no_name_provided_$factory_190(this._safe_2_21));
+              suspendResult = this._safe_2_21.getOrThrow_0_k$();
+              if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
+                return suspendResult;
+              }continue $sm;
             }
-            continue $sm;
+
+            break;
           case 1:
-            return suspendResult;
+            this._state_0 = 3;
+            continue $sm;
           case 2:
+            this._state_0 = 3;
+            continue $sm;
+          case 3:
+            return Unit_getInstance();
+          case 4:
             throw this._exception_0;
         }
       } catch ($p) {
-        if (this._exceptionState === 2) {
+        if (this._exceptionState === 4) {
           throw $p;
         } else {
           this._state_0 = this._exceptionState;
@@ -55534,26 +55761,24 @@
     kind: 'class',
     interfaces: []
   };
-  function firestoreHelper() {
-    firestoreHelper_instance = this;
+  function FirestoreHelper(useStubs, addDataStub, findStub, findAllStub, removeStub) {
+    this._useStubs = useStubs;
+    this._addDataStub = addDataStub;
+    this._findStub = findStub;
+    this._findAllStub = findAllStub;
+    this._removeStub = removeStub;
   }
-  firestoreHelper.prototype.addData_oyvw3h_k$ = function (obj, collection, $cont) {
+  FirestoreHelper.prototype.addData_oyvw3h_k$ = function (obj, collection, $cont) {
     var tmp = new $addDataCOROUTINE$6(this, obj, collection, $cont);
     tmp._result_0 = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_0_k$();
   };
-  firestoreHelper.$metadata$ = {
-    simpleName: 'firestoreHelper',
-    kind: 'object',
+  FirestoreHelper.$metadata$ = {
+    simpleName: 'FirestoreHelper',
+    kind: 'class',
     interfaces: []
   };
-  var firestoreHelper_instance;
-  function firestoreHelper_getInstance() {
-    if (firestoreHelper_instance == null)
-      new firestoreHelper();
-    return firestoreHelper_instance;
-  }
   function WhereClause(field, operator, value) {
     this._field = field;
     this._operator = operator;
@@ -55589,8 +55814,39 @@
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided_$factory_186($safe_2_2) {
-    var i = new _no_name_provided__224($safe_2_2);
+  function _no_name_provided_$factory_186(resultContinuation) {
+    var i = new _no_name_provided__224(resultContinuation);
+    var l = function (p1, p2, $cont) {
+      return i.invoke_oyvw3h_k$(p1, p2, $cont);
+    };
+    l.$arity = 2;
+    return l;
+  }
+  function _no_name_provided_$factory_187(resultContinuation) {
+    var i = new _no_name_provided__225(resultContinuation);
+    var l = function (p1, p2, $cont) {
+      return i.invoke_qr6gdm_k$(p1, p2, $cont);
+    };
+    l.$arity = 2;
+    return l;
+  }
+  function _no_name_provided_$factory_188(resultContinuation) {
+    var i = new _no_name_provided__226(resultContinuation);
+    var l = function (p1, $cont) {
+      return i.invoke_6wfw3l_k$(p1, $cont);
+    };
+    l.$arity = 1;
+    return l;
+  }
+  function _no_name_provided_$factory_189() {
+    var i = new _no_name_provided__227();
+    return function (p1, p2) {
+      i.invoke_wbz76b_k$(p1, p2);
+      return Unit_getInstance();
+    };
+  }
+  function _no_name_provided_$factory_190($safe_2_2) {
+    var i = new _no_name_provided__228($safe_2_2);
     return function (p1) {
       i.invoke_h9nkbz_k$(p1);
       return Unit_getInstance();
@@ -55614,13 +55870,13 @@
     tmp._exception_0 = null;
     return tmp.doResume_0_k$();
   }
-  function _no_name_provided__225() {
+  function _no_name_provided__229() {
   }
-  _no_name_provided__225.prototype.invoke_0_k$ = function () {
+  _no_name_provided__229.prototype.invoke_0_k$ = function () {
     var tmp = functions.config().discord.webhook_url;
     return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
   };
-  _no_name_provided__225.$metadata$ = {
+  _no_name_provided__229.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
@@ -55820,37 +56076,37 @@
       return _get_webhookUrl_();
     }, null);
   }
-  function _no_name_provided_$factory_187() {
-    var i = new _no_name_provided__225();
+  function _no_name_provided_$factory_191() {
+    var i = new _no_name_provided__229();
     return function () {
       return i.invoke_0_k$();
     };
   }
-  function _no_name_provided__226($list_5_4) {
-    this._$list_5_4 = $list_5_4;
+  function _no_name_provided__230($list_5_8) {
+    this._$list_5_8 = $list_5_8;
   }
-  _no_name_provided__226.prototype.invoke_h9nkbz_k$ = function (doc) {
+  _no_name_provided__230.prototype.invoke_h9nkbz_k$ = function (doc) {
     try {
-      var stringData_7_6 = JSON.stringify(doc.data());
+      var stringData_7_10 = JSON.stringify(doc.data());
       var tmp;
       var tmp_0;
-      if (!(stringData_7_6 == null)) {
-        tmp_0 = !(charSequenceLength(stringData_7_6) === 0);
+      if (!(stringData_7_10 == null)) {
+        tmp_0 = !(charSequenceLength(stringData_7_10) === 0);
       } else {
         tmp_0 = false;
       }
       if (tmp_0) {
-        tmp = !(stringData_7_6 === 'undefined');
+        tmp = !(stringData_7_10 === 'undefined');
       } else {
         {
           tmp = false;
         }
       }
       if (tmp) {
-        var tmp0_decodeFromString_0_8_7 = Default_getInstance();
-        var tmp1_serializer_0_1_9_8 = tmp0_decodeFromString_0_8_7._get_serializersModule__0_k$();
-        var tmp0_cast_0_2_10_9 = serializer_1(tmp1_serializer_0_1_9_8, createKType_0(getKClass_0(TransactionAction), [], false));
-        this._$list_5_4.add_2bq_k$(tmp0_decodeFromString_0_8_7.decodeFromString_ed5pl9_k$(isInterface(tmp0_cast_0_2_10_9, KSerializer) ? tmp0_cast_0_2_10_9 : THROW_CCE(), stringData_7_6));
+        var tmp0_decodeFromString_0_8_11 = Default_getInstance();
+        var tmp1_serializer_0_1_9_12 = tmp0_decodeFromString_0_8_11._get_serializersModule__0_k$();
+        var tmp0_cast_0_2_10_13 = serializer_1(tmp1_serializer_0_1_9_12, createKType_0(getKClass_0(TransactionAction), [], false));
+        this._$list_5_8.add_2bq_k$(tmp0_decodeFromString_0_8_11.decodeFromString_ed5pl9_k$(isInterface(tmp0_cast_0_2_10_13, KSerializer) ? tmp0_cast_0_2_10_13 : THROW_CCE(), stringData_7_10));
         Unit_getInstance();
       } else {
       }
@@ -55864,53 +56120,45 @@
       }
     }
   };
-  _no_name_provided__226.prototype.invoke_20e8_k$ = function (p1) {
+  _no_name_provided__230.prototype.invoke_20e8_k$ = function (p1) {
     this.invoke_h9nkbz_k$((p1 == null ? true : p1) ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__226.$metadata$ = {
+  _no_name_provided__230.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function handleTransactionIfNew($this, transaction, since, $cont) {
-    var tmp = new $handleTransactionIfNewCOROUTINE$9($this, transaction, since, $cont);
-    tmp._result_0 = Unit_getInstance();
-    tmp._exception_0 = null;
-    return tmp.doResume_0_k$();
+  function Payments_init_$Init$(bankClient, tokenStorage, accounts, firestoreHelper, $mask0, $marker, $this) {
+    if (!(($mask0 & 4) === 0))
+      accounts = new Accounts();
+    if (!(($mask0 & 8) === 0)) {
+      firestoreHelper = FirestoreHelper_init_$Create$(false, null, null, null, null, 31, null);
+    }Payments.call($this, bankClient, tokenStorage, accounts, firestoreHelper);
+    return $this;
   }
-  function moveMoneytoCoverTransaction($this, transaction, $cont) {
-    var tmp = new $moveMoneytoCoverTransactionCOROUTINE$10($this, transaction, $cont);
-    tmp._result_0 = Unit_getInstance();
-    tmp._exception_0 = null;
-    return tmp.doResume_0_k$();
+  function Payments_init_$Create$(bankClient, tokenStorage, accounts, firestoreHelper, $mask0, $marker) {
+    return Payments_init_$Init$(bankClient, tokenStorage, accounts, firestoreHelper, $mask0, $marker, Object.create(Payments.prototype));
   }
-  function determinePaymentAccount($this, transaction) {
-    var tmp0_safe_receiver = transaction._cardDetails;
-    return _get_group_(parseMCC(tmp0_safe_receiver == null ? null : tmp0_safe_receiver._merchantCategoryCode))._get_withdrawalAccount__0_k$();
-  }
-  function hasBeenHandled($this, transaction, since, $cont) {
-    var tmp = new $hasBeenHandledCOROUTINE$11($this, transaction, since, $cont);
-    tmp._result_0 = Unit_getInstance();
-    tmp._exception_0 = null;
-    return tmp.doResume_0_k$();
+  function isValidBankStatementCharacter($this, c) {
+    return matches(c.toString(), '[a-zA-Z0-9-. ]');
   }
   function isNoopTransaction($this, transaction) {
     return transaction._amount >= 0.0;
   }
-  function _no_name_provided__227($safe_2_2_2) {
-    this._$safe_2_2_2 = $safe_2_2_2;
+  function _no_name_provided__231($safe_2_2_6) {
+    this._$safe_2_2_6 = $safe_2_2_6;
   }
-  _no_name_provided__227.prototype.invoke_h9nkbz_k$ = function (querySnapshot) {
-    var list_5_4 = ArrayList_init_$Create$();
-    querySnapshot.forEach(_no_name_provided_$factory_188(list_5_4));
-    var tmp0_success_0_1_12_11 = Companion_getInstance_4();
-    this._$safe_2_2_2.resumeWith_bnunh2_k$(_Result___init__impl_(list_5_4));
+  _no_name_provided__231.prototype.invoke_h9nkbz_k$ = function (querySnapshot) {
+    var list_5_8 = ArrayList_init_$Create$();
+    querySnapshot.forEach(_no_name_provided_$factory_192(list_5_8));
+    var tmp0_success_0_1_12_15 = Companion_getInstance_4();
+    this._$safe_2_2_6.resumeWith_bnunh2_k$(_Result___init__impl_(list_5_8));
   };
-  _no_name_provided__227.prototype.invoke_20e8_k$ = function (p1) {
+  _no_name_provided__231.prototype.invoke_20e8_k$ = function (p1) {
     this.invoke_h9nkbz_k$((p1 == null ? true : p1) ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__227.$metadata$ = {
+  _no_name_provided__231.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
@@ -55927,7 +56175,7 @@
         var tmp = this._state_0;
         switch (tmp) {
           case 0:
-            this._exceptionState = 6;
+            this._exceptionState = 9;
             this._ARGUMENT0_1 = this.__this__45._bankClient_0;
             this._state_0 = 1;
             suspendResult = this.__this__45._tokenStorage_0.getToken_0_k$(this);
@@ -55939,7 +56187,7 @@
             this._ARGUMENT1_0 = suspendResult;
             this._ARGUMENT2_2 = this._ARGUMENT1_0._get_access_token__0_k$();
             this._state_0 = 2;
-            var tmp_0 = accounts_getInstance()._get_creditCard__0_k$();
+            var tmp_0 = this.__this__45._accounts_0._get_creditCard__0_k$();
             suspendResult = this._ARGUMENT0_1.fetchTransactions$default_ciqv9s_k$(this._ARGUMENT2_2, tmp_0, null, this._since, this._until, 4, null, this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
               return suspendResult;
@@ -55953,26 +56201,53 @@
             continue $sm;
           case 3:
             if (!this._tmp0_iterator_15.hasNext_0_k$()) {
-              this._state_0 = 5;
+              this._state_0 = 8;
               continue $sm;
             }
             this._element_26 = this._tmp0_iterator_15.next_0_k$();
+            this._exceptionState = 5;
             this._state_0 = 4;
-            suspendResult = handleTransactionIfNew(this.__this__45, this._element_26, this._since, this);
+            suspendResult = this.__this__45.handleTransactionIfNew_5n1eqv_k$(this._element_26, this._since, this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
               return suspendResult;
             }
             continue $sm;
           case 4:
-            this._state_0 = 3;
+            this._exceptionState = 9;
+            this._state_0 = 7;
             continue $sm;
           case 5:
-            return Unit_getInstance();
+            this._exceptionState = 9;
+            var tmp_1 = this._exception_0;
+            if (tmp_1 instanceof Exception) {
+              this._e_47 = this._exception_0;
+              this._state_0 = 6;
+              suspendResult = discordAlert('Error handling transaction', '' + 'Unknown error occured: ' + this._e_47.message + ' while handling a transaction ' + this._element_26 + '. \n' + stackTraceToString(this._e_47), this);
+              if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
+                return suspendResult;
+              }continue $sm;
+            } else {
+              {
+                throw this._exception_0;
+              }
+            }
+
+            break;
           case 6:
+            Unit_getInstance();
+            this._state_0 = 7;
+            continue $sm;
+          case 7:
+            this._exceptionState = 9;
+            this._state_0 = 3;
+            continue $sm;
+          case 8:
+            return Unit_getInstance();
+          case 9:
             throw this._exception_0;
         }
       } catch ($p) {
-        if (this._exceptionState === 6) {
+        if (this._exceptionState === 9) {
           throw $p;
         } else {
           this._state_0 = this._exceptionState;
@@ -56001,7 +56276,7 @@
           case 0:
             this._exceptionState = 6;
             this._state_0 = 1;
-            suspendResult = hasBeenHandled(this.__this__46, this._transaction, this._since_0, this);
+            suspendResult = this.__this__46.hasBeenHandled_d1teom_k$(this._transaction, this._since_0, this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
               return suspendResult;
             }
@@ -56013,15 +56288,14 @@
             } else {
               if (isNoopTransaction(this.__this__46, this._transaction)) {
                 this._state_0 = 4;
-                var tmp_0 = firestoreHelper_getInstance();
-                suspendResult = tmp_0.addData_oyvw3h_k$(TransactionAction_init_$Create$(this._transaction, '', 0, 'None', null, null, 0.0, 112, null), this.__this__46._transactionActionCollection, this);
+                suspendResult = this.__this__46._firestoreHelper_0.addData_oyvw3h_k$(TransactionAction_init_$Create$(this._transaction, '', 0, 'None', null, null, 0.0, 112, null), this.__this__46._transactionActionCollection, this);
                 if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
                   return suspendResult;
                 }continue $sm;
               } else {
-                this._ARGUMENT0_2 = firestoreHelper_getInstance();
+                this._ARGUMENT0_2 = this.__this__46._firestoreHelper_0;
                 this._state_0 = 2;
-                suspendResult = moveMoneytoCoverTransaction(this.__this__46, this._transaction, this);
+                suspendResult = this.__this__46.moveMoneytoCoverTransaction_e70d16_k$(this._transaction, this);
                 if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
                   return suspendResult;
                 }continue $sm;
@@ -56077,17 +56351,12 @@
         var tmp = this._state_0;
         switch (tmp) {
           case 0:
-            this._exceptionState = 11;
-            this._paymentAccount0 = determinePaymentAccount(this.__this__47, this._transaction_0);
+            this._exceptionState = 12;
+            this._paymentAccount0 = this.__this__47.determinePaymentAccount_e70d16_k$(this._transaction_0);
             this._transferCompleted1 = false;
             this._exceptionState = 3;
             this._ARGUMENT2_3 = this.__this__47._bankClient_0;
-            var tmp_0 = this;
-            var tmp_1 = accounts_getInstance()._get_creditCardPayments__0_k$();
-            var tmp_2 = -this._transaction_0._amount;
-            var tmp0_safe_receiver = this._transaction_0._cardDetails;
-            var tmp1_safe_receiver = tmp0_safe_receiver == null ? null : tmp0_safe_receiver._merchantName;
-            tmp_0._ARGUMENT3_3 = new Transfer(tmp_1, this._paymentAccount0, tmp_2, '' + 'payment: ' + (tmp1_safe_receiver == null ? null : take(tmp1_safe_receiver, 20)));
+            this._ARGUMENT3_3 = new Transfer(this.__this__47._accounts_0._get_creditCardPayments__0_k$(), this._paymentAccount0, -this._transaction_0._amount, this.__this__47.createTransactionMessage_6hc1ch_k$(this._transaction_0._cardDetails));
             this._state_0 = 1;
             suspendResult = this.__this__47._tokenStorage_0.getToken_0_k$(this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
@@ -56105,28 +56374,30 @@
             continue $sm;
           case 2:
             this._transferCompleted1 = suspendResult;
-            this._exceptionState = 11;
-            this._state_0 = 10;
+            this._exceptionState = 12;
+            this._state_0 = 11;
             continue $sm;
           case 3:
-            this._exceptionState = 11;
-            var tmp_3 = this._exception_0;
-            if (tmp_3 instanceof Exception) {
+            this._exceptionState = 12;
+            var tmp_0 = this._exception_0;
+            if (tmp_0 instanceof Exception) {
               this._e6 = this._exception_0;
-              var tmp2_safe_receiver = this._e6.message;
-              var tmp3_elvis_lhs = tmp2_safe_receiver == null ? null : contains_3(tmp2_safe_receiver, 'Insufficient money', true);
-              if (tmp3_elvis_lhs == null ? false : tmp3_elvis_lhs) {
+              var tmp0_safe_receiver = this._e6.message;
+              var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : contains_3(tmp0_safe_receiver, 'Insufficient money', true);
+              if (tmp1_elvis_lhs == null ? false : tmp1_elvis_lhs) {
                 log('' + 'insufficient funds on ' + this._paymentAccount0 + ', attempting to withdraw from paymentsBuffer');
-                this._state_0 = 4;
-                suspendResult = discordAlert('Insufficient funds', '' + 'Attempted to move ' + this._transaction_0._amount + ' from ' + accounts_getInstance().findAccountName_6wfw3l_k$(this._paymentAccount0) + ' because of the transaction: ' + this._transaction_0, this);
+                this._state_0 = 5;
+                suspendResult = discordAlert('Insufficient funds', '' + 'Attempted to move ' + this._transaction_0._amount + ' from ' + this.__this__47._accounts_0.findAccountName_6wfw3l_k$(this._paymentAccount0) + ' because of the transaction: ' + this._transaction_0, this);
                 if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
                   return suspendResult;
                 }continue $sm;
               } else {
                 {
-                  log('' + 'Unknown error occured: ' + this._e6.message + ' when handling a transaction ' + this._transaction_0);
-                  this._state_0 = 9;
-                  continue $sm;
+                  this._state_0 = 4;
+                  suspendResult = discordAlert('Error', '' + 'Unknown error occured: ' + this._e6.message + ' when handling a transaction ' + this._transaction_0, this);
+                  if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
+                    return suspendResult;
+                  }continue $sm;
                 }
               }
             } else {
@@ -56138,67 +56409,66 @@
             break;
           case 4:
             Unit_getInstance();
+            log('' + 'Unknown error occured: ' + this._e6.message + ' when handling a transaction ' + this._transaction_0);
+            this._state_0 = 10;
+            continue $sm;
+          case 5:
+            Unit_getInstance();
             this._ARGUMENT7 = this.__this__47._bankClient_0;
-            var tmp_4 = this;
-            var tmp_5 = accounts_getInstance()._get_creditCardPayments__0_k$();
-            var tmp_6 = accounts_getInstance()._get_paymentsBuffer__0_k$();
-            var tmp_7 = -this._transaction_0._amount;
-            var tmp4_safe_receiver = this._transaction_0._cardDetails;
-            var tmp5_safe_receiver = tmp4_safe_receiver == null ? null : tmp4_safe_receiver._merchantName;
-            tmp_4._ARGUMENT8 = new Transfer(tmp_5, tmp_6, tmp_7, '' + 'payment: ' + (tmp5_safe_receiver == null ? null : take(tmp5_safe_receiver, 20)));
-            this._state_0 = 5;
+            this._ARGUMENT8 = new Transfer(this.__this__47._accounts_0._get_creditCardPayments__0_k$(), this.__this__47._accounts_0._get_paymentsBuffer__0_k$(), -this._transaction_0._amount, this.__this__47.createTransactionMessage_6hc1ch_k$(this._transaction_0._cardDetails));
+            this._state_0 = 6;
             suspendResult = this.__this__47._tokenStorage_0.getToken_0_k$(this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
               return suspendResult;
             }
             continue $sm;
-          case 5:
+          case 6:
             this._ARGUMENT9_0 = suspendResult;
             this._ARGUMENT10_0 = this._ARGUMENT9_0._get_access_token__0_k$();
-            this._state_0 = 6;
+            this._state_0 = 7;
             suspendResult = this._ARGUMENT7.transferMoney_y9151q_k$(this._ARGUMENT8, this._ARGUMENT10_0, this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
               return suspendResult;
             }
             continue $sm;
-          case 6:
+          case 7:
             this._transferCompleted1 = suspendResult;
             if (!this._transferCompleted1) {
-              this._state_0 = 7;
-              suspendResult = discordAlert('Insufficient funds on payments buffer', '' + 'Attempted to move ' + this._transaction_0._amount + ' because of ' + this._transaction_0, this);
+              this._state_0 = 8;
+              suspendResult = discordAlert('Insufficient funds on payments buffer', '' + 'Attempted to move ' + this._transaction_0._amount + ' kr because of ' + this._transaction_0, this);
               if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
                 return suspendResult;
               }continue $sm;
             } else {
-              this._state_0 = 8;
+              this._state_0 = 9;
               continue $sm;
             }
 
             break;
-          case 7:
-            Unit_getInstance();
-            this._state_0 = 8;
-            continue $sm;
           case 8:
+            Unit_getInstance();
             this._state_0 = 9;
             continue $sm;
           case 9:
             this._state_0 = 10;
             continue $sm;
           case 10:
-            this._exceptionState = 11;
+            this._state_0 = 11;
+            continue $sm;
+          case 11:
+            this._exceptionState = 12;
             if (this._transferCompleted1) {
-              var tmp_8 = numberToInt(this._transaction_0._amount);
-              var tmp_9 = accounts_getInstance().findAccountName_6wfw3l_k$(this._paymentAccount0);
-              return TransactionAction_init_$Create$(this._transaction_0, this._paymentAccount0, tmp_8, 'PayFromAccount', tmp_9, null, 0.0, 96, null);
+              var tmp_1 = numberToInt(this._transaction_0._amount);
+              var tmp_2 = this.__this__47._accounts_0.findAccountName_6wfw3l_k$(this._paymentAccount0);
+              return TransactionAction_init_$Create$(this._transaction_0, this._paymentAccount0, tmp_1, 'PayFromAccount', tmp_2, null, 0.0, 96, null);
             } else
               throw Exception_init_$Create$('' + 'Could not transfer payment to creditcard accound from ' + this._paymentAccount0);
             return Unit_getInstance();
-          case 11:
+          case 12:
             throw this._exception_0;
         }
       } catch ($p) {
-        if (this._exceptionState === 11) {
+        if (this._exceptionState === 12) {
           throw $p;
         } else {
           this._state_0 = this._exceptionState;
@@ -56225,25 +56495,48 @@
         var tmp = this._state_0;
         switch (tmp) {
           case 0:
-            this._exceptionState = 2;
+            this._exceptionState = 4;
             var tmp_0 = this;
-            tmp_0._tmp0_find_00_0 = firestoreHelper_getInstance();
+            tmp_0._tmp0_find_00 = this.__this__48._firestoreHelper_0;
             var tmp_1 = this;
-            tmp_1._tmp1_find_01_0 = this.__this__48._transactionActionCollection;
+            tmp_1._tmp1_find_01 = this.__this__48._transactionActionCollection;
             var tmp_2 = this;
-            tmp_2._tmp2_find_02_0 = new WhereClause('timestamp', '>', _get_timestamp_(toLocalDateTime(this._since_1, norwegianTimeZone)));
-            this._state_0 = 1;
-            var tmp_3 = this;
-            tmp_3._tmp0__anonymous__1_1_13 = this;
-            this._safe_2_2_24 = SafeContinuation_init_$Create$(intercepted(this._tmp0__anonymous__1_1_13));
-            firestore.collection(this._tmp1_find_01_0).where(this._tmp2_find_02_0._field, this._tmp2_find_02_0._operator, this._tmp2_find_02_0._value_27).get().then(_no_name_provided_$factory_189(this._safe_2_2_24));
-            suspendResult = this._safe_2_2_24.getOrThrow_0_k$();
-            if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
-              return suspendResult;
+            tmp_2._tmp2_find_02 = new WhereClause('timestamp', '>', _get_timestamp_(toLocalDateTime(this._since_1, norwegianTimeZone)));
+            if (this._tmp0_find_00._useStubs) {
+              var tmp_3 = this;
+              tmp_3._tmp0_decodeFromString_0_14 = Default_getInstance();
+              this._state_0 = 2;
+              suspendResult = this._tmp0_find_00._findStub(this._tmp1_find_01, this._tmp2_find_02, this);
+              if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
+                return suspendResult;
+              }continue $sm;
+            } else {
+              this._state_0 = 1;
+              var tmp_4 = this;
+              tmp_4._tmp0__anonymous__1_1_55 = this;
+              this._safe_2_2_66 = SafeContinuation_init_$Create$(intercepted(this._tmp0__anonymous__1_1_55));
+              firestore.collection(this._tmp1_find_01).where(this._tmp2_find_02._field, this._tmp2_find_02._operator, this._tmp2_find_02._value_27).get().then(_no_name_provided_$factory_193(this._safe_2_2_66));
+              suspendResult = this._safe_2_2_66.getOrThrow_0_k$();
+              if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
+                return suspendResult;
+              }continue $sm;
             }
-            continue $sm;
+
+            break;
           case 1:
-            var tmp3_find_0 = suspendResult;
+            this._WHEN_RESULT3_1 = suspendResult;
+            this._state_0 = 3;
+            continue $sm;
+          case 2:
+            var tmp1_decodeFromString_0_2 = suspendResult;
+            var tmp_5 = this;
+            var tmp1_serializer_0_1_3 = this._tmp0_decodeFromString_0_14._get_serializersModule__0_k$();
+            var tmp0_cast_0_2_4 = serializer_1(tmp1_serializer_0_1_3, createKType_0(getKClass_0(List), [createInvariantKTypeProjection_0(createKType_0(getKClass_0(TransactionAction), [], false))], false));
+            tmp_5._WHEN_RESULT3_1 = this._tmp0_decodeFromString_0_14.decodeFromString_ed5pl9_k$(isInterface(tmp0_cast_0_2_4, KSerializer) ? tmp0_cast_0_2_4 : THROW_CCE(), tmp1_decodeFromString_0_2);
+            this._state_0 = 3;
+            continue $sm;
+          case 3:
+            var tmp3_find_0 = this._WHEN_RESULT3_1;
             var tmp$ret$0;
             l$ret$1: do {
               var tmp0_iterator_1_1 = tmp3_find_0.iterator_0_k$();
@@ -56262,11 +56555,11 @@
             var ARGUMENT = tmp$ret$0;
             var ARGUMENT_0 = ARGUMENT == null;
             return !ARGUMENT_0;
-          case 2:
+          case 4:
             throw this._exception_0;
         }
       } catch ($p) {
-        if (this._exceptionState === 2) {
+        if (this._exceptionState === 4) {
           throw $p;
         } else {
           this._state_0 = this._exceptionState;
@@ -56280,9 +56573,11 @@
     kind: 'class',
     interfaces: []
   };
-  function Payments(bankClient, tokenStorage) {
+  function Payments(bankClient, tokenStorage, accounts, firestoreHelper) {
     this._bankClient_0 = bankClient;
     this._tokenStorage_0 = tokenStorage;
+    this._accounts_0 = accounts;
+    this._firestoreHelper_0 = firestoreHelper;
     this._transactionActionCollection = 'transaction-actions';
   }
   Payments.prototype.checkForNewTransactions_c9w0cx_k$ = function (since, until_1, $cont) {
@@ -56298,20 +56593,67 @@
       until_1 = System_getInstance().now_0_k$().minus_mqzjix_k$(_get_days_(5));
     return this.checkForNewTransactions_c9w0cx_k$(since, until_1, $cont);
   };
+  Payments.prototype.handleTransactionIfNew_5n1eqv_k$ = function (transaction, since, $cont) {
+    var tmp = new $handleTransactionIfNewCOROUTINE$9(this, transaction, since, $cont);
+    tmp._result_0 = Unit_getInstance();
+    tmp._exception_0 = null;
+    return tmp.doResume_0_k$();
+  };
+  Payments.prototype.moveMoneytoCoverTransaction_e70d16_k$ = function (transaction, $cont) {
+    var tmp = new $moveMoneytoCoverTransactionCOROUTINE$10(this, transaction, $cont);
+    tmp._result_0 = Unit_getInstance();
+    tmp._exception_0 = null;
+    return tmp.doResume_0_k$();
+  };
+  Payments.prototype.createTransactionMessage_6hc1ch_k$ = function (cardDetails) {
+    var tmp0_safe_receiver = cardDetails;
+    var tmp1_safe_receiver = tmp0_safe_receiver == null ? null : tmp0_safe_receiver._merchantName;
+    var tmp;
+    if (tmp1_safe_receiver == null) {
+      tmp = null;
+    } else {
+      var tmp0_filterTo_0_1 = StringBuilder_init_$Create$_0();
+      var inductionVariable = 0;
+      var last_1 = charSequenceLength(tmp1_safe_receiver);
+      if (inductionVariable < last_1)
+        do {
+          var index_2_3 = inductionVariable;
+          inductionVariable = inductionVariable + 1 | 0;
+          var element_3_4 = charSequenceGet(tmp1_safe_receiver, index_2_3);
+          if (isValidBankStatementCharacter(this, element_3_4)) {
+            tmp0_filterTo_0_1.append_wi8o78_k$(element_3_4);
+            Unit_getInstance();
+          }}
+         while (inductionVariable < last_1);
+      tmp = tmp0_filterTo_0_1.toString();
+    }
+    var tmp2_safe_receiver = tmp;
+    return '' + 'payment: ' + (tmp2_safe_receiver == null ? null : take(tmp2_safe_receiver, 20));
+  };
+  Payments.prototype.determinePaymentAccount_e70d16_k$ = function (transaction) {
+    var tmp0_safe_receiver = transaction._cardDetails;
+    return _get_group_(parseMCC(tmp0_safe_receiver == null ? null : tmp0_safe_receiver._merchantCategoryCode))._get_withdrawalAccount__0_k$();
+  };
+  Payments.prototype.hasBeenHandled_d1teom_k$ = function (transaction, since, $cont) {
+    var tmp = new $hasBeenHandledCOROUTINE$11(this, transaction, since, $cont);
+    tmp._result_0 = Unit_getInstance();
+    tmp._exception_0 = null;
+    return tmp.doResume_0_k$();
+  };
   Payments.$metadata$ = {
     simpleName: 'Payments',
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided_$factory_188($list_5_4) {
-    var i = new _no_name_provided__226($list_5_4);
+  function _no_name_provided_$factory_192($list_5_8) {
+    var i = new _no_name_provided__230($list_5_8);
     return function (p1) {
       i.invoke_h9nkbz_k$(p1);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_189($safe_2_2_2) {
-    var i = new _no_name_provided__227($safe_2_2_2);
+  function _no_name_provided_$factory_193($safe_2_2_6) {
+    var i = new _no_name_provided__231($safe_2_2_6);
     return function (p1) {
       i.invoke_h9nkbz_k$(p1);
       return Unit_getInstance();
@@ -56383,50 +56725,10 @@
     var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : tmp0_safe_receiver._get_isValid__0_k$();
     return tmp1_elvis_lhs == null ? false : tmp1_elvis_lhs;
   }
-  function _no_name_provided__228() {
-  }
-  _no_name_provided__228.prototype.invoke_0_k$ = function () {
-    var tmp = functions.config().accounts.buffer;
-    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
-  };
-  _no_name_provided__228.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__229() {
-  }
-  _no_name_provided__229.prototype.invoke_0_k$ = function () {
-    var tmp = functions.config().accounts.credit_card_payments;
-    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
-  };
-  _no_name_provided__229.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__230() {
-  }
-  _no_name_provided__230.prototype.invoke_0_k$ = function () {
-    var tmp = functions.config().accounts.buffer_payments;
-    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
-  };
-  _no_name_provided__230.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
-  function _no_name_provided__231() {
-  }
-  _no_name_provided__231.prototype.invoke_0_k$ = function () {
-    var tmp = functions.config().accounts.household_expenses;
-    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
-  };
-  _no_name_provided__231.$metadata$ = {
-    kind: 'class',
-    interfaces: []
-  };
   function _no_name_provided__232() {
   }
   _no_name_provided__232.prototype.invoke_0_k$ = function () {
-    var tmp = functions.config().accounts.creditcard;
+    var tmp = functions.config().accounts.buffer;
     return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
   };
   _no_name_provided__232.$metadata$ = {
@@ -56436,7 +56738,7 @@
   function _no_name_provided__233() {
   }
   _no_name_provided__233.prototype.invoke_0_k$ = function () {
-    var tmp = functions.config().accounts.general_use;
+    var tmp = functions.config().accounts.credit_card_payments;
     return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
   };
   _no_name_provided__233.$metadata$ = {
@@ -56446,7 +56748,7 @@
   function _no_name_provided__234() {
   }
   _no_name_provided__234.prototype.invoke_0_k$ = function () {
-    var tmp = functions.config().accounts.clothes;
+    var tmp = functions.config().accounts.buffer_payments;
     return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
   };
   _no_name_provided__234.$metadata$ = {
@@ -56456,7 +56758,7 @@
   function _no_name_provided__235() {
   }
   _no_name_provided__235.prototype.invoke_0_k$ = function () {
-    var tmp = functions.config().accounts.regular_personal_costs;
+    var tmp = functions.config().accounts.household_expenses;
     return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
   };
   _no_name_provided__235.$metadata$ = {
@@ -56466,85 +56768,118 @@
   function _no_name_provided__236() {
   }
   _no_name_provided__236.prototype.invoke_0_k$ = function () {
-    var tmp = functions.config().accounts.bills;
+    var tmp = functions.config().accounts.creditcard;
     return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
   };
   _no_name_provided__236.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function accounts() {
-    accounts_instance = this;
-    var tmp = this;
-    tmp._buffer$delegate = lazy(_no_name_provided_$factory_190());
-    var tmp_0 = this;
-    tmp_0._creditCardPayments$delegate = lazy(_no_name_provided_$factory_191());
-    var tmp_1 = this;
-    tmp_1._paymentsBuffer$delegate = lazy(_no_name_provided_$factory_192());
-    var tmp_2 = this;
-    tmp_2._houseHoldExpenses$delegate = lazy(_no_name_provided_$factory_193());
-    var tmp_3 = this;
-    tmp_3._creditCard$delegate = lazy(_no_name_provided_$factory_194());
-    var tmp_4 = this;
-    tmp_4._generalUse$delegate = lazy(_no_name_provided_$factory_195());
-    var tmp_5 = this;
-    tmp_5._clothes$delegate = lazy(_no_name_provided_$factory_196());
-    var tmp_6 = this;
-    tmp_6._regularPersonalCosts$delegate = lazy(_no_name_provided_$factory_197());
-    var tmp_7 = this;
-    tmp_7._bills$delegate = lazy(_no_name_provided_$factory_198());
+  function _no_name_provided__237() {
   }
-  accounts.prototype._get_buffer__0_k$ = function () {
+  _no_name_provided__237.prototype.invoke_0_k$ = function () {
+    var tmp = functions.config().accounts.general_use;
+    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
+  };
+  _no_name_provided__237.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__238() {
+  }
+  _no_name_provided__238.prototype.invoke_0_k$ = function () {
+    var tmp = functions.config().accounts.clothes;
+    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
+  };
+  _no_name_provided__238.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__239() {
+  }
+  _no_name_provided__239.prototype.invoke_0_k$ = function () {
+    var tmp = functions.config().accounts.regular_personal_costs;
+    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
+  };
+  _no_name_provided__239.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__240() {
+  }
+  _no_name_provided__240.prototype.invoke_0_k$ = function () {
+    var tmp = functions.config().accounts.bills;
+    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
+  };
+  _no_name_provided__240.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function Accounts() {
+    var tmp = this;
+    tmp._buffer$delegate = lazy(_no_name_provided_$factory_194());
+    var tmp_0 = this;
+    tmp_0._creditCardPayments$delegate = lazy(_no_name_provided_$factory_195());
+    var tmp_1 = this;
+    tmp_1._paymentsBuffer$delegate = lazy(_no_name_provided_$factory_196());
+    var tmp_2 = this;
+    tmp_2._houseHoldExpenses$delegate = lazy(_no_name_provided_$factory_197());
+    var tmp_3 = this;
+    tmp_3._creditCard$delegate = lazy(_no_name_provided_$factory_198());
+    var tmp_4 = this;
+    tmp_4._generalUse$delegate = lazy(_no_name_provided_$factory_199());
+    var tmp_5 = this;
+    tmp_5._clothes$delegate = lazy(_no_name_provided_$factory_200());
+    var tmp_6 = this;
+    tmp_6._regularPersonalCosts$delegate = lazy(_no_name_provided_$factory_201());
+    var tmp_7 = this;
+    tmp_7._bills$delegate = lazy(_no_name_provided_$factory_202());
+  }
+  Accounts.prototype._get_buffer__0_k$ = function () {
     var tmp0_getValue_0 = buffer$factory();
     return this._buffer$delegate._get_value__0_k$();
   };
-  accounts.prototype._get_creditCardPayments__0_k$ = function () {
+  Accounts.prototype._get_creditCardPayments__0_k$ = function () {
     var tmp0_getValue_0 = creditCardPayments$factory();
     return this._creditCardPayments$delegate._get_value__0_k$();
   };
-  accounts.prototype._get_paymentsBuffer__0_k$ = function () {
+  Accounts.prototype._get_paymentsBuffer__0_k$ = function () {
     var tmp0_getValue_0 = paymentsBuffer$factory();
     return this._paymentsBuffer$delegate._get_value__0_k$();
   };
-  accounts.prototype._get_houseHoldExpenses__0_k$ = function () {
+  Accounts.prototype._get_houseHoldExpenses__0_k$ = function () {
     var tmp0_getValue_0 = houseHoldExpenses$factory();
     return this._houseHoldExpenses$delegate._get_value__0_k$();
   };
-  accounts.prototype._get_creditCard__0_k$ = function () {
+  Accounts.prototype._get_creditCard__0_k$ = function () {
     var tmp0_getValue_0 = creditCard$factory();
     return this._creditCard$delegate._get_value__0_k$();
   };
-  accounts.prototype._get_generalUse__0_k$ = function () {
+  Accounts.prototype._get_generalUse__0_k$ = function () {
     var tmp0_getValue_0 = generalUse$factory();
     return this._generalUse$delegate._get_value__0_k$();
   };
-  accounts.prototype._get_clothes__0_k$ = function () {
+  Accounts.prototype._get_clothes__0_k$ = function () {
     var tmp0_getValue_0 = clothes$factory();
     return this._clothes$delegate._get_value__0_k$();
   };
-  accounts.prototype._get_regularPersonalCosts__0_k$ = function () {
+  Accounts.prototype._get_regularPersonalCosts__0_k$ = function () {
     var tmp0_getValue_0 = regularPersonalCosts$factory();
     return this._regularPersonalCosts$delegate._get_value__0_k$();
   };
-  accounts.prototype._get_bills__0_k$ = function () {
+  Accounts.prototype._get_bills__0_k$ = function () {
     var tmp0_getValue_0 = bills$factory();
     return this._bills$delegate._get_value__0_k$();
   };
-  accounts.prototype.findAccountName_6wfw3l_k$ = function (accountNr) {
+  Accounts.prototype.findAccountName_6wfw3l_k$ = function (accountNr) {
     var tmp0_subject = accountNr;
     return tmp0_subject === this._get_buffer__0_k$() ? 'Buffer' : tmp0_subject === this._get_creditCard__0_k$() ? 'Credit card' : tmp0_subject === this._get_paymentsBuffer__0_k$() ? 'Payments buffer' : tmp0_subject === this._get_houseHoldExpenses__0_k$() ? 'Household expsenses' : tmp0_subject === this._get_creditCardPayments__0_k$() ? 'Credit card payments' : tmp0_subject === this._get_generalUse__0_k$() ? 'General use' : tmp0_subject === this._get_clothes__0_k$() ? 'Clothing' : tmp0_subject === this._get_regularPersonalCosts__0_k$() ? 'Regular personal costs' : tmp0_subject === this._get_bills__0_k$() ? 'Bills' : '' + 'Unknown accountnr: ' + accountNr;
   };
-  accounts.$metadata$ = {
-    simpleName: 'accounts',
-    kind: 'object',
+  Accounts.$metadata$ = {
+    simpleName: 'Accounts',
+    kind: 'class',
     interfaces: []
   };
-  var accounts_instance;
-  function accounts_getInstance() {
-    if (accounts_instance == null)
-      new accounts();
-    return accounts_instance;
-  }
   function buffer$factory() {
     return getPropertyCallableRef('buffer', 1, KProperty1, function (receiver) {
       return receiver._get_buffer__0_k$();
@@ -56590,30 +56925,6 @@
       return receiver._get_bills__0_k$();
     }, null);
   }
-  function _no_name_provided_$factory_190() {
-    var i = new _no_name_provided__228();
-    return function () {
-      return i.invoke_0_k$();
-    };
-  }
-  function _no_name_provided_$factory_191() {
-    var i = new _no_name_provided__229();
-    return function () {
-      return i.invoke_0_k$();
-    };
-  }
-  function _no_name_provided_$factory_192() {
-    var i = new _no_name_provided__230();
-    return function () {
-      return i.invoke_0_k$();
-    };
-  }
-  function _no_name_provided_$factory_193() {
-    var i = new _no_name_provided__231();
-    return function () {
-      return i.invoke_0_k$();
-    };
-  }
   function _no_name_provided_$factory_194() {
     var i = new _no_name_provided__232();
     return function () {
@@ -56640,6 +56951,30 @@
   }
   function _no_name_provided_$factory_198() {
     var i = new _no_name_provided__236();
+    return function () {
+      return i.invoke_0_k$();
+    };
+  }
+  function _no_name_provided_$factory_199() {
+    var i = new _no_name_provided__237();
+    return function () {
+      return i.invoke_0_k$();
+    };
+  }
+  function _no_name_provided_$factory_200() {
+    var i = new _no_name_provided__238();
+    return function () {
+      return i.invoke_0_k$();
+    };
+  }
+  function _no_name_provided_$factory_201() {
+    var i = new _no_name_provided__239();
+    return function () {
+      return i.invoke_0_k$();
+    };
+  }
+  function _no_name_provided_$factory_202() {
+    var i = new _no_name_provided__240();
     return function () {
       return i.invoke_0_k$();
     };
@@ -56688,29 +57023,31 @@
     clientSecret = (!(tmp_1 == null) ? typeof tmp_1 === 'string' : false) ? tmp_1 : THROW_CCE();
     var client = new SBankenBankClient(_get_userid_(), _get_clientId_(), _get_clientSecret_());
     var tokenStorage = new TokenStorage(client);
-    var buffer = new BufferAccount(client, tokenStorage, firestore, functions);
-    var payments = new Payments(client, tokenStorage);
-    exports.checkTransactions = functions.pubsub.schedule('every 1 hours').onRun(_no_name_provided_$factory_199(payments));
-    exports.payDebtForCurrentMonth = functions.pubsub.schedule('every 24 hours').onRun(_no_name_provided_$factory_200(buffer));
-    exports.listDebt = functions.https.onRequest(_no_name_provided_$factory_201(buffer));
-    exports.addDebt = functions.https.onRequest(_no_name_provided_$factory_202(buffer));
-    exports.takeUpLoan = functions.https.onRequest(_no_name_provided_$factory_203(buffer));
+    var tmp_2 = firestore;
+    var tmp_3 = functions;
+    var buffer = BufferAccount_init_$Create$(client, tokenStorage, tmp_2, tmp_3, null, null, 48, null);
+    var payments = Payments_init_$Create$(client, tokenStorage, null, null, 12, null);
+    exports.checkTransactions = functions.pubsub.schedule('every 24 hours').onRun(_no_name_provided_$factory_203(payments));
+    exports.payDebtForCurrentMonth = functions.pubsub.schedule('every 24 hours').onRun(_no_name_provided_$factory_204(buffer));
+    exports.listDebt = functions.https.onRequest(_no_name_provided_$factory_205(buffer));
+    exports.addDebt = functions.https.onRequest(_no_name_provided_$factory_206(buffer));
+    exports.takeUpLoan = functions.https.onRequest(_no_name_provided_$factory_207(buffer));
   }
-  function _no_name_provided__237($payments, resultContinuation) {
+  function _no_name_provided__241($payments, resultContinuation) {
     this._$payments = $payments;
     CoroutineImpl_0.call(this, resultContinuation);
   }
-  _no_name_provided__237.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
+  _no_name_provided__241.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
     var tmp = this.create_y6imfn_k$($this$launch, $cont);
     tmp._result_0 = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_0_k$();
   };
-  _no_name_provided__237.prototype.invoke_20e8_k$ = function (p1, $cont) {
+  _no_name_provided__241.prototype.invoke_20e8_k$ = function (p1, $cont) {
     this.invoke_2i3g7c_k$((!(p1 == null) ? isInterface(p1, CoroutineScope) : false) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
-  _no_name_provided__237.prototype.doResume_0_k$ = function () {
+  _no_name_provided__241.prototype.doResume_0_k$ = function () {
     var suspendResult = this._result_0;
     $sm: do
       try {
@@ -56739,45 +57076,45 @@
       }
      while (true);
   };
-  _no_name_provided__237.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
-    var i = new _no_name_provided__237(this._$payments, completion);
+  _no_name_provided__241.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
+    var i = new _no_name_provided__241(this._$payments, completion);
     i._$this$launch_4 = $this$launch;
     return i;
   };
-  _no_name_provided__237.$metadata$ = {
+  _no_name_provided__241.$metadata$ = {
     kind: 'class',
     interfaces: [],
     suspendArity: 1
   };
-  function _no_name_provided__238($payments) {
+  function _no_name_provided__242($payments) {
     this._$payments_0 = $payments;
   }
-  _no_name_provided__238.prototype.invoke_33y0ow_k$ = function (context) {
+  _no_name_provided__242.prototype.invoke_33y0ow_k$ = function (context) {
     var tmp = CoroutineScope_0(Dispatchers_getInstance()._Default);
-    return launch$default(tmp, null, null, _no_name_provided_$factory_204(this._$payments_0, null), 3, null);
+    return launch$default(tmp, null, null, _no_name_provided_$factory_208(this._$payments_0, null), 3, null);
   };
-  _no_name_provided__238.prototype.invoke_20e8_k$ = function (p1) {
+  _no_name_provided__242.prototype.invoke_20e8_k$ = function (p1) {
     return this.invoke_33y0ow_k$((p1 == null ? true : p1) ? p1 : THROW_CCE());
   };
-  _no_name_provided__238.$metadata$ = {
+  _no_name_provided__242.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__239($buffer, resultContinuation) {
+  function _no_name_provided__243($buffer, resultContinuation) {
     this._$buffer = $buffer;
     CoroutineImpl_0.call(this, resultContinuation);
   }
-  _no_name_provided__239.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
+  _no_name_provided__243.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
     var tmp = this.create_y6imfn_k$($this$launch, $cont);
     tmp._result_0 = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_0_k$();
   };
-  _no_name_provided__239.prototype.invoke_20e8_k$ = function (p1, $cont) {
+  _no_name_provided__243.prototype.invoke_20e8_k$ = function (p1, $cont) {
     this.invoke_2i3g7c_k$((!(p1 == null) ? isInterface(p1, CoroutineScope) : false) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
-  _no_name_provided__239.prototype.doResume_0_k$ = function () {
+  _no_name_provided__243.prototype.doResume_0_k$ = function () {
     var suspendResult = this._result_0;
     $sm: do
       try {
@@ -56806,46 +57143,46 @@
       }
      while (true);
   };
-  _no_name_provided__239.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
-    var i = new _no_name_provided__239(this._$buffer, completion);
+  _no_name_provided__243.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
+    var i = new _no_name_provided__243(this._$buffer, completion);
     i._$this$launch_5 = $this$launch;
     return i;
   };
-  _no_name_provided__239.$metadata$ = {
+  _no_name_provided__243.$metadata$ = {
     kind: 'class',
     interfaces: [],
     suspendArity: 1
   };
-  function _no_name_provided__240($buffer) {
+  function _no_name_provided__244($buffer) {
     this._$buffer_0 = $buffer;
   }
-  _no_name_provided__240.prototype.invoke_33y0ow_k$ = function (context) {
+  _no_name_provided__244.prototype.invoke_33y0ow_k$ = function (context) {
     var tmp = CoroutineScope_0(Dispatchers_getInstance()._Default);
-    return launch$default(tmp, null, null, _no_name_provided_$factory_205(this._$buffer_0, null), 3, null);
+    return launch$default(tmp, null, null, _no_name_provided_$factory_209(this._$buffer_0, null), 3, null);
   };
-  _no_name_provided__240.prototype.invoke_20e8_k$ = function (p1) {
+  _no_name_provided__244.prototype.invoke_20e8_k$ = function (p1) {
     return this.invoke_33y0ow_k$((p1 == null ? true : p1) ? p1 : THROW_CCE());
   };
-  _no_name_provided__240.$metadata$ = {
+  _no_name_provided__244.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__241($response, $buffer, resultContinuation) {
+  function _no_name_provided__245($response, $buffer, resultContinuation) {
     this._$response_1 = $response;
     this._$buffer_1 = $buffer;
     CoroutineImpl_0.call(this, resultContinuation);
   }
-  _no_name_provided__241.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
+  _no_name_provided__245.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
     var tmp = this.create_y6imfn_k$($this$launch, $cont);
     tmp._result_0 = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_0_k$();
   };
-  _no_name_provided__241.prototype.invoke_20e8_k$ = function (p1, $cont) {
+  _no_name_provided__245.prototype.invoke_20e8_k$ = function (p1, $cont) {
     this.invoke_2i3g7c_k$((!(p1 == null) ? isInterface(p1, CoroutineScope) : false) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
-  _no_name_provided__241.prototype.doResume_0_k$ = function () {
+  _no_name_provided__245.prototype.doResume_0_k$ = function () {
     var suspendResult = this._result_0;
     $sm: do
       try {
@@ -56886,50 +57223,50 @@
       }
      while (true);
   };
-  _no_name_provided__241.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
-    var i = new _no_name_provided__241(this._$response_1, this._$buffer_1, completion);
+  _no_name_provided__245.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
+    var i = new _no_name_provided__245(this._$response_1, this._$buffer_1, completion);
     i._$this$launch_6 = $this$launch;
     return i;
   };
-  _no_name_provided__241.$metadata$ = {
+  _no_name_provided__245.$metadata$ = {
     kind: 'class',
     interfaces: [],
     suspendArity: 1
   };
-  function _no_name_provided__242($buffer) {
+  function _no_name_provided__246($buffer) {
     this._$buffer_2 = $buffer;
   }
-  _no_name_provided__242.prototype.invoke_w17qz5_k$ = function (request, response) {
+  _no_name_provided__246.prototype.invoke_w17qz5_k$ = function (request, response) {
     var tmp = CoroutineScope_0(Dispatchers_getInstance()._Default);
-    launch$default(tmp, null, null, _no_name_provided_$factory_206(response, this._$buffer_2, null), 3, null);
+    launch$default(tmp, null, null, _no_name_provided_$factory_210(response, this._$buffer_2, null), 3, null);
     Unit_getInstance();
     Unit_getInstance();
   };
-  _no_name_provided__242.prototype.invoke_osx4an_k$ = function (p1, p2) {
+  _no_name_provided__246.prototype.invoke_osx4an_k$ = function (p1, p2) {
     var tmp = (p1 == null ? true : p1) ? p1 : THROW_CCE();
     this.invoke_w17qz5_k$(tmp, (p2 == null ? true : p2) ? p2 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__242.$metadata$ = {
+  _no_name_provided__246.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__243($buffer, $request, resultContinuation) {
+  function _no_name_provided__247($buffer, $request, resultContinuation) {
     this._$buffer_3 = $buffer;
     this._$request = $request;
     CoroutineImpl_0.call(this, resultContinuation);
   }
-  _no_name_provided__243.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
+  _no_name_provided__247.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
     var tmp = this.create_y6imfn_k$($this$launch, $cont);
     tmp._result_0 = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_0_k$();
   };
-  _no_name_provided__243.prototype.invoke_20e8_k$ = function (p1, $cont) {
+  _no_name_provided__247.prototype.invoke_20e8_k$ = function (p1, $cont) {
     this.invoke_2i3g7c_k$((!(p1 == null) ? isInterface(p1, CoroutineScope) : false) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
-  _no_name_provided__243.prototype.doResume_0_k$ = function () {
+  _no_name_provided__247.prototype.doResume_0_k$ = function () {
     var suspendResult = this._result_0;
     $sm: do
       try {
@@ -56961,51 +57298,51 @@
       }
      while (true);
   };
-  _no_name_provided__243.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
-    var i = new _no_name_provided__243(this._$buffer_3, this._$request, completion);
+  _no_name_provided__247.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
+    var i = new _no_name_provided__247(this._$buffer_3, this._$request, completion);
     i._$this$launch_7 = $this$launch;
     return i;
   };
-  _no_name_provided__243.$metadata$ = {
+  _no_name_provided__247.$metadata$ = {
     kind: 'class',
     interfaces: [],
     suspendArity: 1
   };
-  function _no_name_provided__244($buffer) {
+  function _no_name_provided__248($buffer) {
     this._$buffer_4 = $buffer;
   }
-  _no_name_provided__244.prototype.invoke_w17qz5_k$ = function (request, response) {
+  _no_name_provided__248.prototype.invoke_w17qz5_k$ = function (request, response) {
     var tmp = CoroutineScope_0(Dispatchers_getInstance()._Default);
-    launch$default(tmp, null, null, _no_name_provided_$factory_207(this._$buffer_4, request, null), 3, null);
+    launch$default(tmp, null, null, _no_name_provided_$factory_211(this._$buffer_4, request, null), 3, null);
     Unit_getInstance();
     Unit_getInstance();
   };
-  _no_name_provided__244.prototype.invoke_osx4an_k$ = function (p1, p2) {
+  _no_name_provided__248.prototype.invoke_osx4an_k$ = function (p1, p2) {
     var tmp = (p1 == null ? true : p1) ? p1 : THROW_CCE();
     this.invoke_w17qz5_k$(tmp, (p2 == null ? true : p2) ? p2 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__244.$metadata$ = {
+  _no_name_provided__248.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__245($buffer, $request, $response, resultContinuation) {
+  function _no_name_provided__249($buffer, $request, $response, resultContinuation) {
     this._$buffer_5 = $buffer;
     this._$request_0 = $request;
     this._$response_2 = $response;
     CoroutineImpl_0.call(this, resultContinuation);
   }
-  _no_name_provided__245.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
+  _no_name_provided__249.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
     var tmp = this.create_y6imfn_k$($this$launch, $cont);
     tmp._result_0 = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_0_k$();
   };
-  _no_name_provided__245.prototype.invoke_20e8_k$ = function (p1, $cont) {
+  _no_name_provided__249.prototype.invoke_20e8_k$ = function (p1, $cont) {
     this.invoke_2i3g7c_k$((!(p1 == null) ? isInterface(p1, CoroutineScope) : false) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
-  _no_name_provided__245.prototype.doResume_0_k$ = function () {
+  _no_name_provided__249.prototype.doResume_0_k$ = function () {
     var suspendResult = this._result_0;
     $sm: do
       try {
@@ -57048,101 +57385,101 @@
       }
      while (true);
   };
-  _no_name_provided__245.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
-    var i = new _no_name_provided__245(this._$buffer_5, this._$request_0, this._$response_2, completion);
+  _no_name_provided__249.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
+    var i = new _no_name_provided__249(this._$buffer_5, this._$request_0, this._$response_2, completion);
     i._$this$launch_8 = $this$launch;
     return i;
   };
-  _no_name_provided__245.$metadata$ = {
+  _no_name_provided__249.$metadata$ = {
     kind: 'class',
     interfaces: [],
     suspendArity: 1
   };
-  function _no_name_provided__246($buffer) {
+  function _no_name_provided__250($buffer) {
     this._$buffer_6 = $buffer;
   }
-  _no_name_provided__246.prototype.invoke_w17qz5_k$ = function (request, response) {
+  _no_name_provided__250.prototype.invoke_w17qz5_k$ = function (request, response) {
     var tmp = CoroutineScope_0(Dispatchers_getInstance()._Default);
-    launch$default(tmp, null, null, _no_name_provided_$factory_208(this._$buffer_6, request, response, null), 3, null);
+    launch$default(tmp, null, null, _no_name_provided_$factory_212(this._$buffer_6, request, response, null), 3, null);
     Unit_getInstance();
     Unit_getInstance();
   };
-  _no_name_provided__246.prototype.invoke_osx4an_k$ = function (p1, p2) {
+  _no_name_provided__250.prototype.invoke_osx4an_k$ = function (p1, p2) {
     var tmp = (p1 == null ? true : p1) ? p1 : THROW_CCE();
     this.invoke_w17qz5_k$(tmp, (p2 == null ? true : p2) ? p2 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__246.$metadata$ = {
+  _no_name_provided__250.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided_$factory_199($payments) {
-    var i = new _no_name_provided__238($payments);
+  function _no_name_provided_$factory_203($payments) {
+    var i = new _no_name_provided__242($payments);
     return function (p1) {
       return i.invoke_33y0ow_k$(p1);
     };
   }
-  function _no_name_provided_$factory_200($buffer) {
-    var i = new _no_name_provided__240($buffer);
-    return function (p1) {
-      return i.invoke_33y0ow_k$(p1);
-    };
-  }
-  function _no_name_provided_$factory_201($buffer) {
-    var i = new _no_name_provided__242($buffer);
-    return function (p1, p2) {
-      i.invoke_w17qz5_k$(p1, p2);
-      return Unit_getInstance();
-    };
-  }
-  function _no_name_provided_$factory_202($buffer) {
+  function _no_name_provided_$factory_204($buffer) {
     var i = new _no_name_provided__244($buffer);
-    return function (p1, p2) {
-      i.invoke_w17qz5_k$(p1, p2);
-      return Unit_getInstance();
+    return function (p1) {
+      return i.invoke_33y0ow_k$(p1);
     };
   }
-  function _no_name_provided_$factory_203($buffer) {
+  function _no_name_provided_$factory_205($buffer) {
     var i = new _no_name_provided__246($buffer);
     return function (p1, p2) {
       i.invoke_w17qz5_k$(p1, p2);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_204($payments, resultContinuation) {
-    var i = new _no_name_provided__237($payments, resultContinuation);
+  function _no_name_provided_$factory_206($buffer) {
+    var i = new _no_name_provided__248($buffer);
+    return function (p1, p2) {
+      i.invoke_w17qz5_k$(p1, p2);
+      return Unit_getInstance();
+    };
+  }
+  function _no_name_provided_$factory_207($buffer) {
+    var i = new _no_name_provided__250($buffer);
+    return function (p1, p2) {
+      i.invoke_w17qz5_k$(p1, p2);
+      return Unit_getInstance();
+    };
+  }
+  function _no_name_provided_$factory_208($payments, resultContinuation) {
+    var i = new _no_name_provided__241($payments, resultContinuation);
     var l = function (p1, $cont) {
       return i.invoke_2i3g7c_k$(p1, $cont);
     };
     l.$arity = 1;
     return l;
   }
-  function _no_name_provided_$factory_205($buffer, resultContinuation) {
-    var i = new _no_name_provided__239($buffer, resultContinuation);
+  function _no_name_provided_$factory_209($buffer, resultContinuation) {
+    var i = new _no_name_provided__243($buffer, resultContinuation);
     var l = function (p1, $cont) {
       return i.invoke_2i3g7c_k$(p1, $cont);
     };
     l.$arity = 1;
     return l;
   }
-  function _no_name_provided_$factory_206($response, $buffer, resultContinuation) {
-    var i = new _no_name_provided__241($response, $buffer, resultContinuation);
+  function _no_name_provided_$factory_210($response, $buffer, resultContinuation) {
+    var i = new _no_name_provided__245($response, $buffer, resultContinuation);
     var l = function (p1, $cont) {
       return i.invoke_2i3g7c_k$(p1, $cont);
     };
     l.$arity = 1;
     return l;
   }
-  function _no_name_provided_$factory_207($buffer, $request, resultContinuation) {
-    var i = new _no_name_provided__243($buffer, $request, resultContinuation);
+  function _no_name_provided_$factory_211($buffer, $request, resultContinuation) {
+    var i = new _no_name_provided__247($buffer, $request, resultContinuation);
     var l = function (p1, $cont) {
       return i.invoke_2i3g7c_k$(p1, $cont);
     };
     l.$arity = 1;
     return l;
   }
-  function _no_name_provided_$factory_208($buffer, $request, $response, resultContinuation) {
-    var i = new _no_name_provided__245($buffer, $request, $response, resultContinuation);
+  function _no_name_provided_$factory_212($buffer, $request, $response, resultContinuation) {
+    var i = new _no_name_provided__249($buffer, $request, $response, resultContinuation);
     var l = function (p1, $cont) {
       return i.invoke_2i3g7c_k$(p1, $cont);
     };
@@ -57974,6 +58311,7 @@
   }
   function Companion_72() {
     Companion_instance_71 = this;
+    this._accounts_1 = new Accounts();
     this._subclasses = listOf([HouseholdGroup_getInstance(), SmallPersonalCosts_getInstance(), Clothes_getInstance()]);
   }
   Companion_72.$metadata$ = {
@@ -57992,13 +58330,12 @@
     MccGroup.call(this);
     var tmp = this;
     tmp._mccValues = emptyList();
-    this._withdrawalAccount = accounts_getInstance()._get_generalUse__0_k$();
   }
   Unknown.prototype._get_mccValues__0_k$ = function () {
     return this._mccValues;
   };
   Unknown.prototype._get_withdrawalAccount__0_k$ = function () {
-    return this._withdrawalAccount;
+    return Companion_getInstance_71()._accounts_1._get_generalUse__0_k$();
   };
   Unknown.$metadata$ = {
     simpleName: 'Unknown',
@@ -58014,11 +58351,10 @@
   function HouseholdGroup() {
     HouseholdGroup_instance = this;
     MccGroup.call(this);
-    this._withdrawalAccount_0 = accounts_getInstance()._get_houseHoldExpenses__0_k$();
     this._mccValues_0 = listOf([MCC_MiscellaneousFoodStores_getInstance(), MCC_PetShopsPetFoodAndSupplies_getInstance(), MCC_GroceryStoresSupermarkets_getInstance()]);
   }
   HouseholdGroup.prototype._get_withdrawalAccount__0_k$ = function () {
-    return this._withdrawalAccount_0;
+    return Companion_getInstance_71()._accounts_1._get_houseHoldExpenses__0_k$();
   };
   HouseholdGroup.prototype._get_mccValues__0_k$ = function () {
     return this._mccValues_0;
@@ -58038,13 +58374,12 @@
     Clothes_instance = this;
     MccGroup.call(this);
     this._mccValues_1 = listOf([MCC_FamilyClothingStores_getInstance(), MCC_MensAndBoysClothingAndAccessoriesStores_getInstance(), MCC_MensWomensClothingStores_getInstance(), MCC_SportingGoodsStores_getInstance(), MCC_SportsAndRidingApparelStores_getInstance(), MCC_ShoeStores_getInstance()]);
-    this._withdrawalAccount_1 = accounts_getInstance()._get_clothes__0_k$();
   }
   Clothes.prototype._get_mccValues__0_k$ = function () {
     return this._mccValues_1;
   };
   Clothes.prototype._get_withdrawalAccount__0_k$ = function () {
-    return this._withdrawalAccount_1;
+    return Companion_getInstance_71()._accounts_1._get_clothes__0_k$();
   };
   Clothes.$metadata$ = {
     simpleName: 'Clothes',
@@ -58060,11 +58395,10 @@
   function SmallPersonalCosts() {
     SmallPersonalCosts_instance = this;
     MccGroup.call(this);
-    this._withdrawalAccount_2 = accounts_getInstance()._get_regularPersonalCosts__0_k$();
     this._mccValues_2 = listOf([MCC_CosmeticStores_getInstance(), MCC_TransportationServices_getInstance()]);
   }
   SmallPersonalCosts.prototype._get_withdrawalAccount__0_k$ = function () {
-    return this._withdrawalAccount_2;
+    return Companion_getInstance_71()._accounts_1._get_regularPersonalCosts__0_k$();
   };
   SmallPersonalCosts.prototype._get_mccValues__0_k$ = function () {
     return this._mccValues_2;
@@ -58727,7 +59061,7 @@
   unsignedNumberDescriptors = setOf([serializer_12(Companion_getInstance_6())._get_descriptor__0_k$(), serializer_13(Companion_getInstance_7())._get_descriptor__0_k$(), serializer_14(Companion_getInstance_5())._get_descriptor__0_k$(), serializer_15(Companion_getInstance_8())._get_descriptor__0_k$()]);
   ESCAPE_STRINGS = ESCAPE_STRINGS$init$();
   initializer = SerializerInitializer_getInstance();
-  webhookUrl$delegate = lazy(_no_name_provided_$factory_187());
+  webhookUrl$delegate = lazy(_no_name_provided_$factory_191());
   firestore = null;
   functions = null;
   firebase = null;
