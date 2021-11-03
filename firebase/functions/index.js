@@ -855,16 +855,16 @@
   $hasBeenHandledCOROUTINE$11.prototype.constructor = $hasBeenHandledCOROUTINE$11;
   $getTokenCOROUTINE$12.prototype = Object.create(CoroutineImpl_0.prototype);
   $getTokenCOROUTINE$12.prototype.constructor = $getTokenCOROUTINE$12;
-  _no_name_provided__228.prototype = Object.create(CoroutineImpl_0.prototype);
-  _no_name_provided__228.prototype.constructor = _no_name_provided__228;
-  _no_name_provided__230.prototype = Object.create(CoroutineImpl_0.prototype);
-  _no_name_provided__230.prototype.constructor = _no_name_provided__230;
-  _no_name_provided__232.prototype = Object.create(CoroutineImpl_0.prototype);
-  _no_name_provided__232.prototype.constructor = _no_name_provided__232;
-  _no_name_provided__234.prototype = Object.create(CoroutineImpl_0.prototype);
-  _no_name_provided__234.prototype.constructor = _no_name_provided__234;
-  _no_name_provided__236.prototype = Object.create(CoroutineImpl_0.prototype);
-  _no_name_provided__236.prototype.constructor = _no_name_provided__236;
+  _no_name_provided__237.prototype = Object.create(CoroutineImpl_0.prototype);
+  _no_name_provided__237.prototype.constructor = _no_name_provided__237;
+  _no_name_provided__239.prototype = Object.create(CoroutineImpl_0.prototype);
+  _no_name_provided__239.prototype.constructor = _no_name_provided__239;
+  _no_name_provided__241.prototype = Object.create(CoroutineImpl_0.prototype);
+  _no_name_provided__241.prototype.constructor = _no_name_provided__241;
+  _no_name_provided__243.prototype = Object.create(CoroutineImpl_0.prototype);
+  _no_name_provided__243.prototype.constructor = _no_name_provided__243;
+  _no_name_provided__245.prototype = Object.create(CoroutineImpl_0.prototype);
+  _no_name_provided__245.prototype.constructor = _no_name_provided__245;
   Unknown.prototype = Object.create(MccGroup.prototype);
   Unknown.prototype.constructor = Unknown;
   HouseholdGroup.prototype = Object.create(MccGroup.prototype);
@@ -2214,11 +2214,11 @@
       new EmptyList();
     return EmptyList_instance;
   }
-  function arrayListOf(elements) {
-    return elements.length === 0 ? ArrayList_init_$Create$() : ArrayList_init_$Create$_1(new ArrayAsCollection(elements, true));
-  }
   function throwIndexOverflow() {
     throw ArithmeticException_init_$Create$('Index overflow has happened.');
+  }
+  function arrayListOf(elements) {
+    return elements.length === 0 ? ArrayList_init_$Create$() : ArrayList_init_$Create$_1(new ArrayAsCollection(elements, true));
   }
   function asCollection(_this_) {
     return new ArrayAsCollection(_this_, false);
@@ -5951,9 +5951,6 @@
   function setOf_0(element) {
     return hashSetOf([element]);
   }
-  function listOf_0(element) {
-    return arrayListOf([element]);
-  }
   function mapCapacity(expectedSize) {
     return expectedSize;
   }
@@ -5964,6 +5961,9 @@
   }
   function sortWith(_this_, comparator) {
     collectionsSort(_this_, comparator);
+  }
+  function listOf_0(element) {
+    return arrayListOf([element]);
   }
   function arrayCopy_0(source, destination, destinationOffset, startIndex, endIndex) {
     Companion_getInstance().checkRangeIndexes_zd700_k$(startIndex, endIndex, source.length);
@@ -55099,7 +55099,7 @@
           case 0:
             this._exceptionState = 6;
             this._paymentAmount0 = this._debt._amount_3 / this._debt._nrOfPayments;
-            this._transfer1 = new Transfer(accounts_getInstance()._buffer_9, accounts_getInstance()._paymentsBuffer, this._paymentAmount0, '' + 'debt: ' + this._debt._name_8);
+            this._transfer1 = new Transfer(accounts_getInstance()._get_buffer__0_k$(), accounts_getInstance()._get_paymentsBuffer__0_k$(), this._paymentAmount0, '' + 'debt: ' + this._debt._name_8);
             this._ARGUMENT2_0 = this.__this__39._bankClient;
             this._state_0 = 1;
             suspendResult = this.__this__39._tokenStorage.getToken_0_k$(this);
@@ -55275,7 +55275,7 @@
           case 0:
             this._exceptionState = 3;
             this._ARGUMENT0_0 = this.__this__42._bankClient;
-            this._ARGUMENT1 = new Transfer(this._accountId_1, accounts_getInstance()._buffer_9, this._amount_2, 'Uttak fra buffer');
+            this._ARGUMENT1 = new Transfer(this._accountId_1, accounts_getInstance()._get_buffer__0_k$(), this._amount_2, 'Uttak fra buffer');
             this._state_0 = 1;
             suspendResult = this.__this__42._tokenStorage.getToken_0_k$(this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
@@ -55939,7 +55939,7 @@
             this._ARGUMENT1_0 = suspendResult;
             this._ARGUMENT2_2 = this._ARGUMENT1_0._get_access_token__0_k$();
             this._state_0 = 2;
-            var tmp_0 = accounts_getInstance()._creditCard;
+            var tmp_0 = accounts_getInstance()._get_creditCard__0_k$();
             suspendResult = this._ARGUMENT0_1.fetchTransactions$default_ciqv9s_k$(this._ARGUMENT2_2, tmp_0, null, this._since, this._until, 4, null, this);
             if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
               return suspendResult;
@@ -56083,7 +56083,7 @@
             this._exceptionState = 3;
             this._ARGUMENT2_3 = this.__this__47._bankClient_0;
             var tmp_0 = this;
-            var tmp_1 = accounts_getInstance()._creditCardPayments;
+            var tmp_1 = accounts_getInstance()._get_creditCardPayments__0_k$();
             var tmp_2 = -this._transaction_0._amount;
             var tmp0_safe_receiver = this._transaction_0._cardDetails;
             var tmp1_safe_receiver = tmp0_safe_receiver == null ? null : tmp0_safe_receiver._merchantName;
@@ -56118,7 +56118,7 @@
               if (tmp3_elvis_lhs == null ? false : tmp3_elvis_lhs) {
                 log('' + 'insufficient funds on ' + this._paymentAccount0 + ', attempting to withdraw from paymentsBuffer');
                 this._state_0 = 4;
-                suspendResult = discordAlert('Insufficient funds', '' + 'Attempted to move ' + this._transaction_0._amount + ' from ' + accounts_getInstance().findAccountName_6wfw3l_k$(this._paymentAccount0) + ' because of ' + this._transaction_0, this);
+                suspendResult = discordAlert('Insufficient funds', '' + 'Attempted to move ' + this._transaction_0._amount + ' from ' + accounts_getInstance().findAccountName_6wfw3l_k$(this._paymentAccount0) + ' because of the transaction: ' + this._transaction_0, this);
                 if (suspendResult === _get_COROUTINE_SUSPENDED_()) {
                   return suspendResult;
                 }continue $sm;
@@ -56140,8 +56140,8 @@
             Unit_getInstance();
             this._ARGUMENT7 = this.__this__47._bankClient_0;
             var tmp_4 = this;
-            var tmp_5 = accounts_getInstance()._creditCardPayments;
-            var tmp_6 = accounts_getInstance()._paymentsBuffer;
+            var tmp_5 = accounts_getInstance()._get_creditCardPayments__0_k$();
+            var tmp_6 = accounts_getInstance()._get_paymentsBuffer__0_k$();
             var tmp_7 = -this._transaction_0._amount;
             var tmp4_safe_receiver = this._transaction_0._cardDetails;
             var tmp5_safe_receiver = tmp4_safe_receiver == null ? null : tmp4_safe_receiver._merchantName;
@@ -56383,33 +56383,156 @@
     var tmp1_elvis_lhs = tmp0_safe_receiver == null ? null : tmp0_safe_receiver._get_isValid__0_k$();
     return tmp1_elvis_lhs == null ? false : tmp1_elvis_lhs;
   }
+  function _no_name_provided__228() {
+  }
+  _no_name_provided__228.prototype.invoke_0_k$ = function () {
+    var tmp = functions.config().accounts.buffer;
+    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
+  };
+  _no_name_provided__228.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__229() {
+  }
+  _no_name_provided__229.prototype.invoke_0_k$ = function () {
+    var tmp = functions.config().accounts.credit_card_payments;
+    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
+  };
+  _no_name_provided__229.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__230() {
+  }
+  _no_name_provided__230.prototype.invoke_0_k$ = function () {
+    var tmp = functions.config().accounts.buffer_payments;
+    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
+  };
+  _no_name_provided__230.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__231() {
+  }
+  _no_name_provided__231.prototype.invoke_0_k$ = function () {
+    var tmp = functions.config().accounts.household_expenses;
+    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
+  };
+  _no_name_provided__231.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__232() {
+  }
+  _no_name_provided__232.prototype.invoke_0_k$ = function () {
+    var tmp = functions.config().accounts.creditcard;
+    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
+  };
+  _no_name_provided__232.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__233() {
+  }
+  _no_name_provided__233.prototype.invoke_0_k$ = function () {
+    var tmp = functions.config().accounts.general_use;
+    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
+  };
+  _no_name_provided__233.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__234() {
+  }
+  _no_name_provided__234.prototype.invoke_0_k$ = function () {
+    var tmp = functions.config().accounts.clothes;
+    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
+  };
+  _no_name_provided__234.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__235() {
+  }
+  _no_name_provided__235.prototype.invoke_0_k$ = function () {
+    var tmp = functions.config().accounts.regular_personal_costs;
+    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
+  };
+  _no_name_provided__235.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__236() {
+  }
+  _no_name_provided__236.prototype.invoke_0_k$ = function () {
+    var tmp = functions.config().accounts.bills;
+    return (!(tmp == null) ? typeof tmp === 'string' : false) ? tmp : THROW_CCE();
+  };
+  _no_name_provided__236.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
   function accounts() {
     accounts_instance = this;
     var tmp = this;
-    var tmp_0 = functions.config().accounts.buffer;
-    tmp._buffer_9 = (!(tmp_0 == null) ? typeof tmp_0 === 'string' : false) ? tmp_0 : THROW_CCE();
+    tmp._buffer$delegate = lazy(_no_name_provided_$factory_190());
+    var tmp_0 = this;
+    tmp_0._creditCardPayments$delegate = lazy(_no_name_provided_$factory_191());
     var tmp_1 = this;
-    var tmp_2 = functions.config().accounts.credit_card_payments;
-    tmp_1._creditCardPayments = (!(tmp_2 == null) ? typeof tmp_2 === 'string' : false) ? tmp_2 : THROW_CCE();
+    tmp_1._paymentsBuffer$delegate = lazy(_no_name_provided_$factory_192());
+    var tmp_2 = this;
+    tmp_2._houseHoldExpenses$delegate = lazy(_no_name_provided_$factory_193());
     var tmp_3 = this;
-    var tmp_4 = functions.config().accounts.buffer_payments;
-    tmp_3._paymentsBuffer = (!(tmp_4 == null) ? typeof tmp_4 === 'string' : false) ? tmp_4 : THROW_CCE();
+    tmp_3._creditCard$delegate = lazy(_no_name_provided_$factory_194());
+    var tmp_4 = this;
+    tmp_4._generalUse$delegate = lazy(_no_name_provided_$factory_195());
     var tmp_5 = this;
-    var tmp_6 = functions.config().accounts.household_expenses;
-    tmp_5._houseHoldExpenses = (!(tmp_6 == null) ? typeof tmp_6 === 'string' : false) ? tmp_6 : THROW_CCE();
+    tmp_5._clothes$delegate = lazy(_no_name_provided_$factory_196());
+    var tmp_6 = this;
+    tmp_6._regularPersonalCosts$delegate = lazy(_no_name_provided_$factory_197());
     var tmp_7 = this;
-    var tmp_8 = functions.config().accounts.creditcard;
-    tmp_7._creditCard = (!(tmp_8 == null) ? typeof tmp_8 === 'string' : false) ? tmp_8 : THROW_CCE();
-    var tmp_9 = this;
-    var tmp_10 = functions.config().accounts.general_use;
-    tmp_9._generalUse = (!(tmp_10 == null) ? typeof tmp_10 === 'string' : false) ? tmp_10 : THROW_CCE();
-    var tmp_11 = this;
-    var tmp_12 = functions.config().accounts.clothes;
-    tmp_11._clothes = (!(tmp_12 == null) ? typeof tmp_12 === 'string' : false) ? tmp_12 : THROW_CCE();
+    tmp_7._bills$delegate = lazy(_no_name_provided_$factory_198());
   }
+  accounts.prototype._get_buffer__0_k$ = function () {
+    var tmp0_getValue_0 = buffer$factory();
+    return this._buffer$delegate._get_value__0_k$();
+  };
+  accounts.prototype._get_creditCardPayments__0_k$ = function () {
+    var tmp0_getValue_0 = creditCardPayments$factory();
+    return this._creditCardPayments$delegate._get_value__0_k$();
+  };
+  accounts.prototype._get_paymentsBuffer__0_k$ = function () {
+    var tmp0_getValue_0 = paymentsBuffer$factory();
+    return this._paymentsBuffer$delegate._get_value__0_k$();
+  };
+  accounts.prototype._get_houseHoldExpenses__0_k$ = function () {
+    var tmp0_getValue_0 = houseHoldExpenses$factory();
+    return this._houseHoldExpenses$delegate._get_value__0_k$();
+  };
+  accounts.prototype._get_creditCard__0_k$ = function () {
+    var tmp0_getValue_0 = creditCard$factory();
+    return this._creditCard$delegate._get_value__0_k$();
+  };
+  accounts.prototype._get_generalUse__0_k$ = function () {
+    var tmp0_getValue_0 = generalUse$factory();
+    return this._generalUse$delegate._get_value__0_k$();
+  };
+  accounts.prototype._get_clothes__0_k$ = function () {
+    var tmp0_getValue_0 = clothes$factory();
+    return this._clothes$delegate._get_value__0_k$();
+  };
+  accounts.prototype._get_regularPersonalCosts__0_k$ = function () {
+    var tmp0_getValue_0 = regularPersonalCosts$factory();
+    return this._regularPersonalCosts$delegate._get_value__0_k$();
+  };
+  accounts.prototype._get_bills__0_k$ = function () {
+    var tmp0_getValue_0 = bills$factory();
+    return this._bills$delegate._get_value__0_k$();
+  };
   accounts.prototype.findAccountName_6wfw3l_k$ = function (accountNr) {
     var tmp0_subject = accountNr;
-    return tmp0_subject === this._buffer_9 ? 'Buffer' : tmp0_subject === this._creditCard ? 'Credit card' : tmp0_subject === this._paymentsBuffer ? 'Payments buffer' : tmp0_subject === this._houseHoldExpenses ? 'Household expsenses' : tmp0_subject === this._creditCardPayments ? 'Credit card payments' : tmp0_subject === this._generalUse ? 'General use' : tmp0_subject === this._clothes ? 'Clothing' : '' + 'Unknown accountnr: ' + accountNr;
+    return tmp0_subject === this._get_buffer__0_k$() ? 'Buffer' : tmp0_subject === this._get_creditCard__0_k$() ? 'Credit card' : tmp0_subject === this._get_paymentsBuffer__0_k$() ? 'Payments buffer' : tmp0_subject === this._get_houseHoldExpenses__0_k$() ? 'Household expsenses' : tmp0_subject === this._get_creditCardPayments__0_k$() ? 'Credit card payments' : tmp0_subject === this._get_generalUse__0_k$() ? 'General use' : tmp0_subject === this._get_clothes__0_k$() ? 'Clothing' : tmp0_subject === this._get_regularPersonalCosts__0_k$() ? 'Regular personal costs' : tmp0_subject === this._get_bills__0_k$() ? 'Bills' : '' + 'Unknown accountnr: ' + accountNr;
   };
   accounts.$metadata$ = {
     simpleName: 'accounts',
@@ -56421,6 +56544,105 @@
     if (accounts_instance == null)
       new accounts();
     return accounts_instance;
+  }
+  function buffer$factory() {
+    return getPropertyCallableRef('buffer', 1, KProperty1, function (receiver) {
+      return receiver._get_buffer__0_k$();
+    }, null);
+  }
+  function creditCardPayments$factory() {
+    return getPropertyCallableRef('creditCardPayments', 1, KProperty1, function (receiver) {
+      return receiver._get_creditCardPayments__0_k$();
+    }, null);
+  }
+  function paymentsBuffer$factory() {
+    return getPropertyCallableRef('paymentsBuffer', 1, KProperty1, function (receiver) {
+      return receiver._get_paymentsBuffer__0_k$();
+    }, null);
+  }
+  function houseHoldExpenses$factory() {
+    return getPropertyCallableRef('houseHoldExpenses', 1, KProperty1, function (receiver) {
+      return receiver._get_houseHoldExpenses__0_k$();
+    }, null);
+  }
+  function creditCard$factory() {
+    return getPropertyCallableRef('creditCard', 1, KProperty1, function (receiver) {
+      return receiver._get_creditCard__0_k$();
+    }, null);
+  }
+  function generalUse$factory() {
+    return getPropertyCallableRef('generalUse', 1, KProperty1, function (receiver) {
+      return receiver._get_generalUse__0_k$();
+    }, null);
+  }
+  function clothes$factory() {
+    return getPropertyCallableRef('clothes', 1, KProperty1, function (receiver) {
+      return receiver._get_clothes__0_k$();
+    }, null);
+  }
+  function regularPersonalCosts$factory() {
+    return getPropertyCallableRef('regularPersonalCosts', 1, KProperty1, function (receiver) {
+      return receiver._get_regularPersonalCosts__0_k$();
+    }, null);
+  }
+  function bills$factory() {
+    return getPropertyCallableRef('bills', 1, KProperty1, function (receiver) {
+      return receiver._get_bills__0_k$();
+    }, null);
+  }
+  function _no_name_provided_$factory_190() {
+    var i = new _no_name_provided__228();
+    return function () {
+      return i.invoke_0_k$();
+    };
+  }
+  function _no_name_provided_$factory_191() {
+    var i = new _no_name_provided__229();
+    return function () {
+      return i.invoke_0_k$();
+    };
+  }
+  function _no_name_provided_$factory_192() {
+    var i = new _no_name_provided__230();
+    return function () {
+      return i.invoke_0_k$();
+    };
+  }
+  function _no_name_provided_$factory_193() {
+    var i = new _no_name_provided__231();
+    return function () {
+      return i.invoke_0_k$();
+    };
+  }
+  function _no_name_provided_$factory_194() {
+    var i = new _no_name_provided__232();
+    return function () {
+      return i.invoke_0_k$();
+    };
+  }
+  function _no_name_provided_$factory_195() {
+    var i = new _no_name_provided__233();
+    return function () {
+      return i.invoke_0_k$();
+    };
+  }
+  function _no_name_provided_$factory_196() {
+    var i = new _no_name_provided__234();
+    return function () {
+      return i.invoke_0_k$();
+    };
+  }
+  function _no_name_provided_$factory_197() {
+    var i = new _no_name_provided__235();
+    return function () {
+      return i.invoke_0_k$();
+    };
+  }
+  function _no_name_provided_$factory_198() {
+    var i = new _no_name_provided__236();
+    return function () {
+      return i.invoke_0_k$();
+    };
   }
   var firestore;
   var functions;
@@ -56468,27 +56690,27 @@
     var tokenStorage = new TokenStorage(client);
     var buffer = new BufferAccount(client, tokenStorage, firestore, functions);
     var payments = new Payments(client, tokenStorage);
-    exports.checkTransactions = functions.pubsub.schedule('every 1 hours').onRun(_no_name_provided_$factory_190(payments));
-    exports.payDebtForCurrentMonth = functions.pubsub.schedule('every 24 hours').onRun(_no_name_provided_$factory_191(buffer));
-    exports.listDebt = functions.https.onRequest(_no_name_provided_$factory_192(buffer));
-    exports.addDebt = functions.https.onRequest(_no_name_provided_$factory_193(buffer));
-    exports.takeUpLoan = functions.https.onRequest(_no_name_provided_$factory_194(buffer));
+    exports.checkTransactions = functions.pubsub.schedule('every 1 hours').onRun(_no_name_provided_$factory_199(payments));
+    exports.payDebtForCurrentMonth = functions.pubsub.schedule('every 24 hours').onRun(_no_name_provided_$factory_200(buffer));
+    exports.listDebt = functions.https.onRequest(_no_name_provided_$factory_201(buffer));
+    exports.addDebt = functions.https.onRequest(_no_name_provided_$factory_202(buffer));
+    exports.takeUpLoan = functions.https.onRequest(_no_name_provided_$factory_203(buffer));
   }
-  function _no_name_provided__228($payments, resultContinuation) {
+  function _no_name_provided__237($payments, resultContinuation) {
     this._$payments = $payments;
     CoroutineImpl_0.call(this, resultContinuation);
   }
-  _no_name_provided__228.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
+  _no_name_provided__237.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
     var tmp = this.create_y6imfn_k$($this$launch, $cont);
     tmp._result_0 = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_0_k$();
   };
-  _no_name_provided__228.prototype.invoke_20e8_k$ = function (p1, $cont) {
+  _no_name_provided__237.prototype.invoke_20e8_k$ = function (p1, $cont) {
     this.invoke_2i3g7c_k$((!(p1 == null) ? isInterface(p1, CoroutineScope) : false) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
-  _no_name_provided__228.prototype.doResume_0_k$ = function () {
+  _no_name_provided__237.prototype.doResume_0_k$ = function () {
     var suspendResult = this._result_0;
     $sm: do
       try {
@@ -56517,45 +56739,45 @@
       }
      while (true);
   };
-  _no_name_provided__228.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
-    var i = new _no_name_provided__228(this._$payments, completion);
+  _no_name_provided__237.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
+    var i = new _no_name_provided__237(this._$payments, completion);
     i._$this$launch_4 = $this$launch;
     return i;
   };
-  _no_name_provided__228.$metadata$ = {
+  _no_name_provided__237.$metadata$ = {
     kind: 'class',
     interfaces: [],
     suspendArity: 1
   };
-  function _no_name_provided__229($payments) {
+  function _no_name_provided__238($payments) {
     this._$payments_0 = $payments;
   }
-  _no_name_provided__229.prototype.invoke_33y0ow_k$ = function (context) {
+  _no_name_provided__238.prototype.invoke_33y0ow_k$ = function (context) {
     var tmp = CoroutineScope_0(Dispatchers_getInstance()._Default);
-    return launch$default(tmp, null, null, _no_name_provided_$factory_195(this._$payments_0, null), 3, null);
+    return launch$default(tmp, null, null, _no_name_provided_$factory_204(this._$payments_0, null), 3, null);
   };
-  _no_name_provided__229.prototype.invoke_20e8_k$ = function (p1) {
+  _no_name_provided__238.prototype.invoke_20e8_k$ = function (p1) {
     return this.invoke_33y0ow_k$((p1 == null ? true : p1) ? p1 : THROW_CCE());
   };
-  _no_name_provided__229.$metadata$ = {
+  _no_name_provided__238.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__230($buffer, resultContinuation) {
+  function _no_name_provided__239($buffer, resultContinuation) {
     this._$buffer = $buffer;
     CoroutineImpl_0.call(this, resultContinuation);
   }
-  _no_name_provided__230.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
+  _no_name_provided__239.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
     var tmp = this.create_y6imfn_k$($this$launch, $cont);
     tmp._result_0 = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_0_k$();
   };
-  _no_name_provided__230.prototype.invoke_20e8_k$ = function (p1, $cont) {
+  _no_name_provided__239.prototype.invoke_20e8_k$ = function (p1, $cont) {
     this.invoke_2i3g7c_k$((!(p1 == null) ? isInterface(p1, CoroutineScope) : false) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
-  _no_name_provided__230.prototype.doResume_0_k$ = function () {
+  _no_name_provided__239.prototype.doResume_0_k$ = function () {
     var suspendResult = this._result_0;
     $sm: do
       try {
@@ -56584,46 +56806,46 @@
       }
      while (true);
   };
-  _no_name_provided__230.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
-    var i = new _no_name_provided__230(this._$buffer, completion);
+  _no_name_provided__239.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
+    var i = new _no_name_provided__239(this._$buffer, completion);
     i._$this$launch_5 = $this$launch;
     return i;
   };
-  _no_name_provided__230.$metadata$ = {
+  _no_name_provided__239.$metadata$ = {
     kind: 'class',
     interfaces: [],
     suspendArity: 1
   };
-  function _no_name_provided__231($buffer) {
+  function _no_name_provided__240($buffer) {
     this._$buffer_0 = $buffer;
   }
-  _no_name_provided__231.prototype.invoke_33y0ow_k$ = function (context) {
+  _no_name_provided__240.prototype.invoke_33y0ow_k$ = function (context) {
     var tmp = CoroutineScope_0(Dispatchers_getInstance()._Default);
-    return launch$default(tmp, null, null, _no_name_provided_$factory_196(this._$buffer_0, null), 3, null);
+    return launch$default(tmp, null, null, _no_name_provided_$factory_205(this._$buffer_0, null), 3, null);
   };
-  _no_name_provided__231.prototype.invoke_20e8_k$ = function (p1) {
+  _no_name_provided__240.prototype.invoke_20e8_k$ = function (p1) {
     return this.invoke_33y0ow_k$((p1 == null ? true : p1) ? p1 : THROW_CCE());
   };
-  _no_name_provided__231.$metadata$ = {
+  _no_name_provided__240.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__232($response, $buffer, resultContinuation) {
+  function _no_name_provided__241($response, $buffer, resultContinuation) {
     this._$response_1 = $response;
     this._$buffer_1 = $buffer;
     CoroutineImpl_0.call(this, resultContinuation);
   }
-  _no_name_provided__232.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
+  _no_name_provided__241.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
     var tmp = this.create_y6imfn_k$($this$launch, $cont);
     tmp._result_0 = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_0_k$();
   };
-  _no_name_provided__232.prototype.invoke_20e8_k$ = function (p1, $cont) {
+  _no_name_provided__241.prototype.invoke_20e8_k$ = function (p1, $cont) {
     this.invoke_2i3g7c_k$((!(p1 == null) ? isInterface(p1, CoroutineScope) : false) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
-  _no_name_provided__232.prototype.doResume_0_k$ = function () {
+  _no_name_provided__241.prototype.doResume_0_k$ = function () {
     var suspendResult = this._result_0;
     $sm: do
       try {
@@ -56664,50 +56886,50 @@
       }
      while (true);
   };
-  _no_name_provided__232.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
-    var i = new _no_name_provided__232(this._$response_1, this._$buffer_1, completion);
+  _no_name_provided__241.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
+    var i = new _no_name_provided__241(this._$response_1, this._$buffer_1, completion);
     i._$this$launch_6 = $this$launch;
     return i;
   };
-  _no_name_provided__232.$metadata$ = {
+  _no_name_provided__241.$metadata$ = {
     kind: 'class',
     interfaces: [],
     suspendArity: 1
   };
-  function _no_name_provided__233($buffer) {
+  function _no_name_provided__242($buffer) {
     this._$buffer_2 = $buffer;
   }
-  _no_name_provided__233.prototype.invoke_w17qz5_k$ = function (request, response) {
+  _no_name_provided__242.prototype.invoke_w17qz5_k$ = function (request, response) {
     var tmp = CoroutineScope_0(Dispatchers_getInstance()._Default);
-    launch$default(tmp, null, null, _no_name_provided_$factory_197(response, this._$buffer_2, null), 3, null);
+    launch$default(tmp, null, null, _no_name_provided_$factory_206(response, this._$buffer_2, null), 3, null);
     Unit_getInstance();
     Unit_getInstance();
   };
-  _no_name_provided__233.prototype.invoke_osx4an_k$ = function (p1, p2) {
+  _no_name_provided__242.prototype.invoke_osx4an_k$ = function (p1, p2) {
     var tmp = (p1 == null ? true : p1) ? p1 : THROW_CCE();
     this.invoke_w17qz5_k$(tmp, (p2 == null ? true : p2) ? p2 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__233.$metadata$ = {
+  _no_name_provided__242.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__234($buffer, $request, resultContinuation) {
+  function _no_name_provided__243($buffer, $request, resultContinuation) {
     this._$buffer_3 = $buffer;
     this._$request = $request;
     CoroutineImpl_0.call(this, resultContinuation);
   }
-  _no_name_provided__234.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
+  _no_name_provided__243.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
     var tmp = this.create_y6imfn_k$($this$launch, $cont);
     tmp._result_0 = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_0_k$();
   };
-  _no_name_provided__234.prototype.invoke_20e8_k$ = function (p1, $cont) {
+  _no_name_provided__243.prototype.invoke_20e8_k$ = function (p1, $cont) {
     this.invoke_2i3g7c_k$((!(p1 == null) ? isInterface(p1, CoroutineScope) : false) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
-  _no_name_provided__234.prototype.doResume_0_k$ = function () {
+  _no_name_provided__243.prototype.doResume_0_k$ = function () {
     var suspendResult = this._result_0;
     $sm: do
       try {
@@ -56739,51 +56961,51 @@
       }
      while (true);
   };
-  _no_name_provided__234.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
-    var i = new _no_name_provided__234(this._$buffer_3, this._$request, completion);
+  _no_name_provided__243.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
+    var i = new _no_name_provided__243(this._$buffer_3, this._$request, completion);
     i._$this$launch_7 = $this$launch;
     return i;
   };
-  _no_name_provided__234.$metadata$ = {
+  _no_name_provided__243.$metadata$ = {
     kind: 'class',
     interfaces: [],
     suspendArity: 1
   };
-  function _no_name_provided__235($buffer) {
+  function _no_name_provided__244($buffer) {
     this._$buffer_4 = $buffer;
   }
-  _no_name_provided__235.prototype.invoke_w17qz5_k$ = function (request, response) {
+  _no_name_provided__244.prototype.invoke_w17qz5_k$ = function (request, response) {
     var tmp = CoroutineScope_0(Dispatchers_getInstance()._Default);
-    launch$default(tmp, null, null, _no_name_provided_$factory_198(this._$buffer_4, request, null), 3, null);
+    launch$default(tmp, null, null, _no_name_provided_$factory_207(this._$buffer_4, request, null), 3, null);
     Unit_getInstance();
     Unit_getInstance();
   };
-  _no_name_provided__235.prototype.invoke_osx4an_k$ = function (p1, p2) {
+  _no_name_provided__244.prototype.invoke_osx4an_k$ = function (p1, p2) {
     var tmp = (p1 == null ? true : p1) ? p1 : THROW_CCE();
     this.invoke_w17qz5_k$(tmp, (p2 == null ? true : p2) ? p2 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__235.$metadata$ = {
+  _no_name_provided__244.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__236($buffer, $request, $response, resultContinuation) {
+  function _no_name_provided__245($buffer, $request, $response, resultContinuation) {
     this._$buffer_5 = $buffer;
     this._$request_0 = $request;
     this._$response_2 = $response;
     CoroutineImpl_0.call(this, resultContinuation);
   }
-  _no_name_provided__236.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
+  _no_name_provided__245.prototype.invoke_2i3g7c_k$ = function ($this$launch, $cont) {
     var tmp = this.create_y6imfn_k$($this$launch, $cont);
     tmp._result_0 = Unit_getInstance();
     tmp._exception_0 = null;
     return tmp.doResume_0_k$();
   };
-  _no_name_provided__236.prototype.invoke_20e8_k$ = function (p1, $cont) {
+  _no_name_provided__245.prototype.invoke_20e8_k$ = function (p1, $cont) {
     this.invoke_2i3g7c_k$((!(p1 == null) ? isInterface(p1, CoroutineScope) : false) ? p1 : THROW_CCE(), $cont);
     return Unit_getInstance();
   };
-  _no_name_provided__236.prototype.doResume_0_k$ = function () {
+  _no_name_provided__245.prototype.doResume_0_k$ = function () {
     var suspendResult = this._result_0;
     $sm: do
       try {
@@ -56826,101 +57048,101 @@
       }
      while (true);
   };
-  _no_name_provided__236.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
-    var i = new _no_name_provided__236(this._$buffer_5, this._$request_0, this._$response_2, completion);
+  _no_name_provided__245.prototype.create_y6imfn_k$ = function ($this$launch, completion) {
+    var i = new _no_name_provided__245(this._$buffer_5, this._$request_0, this._$response_2, completion);
     i._$this$launch_8 = $this$launch;
     return i;
   };
-  _no_name_provided__236.$metadata$ = {
+  _no_name_provided__245.$metadata$ = {
     kind: 'class',
     interfaces: [],
     suspendArity: 1
   };
-  function _no_name_provided__237($buffer) {
+  function _no_name_provided__246($buffer) {
     this._$buffer_6 = $buffer;
   }
-  _no_name_provided__237.prototype.invoke_w17qz5_k$ = function (request, response) {
+  _no_name_provided__246.prototype.invoke_w17qz5_k$ = function (request, response) {
     var tmp = CoroutineScope_0(Dispatchers_getInstance()._Default);
-    launch$default(tmp, null, null, _no_name_provided_$factory_199(this._$buffer_6, request, response, null), 3, null);
+    launch$default(tmp, null, null, _no_name_provided_$factory_208(this._$buffer_6, request, response, null), 3, null);
     Unit_getInstance();
     Unit_getInstance();
   };
-  _no_name_provided__237.prototype.invoke_osx4an_k$ = function (p1, p2) {
+  _no_name_provided__246.prototype.invoke_osx4an_k$ = function (p1, p2) {
     var tmp = (p1 == null ? true : p1) ? p1 : THROW_CCE();
     this.invoke_w17qz5_k$(tmp, (p2 == null ? true : p2) ? p2 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__237.$metadata$ = {
+  _no_name_provided__246.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided_$factory_190($payments) {
-    var i = new _no_name_provided__229($payments);
+  function _no_name_provided_$factory_199($payments) {
+    var i = new _no_name_provided__238($payments);
     return function (p1) {
       return i.invoke_33y0ow_k$(p1);
     };
   }
-  function _no_name_provided_$factory_191($buffer) {
-    var i = new _no_name_provided__231($buffer);
+  function _no_name_provided_$factory_200($buffer) {
+    var i = new _no_name_provided__240($buffer);
     return function (p1) {
       return i.invoke_33y0ow_k$(p1);
     };
   }
-  function _no_name_provided_$factory_192($buffer) {
-    var i = new _no_name_provided__233($buffer);
+  function _no_name_provided_$factory_201($buffer) {
+    var i = new _no_name_provided__242($buffer);
     return function (p1, p2) {
       i.invoke_w17qz5_k$(p1, p2);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_193($buffer) {
-    var i = new _no_name_provided__235($buffer);
+  function _no_name_provided_$factory_202($buffer) {
+    var i = new _no_name_provided__244($buffer);
     return function (p1, p2) {
       i.invoke_w17qz5_k$(p1, p2);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_194($buffer) {
-    var i = new _no_name_provided__237($buffer);
+  function _no_name_provided_$factory_203($buffer) {
+    var i = new _no_name_provided__246($buffer);
     return function (p1, p2) {
       i.invoke_w17qz5_k$(p1, p2);
       return Unit_getInstance();
     };
   }
-  function _no_name_provided_$factory_195($payments, resultContinuation) {
-    var i = new _no_name_provided__228($payments, resultContinuation);
+  function _no_name_provided_$factory_204($payments, resultContinuation) {
+    var i = new _no_name_provided__237($payments, resultContinuation);
     var l = function (p1, $cont) {
       return i.invoke_2i3g7c_k$(p1, $cont);
     };
     l.$arity = 1;
     return l;
   }
-  function _no_name_provided_$factory_196($buffer, resultContinuation) {
-    var i = new _no_name_provided__230($buffer, resultContinuation);
+  function _no_name_provided_$factory_205($buffer, resultContinuation) {
+    var i = new _no_name_provided__239($buffer, resultContinuation);
     var l = function (p1, $cont) {
       return i.invoke_2i3g7c_k$(p1, $cont);
     };
     l.$arity = 1;
     return l;
   }
-  function _no_name_provided_$factory_197($response, $buffer, resultContinuation) {
-    var i = new _no_name_provided__232($response, $buffer, resultContinuation);
+  function _no_name_provided_$factory_206($response, $buffer, resultContinuation) {
+    var i = new _no_name_provided__241($response, $buffer, resultContinuation);
     var l = function (p1, $cont) {
       return i.invoke_2i3g7c_k$(p1, $cont);
     };
     l.$arity = 1;
     return l;
   }
-  function _no_name_provided_$factory_198($buffer, $request, resultContinuation) {
-    var i = new _no_name_provided__234($buffer, $request, resultContinuation);
+  function _no_name_provided_$factory_207($buffer, $request, resultContinuation) {
+    var i = new _no_name_provided__243($buffer, $request, resultContinuation);
     var l = function (p1, $cont) {
       return i.invoke_2i3g7c_k$(p1, $cont);
     };
     l.$arity = 1;
     return l;
   }
-  function _no_name_provided_$factory_199($buffer, $request, $response, resultContinuation) {
-    var i = new _no_name_provided__236($buffer, $request, $response, resultContinuation);
+  function _no_name_provided_$factory_208($buffer, $request, $response, resultContinuation) {
+    var i = new _no_name_provided__245($buffer, $request, $response, resultContinuation);
     var l = function (p1, $cont) {
       return i.invoke_2i3g7c_k$(p1, $cont);
     };
@@ -57770,7 +57992,7 @@
     MccGroup.call(this);
     var tmp = this;
     tmp._mccValues = emptyList();
-    this._withdrawalAccount = accounts_getInstance()._generalUse;
+    this._withdrawalAccount = accounts_getInstance()._get_generalUse__0_k$();
   }
   Unknown.prototype._get_mccValues__0_k$ = function () {
     return this._mccValues;
@@ -57792,7 +58014,7 @@
   function HouseholdGroup() {
     HouseholdGroup_instance = this;
     MccGroup.call(this);
-    this._withdrawalAccount_0 = accounts_getInstance()._houseHoldExpenses;
+    this._withdrawalAccount_0 = accounts_getInstance()._get_houseHoldExpenses__0_k$();
     this._mccValues_0 = listOf([MCC_MiscellaneousFoodStores_getInstance(), MCC_PetShopsPetFoodAndSupplies_getInstance(), MCC_GroceryStoresSupermarkets_getInstance()]);
   }
   HouseholdGroup.prototype._get_withdrawalAccount__0_k$ = function () {
@@ -57816,7 +58038,7 @@
     Clothes_instance = this;
     MccGroup.call(this);
     this._mccValues_1 = listOf([MCC_FamilyClothingStores_getInstance(), MCC_MensAndBoysClothingAndAccessoriesStores_getInstance(), MCC_MensWomensClothingStores_getInstance(), MCC_SportingGoodsStores_getInstance(), MCC_SportsAndRidingApparelStores_getInstance(), MCC_ShoeStores_getInstance()]);
-    this._withdrawalAccount_1 = accounts_getInstance()._clothes;
+    this._withdrawalAccount_1 = accounts_getInstance()._get_clothes__0_k$();
   }
   Clothes.prototype._get_mccValues__0_k$ = function () {
     return this._mccValues_1;
@@ -57838,8 +58060,8 @@
   function SmallPersonalCosts() {
     SmallPersonalCosts_instance = this;
     MccGroup.call(this);
-    this._withdrawalAccount_2 = accounts_getInstance()._generalUse;
-    this._mccValues_2 = listOf_0(MCC_CosmeticStores_getInstance());
+    this._withdrawalAccount_2 = accounts_getInstance()._get_regularPersonalCosts__0_k$();
+    this._mccValues_2 = listOf([MCC_CosmeticStores_getInstance(), MCC_TransportationServices_getInstance()]);
   }
   SmallPersonalCosts.prototype._get_withdrawalAccount__0_k$ = function () {
     return this._withdrawalAccount_2;

@@ -56,11 +56,11 @@ sealed class MccGroup {
     }
 
     object SmallPersonalCosts : MccGroup() {
-        override val withdrawalAccount: String = accounts.generalUse
+        override val withdrawalAccount: String = accounts.regularPersonalCosts
 
         override val mccValues: List<MCC> = listOf(
                 MCC.CosmeticStores,//parfyme / deo
-                MCC.TransportationServices
+                MCC.TransportationServices // skyss
         )
     }
 }
