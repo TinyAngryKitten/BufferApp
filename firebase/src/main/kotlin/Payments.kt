@@ -120,7 +120,6 @@ class Payments(
                 transactionActionCollection,
                 where = WhereClause("timestamp", ">", since.toLocalDateTime(norwegianTimeZone).timestamp)
             ).find {
-                println("comparing \n$transaction \n${it.transaction}")
                 it.transaction == transaction
         } != null
     }
