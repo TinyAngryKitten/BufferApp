@@ -56542,7 +56542,6 @@
               var tmp0_iterator_1_1 = tmp3_find_0.iterator_0_k$();
               while (tmp0_iterator_1_1.hasNext_0_k$()) {
                 var element_2_2 = tmp0_iterator_1_1.next_0_k$();
-                println('' + 'comparing \n' + this._transaction_1 + ' \n' + element_2_2._transaction_2);
                 if (element_2_2._transaction_2.equals(this._transaction_1)) {
                   tmp$ret$0 = element_2_2;
                   break l$ret$1;

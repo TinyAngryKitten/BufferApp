@@ -27,3 +27,4 @@ hs_err_pid*
 .idea/
 build/
 firebase/functions/.runtimeconfig.json
+firebase/src/test/kotlin/sbankenClient.kt
