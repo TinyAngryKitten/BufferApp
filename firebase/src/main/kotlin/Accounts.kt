@@ -8,6 +8,7 @@ open class Accounts {
     open val clothes by lazy { functions.config().accounts.clothes as String }
     open val regularPersonalCosts by lazy { functions.config().accounts.regular_personal_costs as String }
     open val bills by lazy { functions.config().accounts.bills as String }
+    open val fondsSparingMellomledd by lazy { functions.config().accounts.fonds_sparing_mellomledd as String }
 
     //orker ikke gjøre dette finere...
     open fun findAccountName(accountNr : String) = when(accountNr) {

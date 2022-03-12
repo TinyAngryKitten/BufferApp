@@ -5,6 +5,7 @@ import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import model.Account
 import model.Debt
 
 external fun require(module:String) : dynamic
@@ -33,10 +34,26 @@ fun main(args: Array<String>) {
     val tokenStorage = TokenStorage(client)
     val buffer = BufferAccount(client, tokenStorage, firestore,functions)
     val payments = Payments(client, tokenStorage)
+    val savings = Savings(client, tokenStorage, payments)
+    val accounts = Accounts()
 
     exports.checkTransactions = functions.pubsub.schedule("every 24 hours").onRun { context ->
         CoroutineScope(Dispatchers.Default).launch {
             payments.checkForNewTransactions()
+        }
+    }
+
+    //Europe/Oslo
+    exports.reserveRemainingFunds = functions.pubsub.schedule("0 0 14 * *").timeZone("Europe/Oslo").onRun { context ->
+        CoroutineScope(Dispatchers.Default).launch {
+            savings.reserveRemainingFundsOfAccounts(
+                    listOf(
+                            accounts.generalUse,
+                            accounts.buffer,
+                            accounts.houseHoldExpenses,
+                    ),
+                    accounts.fondsSparingMellomledd
+            )
         }
     }
 
